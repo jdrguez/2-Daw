@@ -39,7 +39,7 @@ Hechos el test con pycheck.
 - [X] Find_odds
 - [X] Reagent_formula
 - [X] Whats_next
-- [ ] Npartition
+- [X] Npartition
 - [ ] Add_length
 - [ ] Reversing_words
 - [ ] Barycenter
