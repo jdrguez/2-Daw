@@ -33,8 +33,8 @@ Hechos el test con pycheck.
 - [ ] Maxmin_values
 - [ ] Cascading_subsets
 - [X] Diff_cuboid
-- [ ] Fl_strip
-- [ ] Logical_chain
+- [X] Fl_strip
+- [X] Logical_chain
 - [ ] Smallest_unused_id
 - [ ] Find_odds
 - [ ] Reagent_formula
