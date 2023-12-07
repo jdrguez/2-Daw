@@ -38,7 +38,7 @@ Hechos el test con pycheck.
 - [X] Smallest_unused_id
 - [X] Find_odds
 - [X] Reagent_formula
-- [ ] Whats_next
+- [X] Whats_next
 - [ ] Npartition
 - [ ] Add_length
 - [ ] Reversing_words
