@@ -35,7 +35,7 @@ Hechos el test con pycheck.
 - [X] Diff_cuboid
 - [X] Fl_strip
 - [X] Logical_chain
-- [ ] Smallest_unused_id
+- [X] Smallest_unused_id
 - [ ] Find_odds
 - [ ] Reagent_formula
 - [ ] Whats_next
