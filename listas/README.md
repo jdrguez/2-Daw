@@ -36,8 +36,8 @@ Hechos el test con pycheck.
 - [X] Fl_strip
 - [X] Logical_chain
 - [X] Smallest_unused_id
-- [ ] Find_odds
-- [ ] Reagent_formula
+- [X] Find_odds
+- [X] Reagent_formula
 - [ ] Whats_next
 - [ ] Npartition
 - [ ] Add_length
