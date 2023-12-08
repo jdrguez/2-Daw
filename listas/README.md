@@ -10,11 +10,11 @@ Hechos el test con pycheck.
 - [X] Mulmatrix
 - [X] Remove_dups
 - [X] Flatten_list
-- [ ] Remove_consecutive_dups
+- [X] Remove_consecutive_dups
 - [X] All_same
 - [X] Sum_diagonal
 - [X] Powers2
-- [ ] Dec2bin
+- [X] Dec2bin
 - [X] Sum_mixed
 - [X] N_mult
 - [X] Remove_second
