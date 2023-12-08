@@ -20,7 +20,7 @@ Hechos el test con pycheck.
 - [X] Remove_second
 - [X] Nth_power
 - [X] Name_initials
-- [ ] Non_consecutive
+- [X] Non_consecutive
 - [X] Mult_reduce
 - [X] Digit_rev_list
 - [X] Sum_positive
