@@ -4,14 +4,14 @@
 
 
 def run(farm: list) -> str:
-    n = len(farm)
+    length_farm = len(farm)
     msg = ''
-    for character in range(n - 1, 0 , -1):
+    for character in range(length_farm - 1, -1 , -1):
         if farm[character] == 'lobo':
-            if character == n - 1:
-                msg = f'No te quiero ver más por aqui,lobo'
+            if character == length_farm - 1:
+                msg = f'No te quiero ver más por aquí, lobo'
             else:
-                msg = f'Cuidado oveja {n - character}, el lobo te va a comer'
+                msg = f'Cuidado oveja {length_farm - character - 1}, el lobo te va a comer'
 
 
     return msg

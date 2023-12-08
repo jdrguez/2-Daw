@@ -26,10 +26,10 @@ Hechos el test con pycheck.
 - [X] Sum_positive
 - [X] Add_inverse
 - [X] Descending_numbers
-- [ ] Merge_sorted
+- [X] Merge_sorted
 - [X] Min_value
-- [ ] Trimmed_sum
-- [ ] Wolves
+- [X] Trimmed_sum
+- [X] Wolves
 - [X] Maxmin_values
 - [X] Cascading_subsets
 - [X] Diff_cuboid
