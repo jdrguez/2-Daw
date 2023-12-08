@@ -27,11 +27,11 @@ Hechos el test con pycheck.
 - [X] Add_inverse
 - [X] Descending_numbers
 - [ ] Merge_sorted
-- [ ] Min_value
+- [X] Min_value
 - [ ] Trimmed_sum
 - [ ] Wolves
-- [ ] Maxmin_values
-- [ ] Cascading_subsets
+- [X] Maxmin_values
+- [X] Cascading_subsets
 - [X] Diff_cuboid
 - [X] Fl_strip
 - [X] Logical_chain
