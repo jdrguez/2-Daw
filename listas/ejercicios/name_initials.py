@@ -4,12 +4,10 @@
 
 
 def run(fullname: str) -> str:
-    fullname_parts = fullname.split(', ')
-    surname_parts = fullname.split(' ')
-    first_surname_initial = surname_parts[0][0].upper()
-    second_surname_initial = surname_parts[1][0].upper() if len(surname_parts) == 1 else None
-    name = fullname_parts[1][0].upper()
-    initials = f'{name}.{first_surname_initial}.{second_surname_initial}.'
+    parts = [part.strip() for part in fullname.split(',')]
+    first_name_initials = parts[1][0].upper() if len(parts) > 1 else ''
+    last_name_initials = '.'.join([part[0].upper() for part in parts[0].split()]) if len(parts) > 0 else ''
+    initials = f'{first_name_initials}.{last_name_initials}.'
     
 
     return initials
