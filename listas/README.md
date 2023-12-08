@@ -7,7 +7,7 @@ Todos los ejercicios, junto con el check de hechos o no.
 Hechos el test con pycheck.
 
 ---
-- [:white_check_mark:] Mulmatrix
+- [X] Mulmatrix
 - [X] Remove_dups
 - [X] Flatten_list
 - [X] Remove_consecutive_dups
