@@ -4,8 +4,10 @@
 
 
 def run(items: list) -> list:
-    # TU CÓDIGO AQUÍ
-    result = 'output'
+    result = [items[0]]
+    for item in range(1, len(items)):
+        if items[item] != items[item - 1]:
+            result.append(items[item])
 
     return result
 

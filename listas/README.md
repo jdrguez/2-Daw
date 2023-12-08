@@ -19,7 +19,7 @@ Hechos el test con pycheck.
 - [X] N_mult
 - [X] Remove_second
 - [X] Nth_power
-- [ ] Name_initials
+- [X] Name_initials
 - [ ] Non_consecutive
 - [X] Mult_reduce
 - [X] Digit_rev_list
@@ -40,8 +40,8 @@ Hechos el test con pycheck.
 - [X] Reagent_formula
 - [X] Whats_next
 - [X] Npartition
-- [ ] Add_length
-- [ ] Reversing_words
-- [ ] Barycenter
-- [ ] Kpower
-- [ ] Sort_numbers
+- [X] Add_length
+- [X] Reversing_words
+- [X] Barycenter
+- [X] Kpower
+- [ ] Sort_numbers *Tengo que revisarlo mañana*
