@@ -4,8 +4,9 @@
 
 
 def run(numbers: str) -> str:
-    # TU CÓDIGO AQUÍ
-    strip_numbers = 'output'
+    numbers_list = numbers.split(',')
+    stripped_number = numbers_list[1:-1]
+    strip_numbers = ' '.join(stripped_number)
 
     return strip_numbers
 
