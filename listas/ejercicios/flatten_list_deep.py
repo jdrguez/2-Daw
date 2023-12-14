@@ -4,16 +4,23 @@
 
 
 def run(elements: list) -> list:
+    new_elements = elements.copy()
+    box = [new_elements]
     flatten_elements = []
-    for item in elements:
-        if isinstance(item, list):
-            for element in item:
-                if isinstance(element, list):
-                    flatten_elements.append(element)
-                else:
-                    flatten_elements.append(element)
+    
+    while box:
+        current_list = box.pop()
+        while current_list:
+            element = current_list.pop(0)
+            if isinstance(element,list):
+                box.append(current_list)
+                current_list = element
+            else:
+                flatten_elements.append(element)
         else:
-            flatten_elements.append(item)
+            if box:
+                current_list = box.pop()
+                box.append(current_list)
 
     return flatten_elements
 
