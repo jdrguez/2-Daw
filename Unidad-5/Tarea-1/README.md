@@ -3,7 +3,7 @@
 ### Ejercicio 1
 Crear una tabla con un comando de cada tipo. Primero usamos el comando preestablecido para generar un fichero para contener la base de datos.
 
->Usamos este comando `sqlite3 tarea1.db`
+>Usamos este comando  `sqlite3 tarea1.db`
 
 Dentro de SQLite3, debemos crear una tabla llamada Ejemplo con los campos que se nos indican:
 
@@ -112,4 +112,8 @@ UPDATE Ejemplo
 SET entero = entero + 10 
 WHERE booleano= 0;
 ```
-##### Actualiza el campo fehca de todas las entradas a la fecha actual:
+##### Actualiza el campo fecha de todas las entradas a la fecha actual:
+```
+UPDATE Ejemplo
+SET fecha = date(now);
+```
