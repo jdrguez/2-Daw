@@ -115,5 +115,5 @@ WHERE booleano= 0;
 ##### Actualiza el campo fecha de todas las entradas a la fecha actual:
 ```
 UPDATE Ejemplo
-SET fecha = date(now);
+SET fecha = date('now');
 ```
