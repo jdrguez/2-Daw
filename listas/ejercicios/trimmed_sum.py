@@ -4,7 +4,7 @@
 
 
 def run(values: list) -> int:
-    if not values or values == []:
+    if not values:
         tsum = 0
     else:
         max_value = max(values)
