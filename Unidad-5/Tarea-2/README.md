@@ -3,12 +3,11 @@
 Primero debemos de crear las tablas con el siguiente comando:
 
 ```
-CREATE TABLE Vehiculos (
+CREATE TABLE Propietarios (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
-marca TEXT NOT NULL,
-modelo TEXT NOT NULL,
-anio INTEGER NOT NULL,
-id_propietario INTEGER references Propietarios(id));
+nombre TEXT NOT NULL,
+apellido TEXT NOT NULL,
+dni TEXT UNICODE);
 ```
 ```
 CREATE TABLE Vehiculos (
