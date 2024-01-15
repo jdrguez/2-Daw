@@ -5,11 +5,12 @@
 
 def run(sentence: str) -> dict:
     counter = {}
+
     for letter in sentence:
         if letter not in counter:
             counter[letter] = 1
         else:
-            counter[letter] = counter[letter] + 1
+            counter[letter] += 1
 
     return counter
 
