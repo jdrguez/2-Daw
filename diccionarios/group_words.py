@@ -7,7 +7,8 @@ def run(words: list) -> dict:
     group_words = {}
 
     for letter in words:
-        group_words[letter[0]]
+        group_words[letter[0]] = [word for word in words if word.startswith(letter[0][0])]
+        
     return group_words
 
 
