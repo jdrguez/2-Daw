@@ -461,7 +461,7 @@ SELECT id, nombre, salario, departamento FROM empleados WHERE departamento IN ('
 
 #### Empleados con salarios únicos (eliminando duplicados) en orden ascendente.
 ```Sql
-SELECT DISTINCT id, nombre, salario FROM empleados GROUP BY salario ORDER BY salario AS;
+SELECT DISTINCT id, nombre, salario FROM empleados GROUP BY salario ORDER BY salario ASC;
 ┌────┬───────────┬─────────┐
 │ id │  nombre   │ salario │
 ├────┼───────────┼─────────┤
