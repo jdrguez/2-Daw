@@ -127,29 +127,10 @@ SELECT ABS(salario) as valor_absoluto_salario FROM empleados;
 
 ### 3 Funciones de Fecha y Hora: Muestra la fecha actual.
 ```Sql
-SELECT CURRENT_DATE FROM empleados;
+SELECT CURRENT_DATE;
 ┌──────────────┐
 │ CURRENT_DATE │
 ├──────────────┤
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
-│ 2024-01-17   │
 │ 2024-01-17   │
 └──────────────┘
 ```
