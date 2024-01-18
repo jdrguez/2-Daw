@@ -1,7 +1,17 @@
+<div text-align=justify>
+
 ## Paso 3: Responde a las siguientes cuestiones
 Realiza el diagrama ER de la BBDD supermercado.
+![Entidad Relacion](img/entidad_relacion.drawio.png)
+
+Hubo una errata en el entidad relación, precio como propiedad no va ahí pero me di cuenta más tarde.
+
 Realiza el diagrama MR de la BBDD supermercado.
+![Modelo Relacional](img/modelo_relacional.drawio.png)
+
 Indica si la BBDD esta normalizada hasta la 3ª forma normal, justificando la respuesta.
+
+La BBDD no esta normalizada en tercera forma normal, debido a que las columnas precio y categoría no deben de ponerse en producto. Esto se debe a que estas no están relacionadas directamente con la clave primaria y además, hace más complicado las funciones de inserción, eliminación y actualización. Por otro lado, el precio y la categoría se repiten todo el rato, siendo más fácil que tuvieran una tabla propia y se relacionaran con la tabla producto.  Esto facilitaría hacer cualquier cambio en el producto, ya sea su precio como su categoría sin acceder a este.
 
 ## Paso 4: Responde a las siguientes cuestiones
 
@@ -76,6 +86,7 @@ SELECT id, nombre FROM productos WHERE (nombre LIKE '%a%');
 └────┴──────────────────┘
 ```
 ### 5 Obtener la cantidad total de productos vendidos en todas las fechas.
+```sql
 SELECT fecha, COUNT(id_producto) as total_ventas FROM ventas GROUP BY fecha ;
 ┌────────────┬──────────────┐
 │   fecha    │ total_ventas │
@@ -85,7 +96,9 @@ SELECT fecha, COUNT(id_producto) as total_ventas FROM ventas GROUP BY fecha ;
 │ 2024-01-19 │ 2            │
 │ 2024-01-20 │ 1            │
 └────────────┴──────────────┘
+```
 ### 6 Encontrar el producto más caro en cada categoría.
+```sql
 SELECT DISTINCT id, nombre, precio, categoria FROM productos GROUP BY categoria;
 ┌────┬────────────────────┬────────┬───────────┐
 │ id │       nombre       │ precio │ categoria │
@@ -105,21 +118,39 @@ SELECT DISTINCT id, nombre, precio, categoria FROM productos GROUP BY categoria;
 │ 14 │ Galletas           │ 1.7    │ Snacks    │
 │ 8  │ Tomates            │ 2.2    │ Verduras  │
 └────┴────────────────────┴────────┴───────────┘
+
+```
 ### 7 Listar los productos que no han sido vendidos.
-
-
+```sql
+SELECT * from productos where id not in (SELECT p.id from productos as p, ventas as v where p.id=v.id_producto);
+┌────┬────────────────────┬───────────┬────────┐
+│ id │       nombre       │ categoria │ precio │
+├────┼────────────────────┼───────────┼────────┤
+│ 3  │ Pan                │ Panadería │ 1.2    │
+│ 7  │ Yogurt             │ Lácteos   │ 2.0    │
+│ 9  │ Queso              │ Lácteos   │ 4.0    │
+│ 11 │ Papel Higiénico    │ Hogar     │ 1.5    │
+│ 12 │ Cepillo de Dientes │ Higiene   │ 2.0    │
+│ 13 │ Detergente         │ Limpieza  │ 2.8    │
+│ 15 │ Aceite de Oliva    │ Cocina    │ 4.5    │
+│ 17 │ Sopa enlatada      │ Conservas │ 2.3    │
+│ 19 │ Botellas de Agua   │ Bebidas   │ 1.0    │
+│ 20 │ Cerveza            │ Bebidas   │ 3.8    │
+└────┴────────────────────┴───────────┴────────┘
+```
 
 ### 8 Calcular el precio promedio de los productos en la categoría "Snacks".
-
+```sql
 SELECT AVG(precio) FROM productos WHERE categoria='Snacks';
 ┌─────────────┐
 │ AVG(precio) │
 ├─────────────┤
 │ 1.7         │
 └─────────────┘
+```
 
 ### 9 Encontrar los productos que han sido vendidos más de 5 veces.
-
+```sql
 SELECT p.nombre, v.cantidad FROM productos as p, ventas as v WHERE p.id=v.id_producto AND v.cantidad >=5;
 ┌───────────────┬──────────┐
 │    nombre     │ cantidad │
@@ -129,9 +160,11 @@ SELECT p.nombre, v.cantidad FROM productos as p, ventas as v WHERE p.id=v.id_pro
 │ Galletas      │ 7        │
 │ Jabón de Baño │ 6        │
 └───────────────┴──────────┘
+```
 
 
 ### 10 Mostrar la fecha y la cantidad de ventas para cada producto.
+```sql
 SELECT p.nombre, v.cantidad, v.fecha FROM productos as p, ventas as v WHERE p.id = v.id_producto;
 ┌───────────────┬──────────┬────────────┐
 │    nombre     │ cantidad │   fecha    │
@@ -147,8 +180,10 @@ SELECT p.nombre, v.cantidad, v.fecha FROM productos as p, ventas as v WHERE p.id
 │ Café          │ 3        │ 2024-01-19 │
 │ Jabón de Baño │ 6        │ 2024-01-20 │
 └───────────────┴──────────┴────────────┘
+```
 
 ### 11 Encontrar los productos que tienen un precio menor o igual a 2.
+```sql
 SELECT id, nombre, precio FROM productos WHERE precio <= 2;
 ┌────┬────────────────────┬────────┐
 │ id │       nombre       │ precio │
@@ -163,8 +198,9 @@ SELECT id, nombre, precio FROM productos WHERE precio <= 2;
 │ 18 │ Jabón de Baño      │ 1.2    │
 │ 19 │ Botellas de Agua   │ 1.0    │
 └────┴────────────────────┴────────┘
+```
 ### 12 Calcular la cantidad total de ventas para cada fecha.
-
+```sql
 SELECT DISTINCT fecha, SUM(cantidad) as total_ventas FROM ventas GROUP BY fecha; 
 ┌────────────┬──────────────┐
 │   fecha    │ total_ventas │
@@ -174,8 +210,11 @@ SELECT DISTINCT fecha, SUM(cantidad) as total_ventas FROM ventas GROUP BY fecha;
 │ 2024-01-19 │ 10           │
 │ 2024-01-20 │ 6            │
 └────────────┴──────────────┘
-sqlite> 
+```
+
 ### 13 Listar los productos cuyo nombre comienza con la letra 'P'.
+
+```sql
 SELECT id, nombre FROM productos WHERE (nombre LIKE 'P%');
 ┌────┬─────────────────┐
 │ id │     nombre      │
@@ -184,16 +223,18 @@ SELECT id, nombre FROM productos WHERE (nombre LIKE 'P%');
 │ 5  │ Pollo           │
 │ 11 │ Papel Higiénico │
 └────┴─────────────────┘
+```
 ### 14 Obtener el producto más vendido en términos de cantidad.
-
+```sql
 SELECT p.nombre, MAX(v.cantidad) as producto_mas_vendido FROM productos as p, ventas as v WHERE p.id = v.id_producto; 
 ┌────────┬──────────────────────┐
 │ nombre │ producto_mas_vendido │
 ├────────┼──────────────────────┤
 │ Huevos │ 10                   │
 └────────┴──────────────────────┘
-
+```
 ### 15 Mostrar los productos que fueron vendidos en la fecha '2024-01-18'.
+```sql
 SELECT p.id, p.nombre, v.fecha FROM productos as p, ventas as v WHERE v.fecha = '2024-01-18' AND p.id = v.id_producto;
 ┌────┬─────────┬────────────┐
 │ id │ nombre  │   fecha    │
@@ -202,8 +243,11 @@ SELECT p.id, p.nombre, v.fecha FROM productos as p, ventas as v WHERE v.fecha = 
 │ 8  │ Tomates │ 2024-01-18 │
 │ 10 │ Cereal  │ 2024-01-18 │
 └────┴─────────┴────────────┘
+```
 
 ### 16 Calcular el total de ventas para cada producto.
+
+```sql
 SELECT p.id, nombre, v.cantidad from productos as p, ventas as v WHERE p.id = v.id_producto;
 ┌────┬───────────────┬──────────┐
 │ id │    nombre     │ cantidad │
@@ -219,9 +263,10 @@ SELECT p.id, nombre, v.cantidad from productos as p, ventas as v WHERE p.id = v.
 │ 16 │ Café          │ 3        │
 │ 18 │ Jabón de Baño │ 6        │
 └────┴───────────────┴──────────┘
+```
 
 ### 17 Encontrar los productos con un precio entre 3 y 4.
-
+```sql
 SELECT * from productos WHERE precio BETWEEN 3 and 4;
 ┌────┬──────────┬───────────┬────────┐
 │ id │  nombre  │ categoria │ precio │
@@ -231,7 +276,9 @@ SELECT * from productos WHERE precio BETWEEN 3 and 4;
 │ 10 │ Cereal   │ Desayuno  │ 3.5    │
 │ 20 │ Cerveza  │ Bebidas   │ 3.8    │
 └────┴──────────┴───────────┴────────┘
+```
 ### 18 Listar los productos y sus categorías ordenados alfabéticamente por categoría.
+```sql
 SELECT * FROM productos GROUP BY categoria;
 ┌────┬────────────────────┬───────────┬────────┐
 │ id │       nombre       │ categoria │ precio │
@@ -251,17 +298,20 @@ SELECT * FROM productos GROUP BY categoria;
 │ 14 │ Galletas           │ Snacks    │ 1.7    │
 │ 8  │ Tomates            │ Verduras  │ 2.2    │
 └────┴────────────────────┴───────────┴────────┘
+```
 
 ### 19 Calcular el precio total de los productos vendidos en la fecha '2024-01-19'.
+```sql
 SELECT v.fecha, SUM(p.precio) as precio_total FROM productos as p, ventas as v WHERE v.fecha='2024-01-19' AND p.id = v.id_producto;
 ┌────────────┬──────────────┐
 │   fecha    │ precio_total │
 ├────────────┼──────────────┤
 │ 2024-01-19 │ 6.7          │
 └────────────┴──────────────┘
+```
 
 ### 20 Mostrar los productos que no pertenecen a la categoría "Higiene".
-
+```sql
 SELECT * FROM productos WHERE categoria != 'Higiene';
 ┌────┬──────────────────┬───────────┬────────┐
 │ id │      nombre      │ categoria │ precio │
@@ -285,18 +335,56 @@ SELECT * FROM productos WHERE categoria != 'Higiene';
 │ 19 │ Botellas de Agua │ Bebidas   │ 1.0    │
 │ 20 │ Cerveza          │ Bebidas   │ 3.8    │
 └────┴──────────────────┴───────────┴────────┘
+```
 
 
 ### 21 Encontrar la cantidad total de productos en cada categoría.
-
+```sql
+SELECT categoria, COUNT(*) as cantidad_total
+   ...> FROM productos
+   ...> GROUP BY categoria;
+┌───────────┬────────────────┐
+│ categoria │ cantidad_total │
+├───────────┼────────────────┤
+│ Alimentos │ 1              │
+│ Bebidas   │ 3              │
+│ Carnes    │ 1              │
+│ Cocina    │ 1              │
+│ Conservas │ 1              │
+│ Desayuno  │ 1              │
+│ Frutas    │ 1              │
+│ Higiene   │ 2              │
+│ Hogar     │ 1              │
+│ Limpieza  │ 1              │
+│ Lácteos   │ 4              │
+│ Panadería │ 1              │
+│ Snacks    │ 1              │
+│ Verduras  │ 1              │
+└───────────┴────────────────┘
+```
 
 
 ### 22 Listar los productos que tienen un precio igual a la media de precios.
 
-
+```sql
+SELECT id,nombre, precio from productos where precio = (SELECT AVG(precio) from productos);
+```
+No existe tal resultado
 ### 23 Calcular el precio total de los productos vendidos en cada fecha.
-### 24 Mostrar los productos con un nombre que termina con la letra 'o'.
+```sql
+SELECT v.fecha, SUM(p.precio) as precio_total from productos as p , ventas as v  GROUP BY fecha;
+┌────────────┬──────────────┐
+│   fecha    │ precio_total │
+├────────────┼──────────────┤
+│ 2024-01-17 │ 210.0        │
+│ 2024-01-18 │ 157.5        │
+│ 2024-01-19 │ 105.0        │
+│ 2024-01-20 │ 52.5         │
+└────────────┴──────────────┘
+```
 
+### 24 Mostrar los productos con un nombre que termina con la letra 'o'.
+```sql
 SELECT * FROM productos WHERE (nombre LIKE '%o');
 ┌────┬─────────────────┬───────────┬────────┐
 │ id │     nombre      │ categoria │ precio │
@@ -306,9 +394,19 @@ SELECT * FROM productos WHERE (nombre LIKE '%o');
 │ 11 │ Papel Higiénico │ Hogar     │ 1.5    │
 │ 18 │ Jabón de Baño   │ Higiene   │ 1.2    │
 └────┴─────────────────┴───────────┴────────┘
+```
 ### 25 Encontrar los productos que han sido vendidos en más de una fecha.
+```sql
+SELECT p.id, p.nombre from productos as p, ventas as v WHERE p.id  = v.id_producto GROUP BY p.id, p.nombre HAVING COUNT(DISTINCT v.fecha) > 1;
+```
+
+No produce resultado porque un producto no tiene dos fechas
+
 
 ### 26 Listar los productos cuya categoría comienza con la letra 'L'.
+
+```sql
+
 SELECT * FROM productos WHERE (categoria LIKE 'L%');
 ┌────┬────────────┬───────────┬────────┐
 │ id │   nombre   │ categoria │ precio │
@@ -319,11 +417,12 @@ SELECT * FROM productos WHERE (categoria LIKE 'L%');
 │ 9  │ Queso      │ Lácteos   │ 4.0    │
 │ 13 │ Detergente │ Limpieza  │ 2.8    │
 └────┴────────────┴───────────┴────────┘
-
+```
 ### 27 Calcular el total de ventas para cada producto en la fecha '2024-01-17'.
 
 
 ### 28 Mostrar los productos cuyo nombre tiene al menos 5 caracteres.
+```sql
 SELECT * FROM productos WHERE LENGTH(nombre) >= 5;
 ┌────┬────────────────────┬───────────┬────────┐
 │ id │       nombre       │ categoria │ precio │
@@ -347,7 +446,9 @@ SELECT * FROM productos WHERE LENGTH(nombre) >= 5;
 │ 19 │ Botellas de Agua   │ Bebidas   │ 1.0    │
 │ 20 │ Cerveza            │ Bebidas   │ 3.8    │
 └────┴────────────────────┴───────────┴────────┘
+```
 ### 29 Encontrar los productos que tienen un precio superior a la media en la tabla "productos".
+```sql
 SELECT * from productos as p  WHERE p.precio > (SELECT AVG(precio) as precio_media FROM productos);
 ┌────┬─────────────────┬───────────┬────────┐
 │ id │     nombre      │ categoria │ precio │
@@ -361,3 +462,7 @@ SELECT * from productos as p  WHERE p.precio > (SELECT AVG(precio) as precio_med
 │ 16 │ Café            │ Bebidas   │ 5.0    │
 │ 20 │ Cerveza         │ Bebidas   │ 3.8    │
 └────┴─────────────────┴───────────┴────────┘
+```
+
+
+</div>
