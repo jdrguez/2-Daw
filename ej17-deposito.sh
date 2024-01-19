@@ -12,7 +12,7 @@ fi
 
 echo "Para un depósito de $cantidad_euros con un interes de $interes_tae a $anios, sera: "
 
-for ((i = 1; i <= anios; i++)); do
+for i in $(seq 1 $anios); do
     dinero_actual=$(echo "$cantidad_euros * (1 + $interes_tae / 100)" | bc)
     ganancia= $(echo "$dinero_actual - $cantidad_euros" | bc)
 
