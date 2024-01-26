@@ -4,8 +4,7 @@
 
 
 def run(items: list) -> dict:
-    for value in items:
-        unpack_items = {item[0]: item[1:] for item in items}
+    unpack_items = {item[0]: item[1:] for item in items}
 
     return unpack_items
 
