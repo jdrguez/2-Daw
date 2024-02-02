@@ -270,7 +270,42 @@ SELECT * FROM productos WHERE nombre regexp '^[A|B]';
 **/
 -- Obtener la cantidad total de productos en todos los pedidos por cliente ordenado por cliente.
 
-
+SELECT c.id, c.nombre, SUM(ped.cantidad) as cantidad_total from clientes as c, pedidos as ped WHERE c.id=ped.id_cliente GROUP BY c.id ORDER BY c.id ;
+/**
+┌────┬─────────────────┬────────────────┐
+│ id │     nombre      │ cantidad_total │
+├────┼─────────────────┼────────────────┤
+│ 1  │ Juan Pérez      │ 2              │
+│ 2  │ María Gómez     │ 1              │
+│ 3  │ Carlos López    │ 3              │
+│ 4  │ Ana Rodríguez   │ 1              │
+│ 5  │ Luisa Martínez  │ 2              │
+│ 6  │ Pedro Sánchez   │ 1              │
+│ 7  │ Laura García    │ 3              │
+│ 8  │ Miguel Martín   │ 2              │
+│ 9  │ Elena González  │ 1              │
+│ 10 │ David Torres    │ 2              │
+│ 11 │ Sofía Ruiz      │ 1              │
+│ 12 │ Javier López    │ 3              │
+│ 13 │ Carmen Vargas   │ 1              │
+│ 14 │ Daniel Muñoz    │ 2              │
+│ 15 │ Isabel Serrano  │ 1              │
+│ 16 │ Alejandro Muñoz │ 3              │
+│ 17 │ Raquel Herrera  │ 2              │
+│ 18 │ Francisco Mora  │ 1              │
+│ 19 │ Marina Díaz     │ 2              │
+│ 20 │ Antonio Jiménez │ 1              │
+│ 21 │ Beatriz Romero  │ 3              │
+│ 22 │ Carlos Gómez    │ 1              │
+│ 23 │ Clara Sánchez   │ 2              │
+│ 24 │ Andrés Martínez │ 1              │
+│ 25 │ Lucía Díaz      │ 3              │
+│ 26 │ Mario Serrano   │ 2              │
+│ 27 │ Eva Torres      │ 1              │
+│ 28 │ Roberto Ruiz    │ 2              │
+│ 29 │ Celia García    │ 1              │
+└────┴─────────────────┴────────────────┘
+**/
 
 -- Obtener los clientes que han realizado más de un pedido en febrero de 2024.
 
@@ -316,8 +351,44 @@ SELECT * from productos WHERE precio BETWEEN 100 and 500;
 **/
 -- Obtener la cantidad total de productos en todos los pedidos por cliente ordenado por cantidad descendente.
 
+SELECT c.id, c.nombre, SUM(ped.cantidad) as cantidad_total from clientes as c, pedidos as ped WHERE c.id=ped.id_cliente GROUP BY c.id ORDER BY c.id desc;
 
 
+/**
+┌────┬─────────────────┬────────────────┐
+│ id │     nombre      │ cantidad_total │
+├────┼─────────────────┼────────────────┤
+│ 29 │ Celia García    │ 1              │
+│ 28 │ Roberto Ruiz    │ 2              │
+│ 27 │ Eva Torres      │ 1              │
+│ 26 │ Mario Serrano   │ 2              │
+│ 25 │ Lucía Díaz      │ 3              │
+│ 24 │ Andrés Martínez │ 1              │
+│ 23 │ Clara Sánchez   │ 2              │
+│ 22 │ Carlos Gómez    │ 1              │
+│ 21 │ Beatriz Romero  │ 3              │
+│ 20 │ Antonio Jiménez │ 1              │
+│ 19 │ Marina Díaz     │ 2              │
+│ 18 │ Francisco Mora  │ 1              │
+│ 17 │ Raquel Herrera  │ 2              │
+│ 16 │ Alejandro Muñoz │ 3              │
+│ 15 │ Isabel Serrano  │ 1              │
+│ 14 │ Daniel Muñoz    │ 2              │
+│ 13 │ Carmen Vargas   │ 1              │
+│ 12 │ Javier López    │ 3              │
+│ 11 │ Sofía Ruiz      │ 1              │
+│ 10 │ David Torres    │ 2              │
+│ 9  │ Elena González  │ 1              │
+│ 8  │ Miguel Martín   │ 2              │
+│ 7  │ Laura García    │ 3              │
+│ 6  │ Pedro Sánchez   │ 1              │
+│ 5  │ Luisa Martínez  │ 2              │
+│ 4  │ Ana Rodríguez   │ 1              │
+│ 3  │ Carlos López    │ 3              │
+│ 2  │ María Gómez     │ 1              │
+│ 1  │ Juan Pérez      │ 2              │
+└────┴─────────────────┴────────────────┘
+**/
 -- Obtener los clientes que tienen una 'a' en cualquier posición de su nombre.
 
 SELECT * from Clientes WHERE nombre regexp 'a';
@@ -377,9 +448,41 @@ select nombre,max(precio) as precio_maximo from productos;
 **/
 
 -- Obtener la cantidad total de productos en todos los pedidos por producto ordenado por total de productos descendente.
-
-
-
+SELECT prod.id, prod.nombre, SUM(ped.cantidad) as cantidad_total from productos as prod, pedidos as ped WHERE prod.id=ped.id_producto GROUP BY prod.nombre ORDER BY cantidad_total desc;
+/**
+┌────┬───────────────────────────────────┬────────────────┐
+│ id │              nombre               │ cantidad_total │
+├────┼───────────────────────────────────┼────────────────┤
+│ 3  │ TV LED                            │ 3              │
+│ 16 │ Router Wi-Fi                      │ 3              │
+│ 12 │ Ratón Óptico                      │ 3              │
+│ 25 │ Hub USB                           │ 3              │
+│ 7  │ Cámara Digital                    │ 3              │
+│ 21 │ Cargador Inalámbrico              │ 3              │
+│ 26 │ Webcam HD                         │ 2              │
+│ 8  │ Reproductor de Audio              │ 2              │
+│ 10 │ Reloj Inteligente                 │ 2              │
+│ 14 │ Mochila para Portátil             │ 2              │
+│ 17 │ Lámpara LED                       │ 2              │
+│ 1  │ Laptop                            │ 2              │
+│ 23 │ Funda para Tablet                 │ 2              │
+│ 19 │ Estuche para Auriculares          │ 2              │
+│ 5  │ Auriculares Bluetooth             │ 2              │
+│ 28 │ Adaptador HDMI                    │ 2              │
+│ 11 │ Teclado Inalámbrico               │ 1              │
+│ 20 │ Tarjeta de Memoria                │ 1              │
+│ 4  │ Tablet                            │ 1              │
+│ 24 │ Soporte para Teléfono             │ 1              │
+│ 2  │ Smartphone                        │ 1              │
+│ 13 │ Monitor LED                       │ 1              │
+│ 22 │ Kit de Limpieza para Computadoras │ 1              │
+│ 6  │ Impresora                         │ 1              │
+│ 27 │ Funda para Laptop                 │ 1              │
+│ 15 │ Disco Duro Externo                │ 1              │
+│ 18 │ Batería Externa                   │ 1              │
+│ 9  │ Altavoces Inalámbricos            │ 1              │
+└────┴───────────────────────────────────┴────────────────┘
+**/
 -- Obtener los productos que no tienen un precio registrado.
 
 SELECT * from productos WHERE precio not regexp '\d';
@@ -466,8 +569,43 @@ SELECT nombre from productos WHERE nombre regexp 'o';
 
 -- Obtener la cantidad total de productos en todos los pedidos por cliente ordenado por cliente.
 
+SELECT c.id, c.nombre, SUM(ped.cantidad) as cantidad_total from clientes as c, pedidos as ped WHERE c.id=ped.id_cliente GROUP BY c.id ORDER BY c.id;
 
-
+/**
+┌────┬─────────────────┬────────────────┐
+│ id │     nombre      │ cantidad_total │
+├────┼─────────────────┼────────────────┤
+│ 1  │ Juan Pérez      │ 2              │
+│ 2  │ María Gómez     │ 1              │
+│ 3  │ Carlos López    │ 3              │
+│ 4  │ Ana Rodríguez   │ 1              │
+│ 5  │ Luisa Martínez  │ 2              │
+│ 6  │ Pedro Sánchez   │ 1              │
+│ 7  │ Laura García    │ 3              │
+│ 8  │ Miguel Martín   │ 2              │
+│ 9  │ Elena González  │ 1              │
+│ 10 │ David Torres    │ 2              │
+│ 11 │ Sofía Ruiz      │ 1              │
+│ 12 │ Javier López    │ 3              │
+│ 13 │ Carmen Vargas   │ 1              │
+│ 14 │ Daniel Muñoz    │ 2              │
+│ 15 │ Isabel Serrano  │ 1              │
+│ 16 │ Alejandro Muñoz │ 3              │
+│ 17 │ Raquel Herrera  │ 2              │
+│ 18 │ Francisco Mora  │ 1              │
+│ 19 │ Marina Díaz     │ 2              │
+│ 20 │ Antonio Jiménez │ 1              │
+│ 21 │ Beatriz Romero  │ 3              │
+│ 22 │ Carlos Gómez    │ 1              │
+│ 23 │ Clara Sánchez   │ 2              │
+│ 24 │ Andrés Martínez │ 1              │
+│ 25 │ Lucía Díaz      │ 3              │
+│ 26 │ Mario Serrano   │ 2              │
+│ 27 │ Eva Torres      │ 1              │
+│ 28 │ Roberto Ruiz    │ 2              │
+│ 29 │ Celia García    │ 1              │
+└────┴─────────────────┴────────────────┘
+**/
 
 -- Obtener los clientes cuyos nombres no contienen la letra 'i':
 
@@ -578,9 +716,57 @@ SELECT nombre from productos where nombre regexp 'a$';
 
 -- Obtener los clientes cuyos nombres tienen al menos 4 vocales (mayúsculas|minúsculas).
 
-
+SELECT * FROM Clientes where nombre regexp '[aeiouAEIOU]{4,}';
 
 -- Obtener los productos cuyo precio tenga al menos 4 números sin contrar los decimales.
+
+SELECT * FROM productos where precio regexp '\d{4}';
+/**
+┌────┬────────┬────────┐
+│ id │ nombre │ precio │
+├────┼────────┼────────┤
+│ 1  │ Laptop │ 1200.0 │
+└────┴────────┴────────┘
+**/
 -- Obtener los clientes cuyos nombres tienen al menos una 'a' seguida de una 'e'.
+
+SELECT * FROM clientes where nombre regexp 'ae';
+
 -- Obtener los productos cuyos nombres terminan con una consonante.
+
+SELECT * FROM productos where nombre not regexp '[aeiouAEIOU]$' ;
+/**
+┌────┬───────────────────────────────────┬────────┐
+│ id │              nombre               │ precio │
+├────┼───────────────────────────────────┼────────┤
+│ 1  │ Laptop                            │ 1200.0 │
+│ 3  │ TV LED                            │ 799.5  │
+│ 4  │ Tablet                            │ 299.99 │
+│ 5  │ Auriculares Bluetooth             │ 79.99  │
+│ 7  │ Cámara Digital                    │ 499.99 │
+│ 9  │ Altavoces Inalámbricos            │ 129.99 │
+│ 13 │ Monitor LED                       │ 349.99 │
+│ 14 │ Mochila para Portátil             │ 49.99  │
+│ 17 │ Lámpara LED                       │ 39.99  │
+│ 19 │ Estuche para Auriculares          │ 14.99  │
+│ 22 │ Kit de Limpieza para Computadoras │ 9.99   │
+│ 23 │ Funda para Tablet                 │ 19.99  │
+│ 25 │ Hub USB                           │ 29.99  │
+│ 26 │ Webcam HD                         │ 59.99  │
+│ 27 │ Funda para Laptop                 │ 29.99  │
+└────┴───────────────────────────────────┴────────┘
+**/
 -- Obtener los productos cuyos nombres empiezan con una vocal.
+
+SELECT * FROM productos WHERE nombre REGEXP '^[aeiouAEIOU]';
+/**
+┌────┬──────────────────────────┬────────┐
+│ id │          nombre          │ precio │
+├────┼──────────────────────────┼────────┤
+│ 5  │ Auriculares Bluetooth    │ 79.99  │
+│ 6  │ Impresora                │ 199.99 │
+│ 9  │ Altavoces Inalámbricos   │ 129.99 │
+│ 19 │ Estuche para Auriculares │ 14.99  │
+│ 28 │ Adaptador HDMI           │ 12.99  │
+└────┴──────────────────────────┴────────┘
+**/
