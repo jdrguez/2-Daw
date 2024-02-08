@@ -5,8 +5,8 @@
 
 def run(words: list) -> str:
     max_diversity = 0
-    dword= ''
-    
+    dword = ''
+
     for word in words:
         diversity = len(set(word))
         if diversity > max_diversity:

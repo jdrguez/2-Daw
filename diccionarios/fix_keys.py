@@ -4,8 +4,7 @@
 
 
 def run(items: dict) -> dict:
-    fitems = {k.replace(' ',''): v for k, v in items.items()}
-   
+    fitems = {k.replace(' ', ''): v for k, v in items.items()}
 
     return fitems
 

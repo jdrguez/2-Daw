@@ -5,7 +5,7 @@
 
 def run(values: set) -> set:
     half_out_values = set()
-    
+
     for value in values:
         operation = value // 2
         if operation not in values:
