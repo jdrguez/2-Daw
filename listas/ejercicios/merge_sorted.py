@@ -4,18 +4,24 @@
 
 
 def run(values1: list, values2: list) -> list:
+    new_values1 = values1.copy()
+    new_values2 = values2.copy()
     merged = []
-    element1 = element2 = 0
-    for _ in range(len(values1) + len(values2)):
-        if element1 < len(values1) and (element2 == len(values2) or values1[element1] <= values2[element2]):
-            if not merged or values1[element1] != merged[-1]:
-                merged.append(values1[element1])
-            element1 += 1
-        elif element2 < len(values2) and (element1 == len(values1) or values2[element2] < values1[element1]):
-            if not merged or values2[element2] != merged[-1]:
-                merged.append(values2[element2])
-            element2 += 1
-
+    while new_values1 and new_values2:
+        if new_values1[0] < new_values2[0]:
+            if not merged or new_values1[0] != merged[-1]:
+                merged.append(new_values1.pop(0))
+            else:
+                new_values1.pop(0)
+        else:
+            if not merged or new_values2[0] != merged[-1]:
+                merged.append(new_values2.pop(0))
+            else:
+                new_values2.pop(0)
+    remaining = new_values1 if new_values1 else values2
+    for value in remaining:
+        if value != merged[-1]:
+            merged.append(value)
     return merged
 
 
