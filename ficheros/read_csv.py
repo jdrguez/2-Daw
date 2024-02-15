@@ -5,20 +5,26 @@ from pathlib import Path
 
 
 def run(datafile: Path) -> list:
-    f = open(datafile)
-    cdata = {}
-    for line in f:
-        cleaned_line = line.strip().split(',')
-        for k in cleaned_line:
-            cdata[k] = 0
-    f.close()
-
-    with open(datafile) as f1:
-        for line in f1:
+    data = []
+    
+    with open(datafile, 'r') as f:
+        lines = f.readlines()
+        headers = lines[0].strip().split(',')
+        for line in lines[1:]:
             cleaned_line = line.strip().split(',')
-            for word in cleaned_line:
-                cdata[k] = cdata.get(word)
-    data = [cdata]
+            row = {}
+            for key, value in zip(headers, cleaned_line):
+                if value.lower() == 'true':
+                    row[key] = True
+                elif value.lower() == 'false':
+                    row[key] = False
+                elif value.isdigit():
+                    row[key] = int(value)
+                elif value == '':
+                    row[key] = None
+                else:
+                    row[key] = value
+            data.append(row)
     return data
 
 
