@@ -1051,15 +1051,28 @@ SELECT * from empleado, oficina
 ```
 ### Devuelve un listado de los productos que nunca han aparecido en un pedido.
 ```sql
+SELECT p.* from producto as p 
+   ...> JOIN detalle_pedido on p.codigo_producto = detalle_pedido.codigo_producto WHERE detalle_pedido.codigo_producto is NULL;
 ```
+
 ### Devuelve un listado de los productos que nunca han aparecido en un pedido. El resultado debe mostrar el nombre, la descripción y la imagen del producto.
 ```sql
+SELECT p.* from producto as p 
+   ...> JOIN detalle_pedido on p.codigo_producto = detalle_pedido.codigo_producto WHERE detalle_pedido.codigo_producto is NULL;
 ```
 ### Devuelve las oficinas donde no trabajan ninguno de los empleados que hayan sido los representantes de ventas de algún cliente que haya realizado la compra de algún producto de la gama Frutales.
 ```sql
 ```
 ### Devuelve un listado con los clientes que han realizado algún pedido pero no han realizado ningún pago.
 ```sql
+SELECT * from cliente         
+   ...> WHERE codigo_cliente in (SELECT DISTINCT codigo_cliente FROM pedido) 
+   ...> AND codigo_cliente NOT IN (SELECT DISTINCT codigo_cliente FROM pago);
+┌────────────────┬────────────────┬─────────────────┬───────────────────┬───────────┬───────────┬──────────────────┬──────────────────┬────────┬─────────────┬───────┬───────────────┬────────────────────────────┬────────────────┐
+│ codigo_cliente │ nombre_cliente │ nombre_contacto │ apellido_contacto │ telefono  │    fax    │ linea_direccion1 │ linea_direccion2 │ ciudad │   region    │ pais  │ codigo_postal │ codigo_empleado_rep_ventas │ limite_credito │
+├────────────────┼────────────────┼─────────────────┼───────────────────┼───────────┼───────────┼──────────────────┼──────────────────┼────────┼─────────────┼───────┼───────────────┼────────────────────────────┼────────────────┤
+│ 36             │ Flores S.L.    │ Antonio         │ Romero            │ 654352981 │ 685249700 │ Avenida España   │                  │ Madrid │ Fuenlabrada │ Spain │ 29643         │ 18                         │ 6000           │
+└────────────────┴────────────────┴─────────────────┴───────────────────┴───────────┴───────────┴──────────────────┴──────────────────┴────────┴─────────────┴───────┴───────────────┴────────────────────────────┴────────────────┘
 ```
 ### Devuelve un listado con los datos de los empleados que no tienen clientes asociados y el nombre de su jefe asociado.
 ```sql
@@ -1613,86 +1626,517 @@ SELECT SUBSTRING(fecha_pago, 1, 4) as anio,
 
 ### Devuelve el nombre del cliente con mayor límite de crédito.
 ```sql
-```
-Devuelve el nombre del producto que tenga el precio de venta más caro.
-```sql
-```
-Devuelve el nombre del producto del que se han vendido más unidades. (Tenga en cuenta que tendrá que calcular cuál es el número total de unidades que se han vendido de cada producto a partir de los datos de la tabla detalle_pedido)
-```sql
-```
-Los clientes cuyo límite de crédito sea mayor que los pagos que haya realizado. (Sin utilizar INNER JOIN).
-```sql
-```
-Devuelve el producto que más unidades tiene en stock.
-```sql
-```
-Devuelve el producto que menos unidades tiene en stock.
-```sql
-```
-Devuelve el nombre, los apellidos y el email de los empleados que están a cargo de Alberto Soria.
-```sql
-```
-Devuelve el nombre del cliente con mayor límite de crédito.
-```sql
-```
-Devuelve el nombre del producto que tenga el precio de venta más caro.
-```sql
-```
-Devuelve el producto que menos unidades tiene en stock.
-```sql
-```
-Devuelve el nombre, apellido1 y cargo de los empleados que no representen a ningún cliente.
-```sql
-```
-Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
-```sql
-```
-Devuelve un listado que muestre solamente los clientes que sí han realizado algún pago.
-```sql
-```
-Devuelve un listado de los productos que nunca han aparecido en un pedido.
-```sql
-```
-Devuelve el nombre, apellidos, puesto y teléfono de la oficina de aquellos empleados que no sean representante de ventas de ningún cliente.
-```sql
-```
-Devuelve las oficinas donde no trabajan ninguno de los empleados que hayan sido los representantes de ventas de algún cliente que haya realizado la compra de algún producto de la gama Frutales.
-```sql
-```
-Devuelve un listado con los clientes que han realizado algún pedido pero no han realizado ningún pago.
-```sql
-```
-Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
-```sql
-```
-Devuelve un listado que muestre solamente los clientes que sí han realizado algún pago.
-```sql
-```
-Devuelve un listado de los productos que nunca han aparecido en un pedido.
-```sql
-```
-Devuelve un listado de los productos que han aparecido en un pedido alguna vez.
-```sql
+
+SELECT nombre_cliente, MAX(limite_credito) from cliente;
+┌────────────────┬─────────────────────┐
+│ nombre_cliente │ MAX(limite_credito) │
+├────────────────┼─────────────────────┤
+│ Tendo Garden   │ 600000              │
+└────────────────┴─────────────────────┘
 ```
 
-Devuelve el listado de clientes indicando el nombre del cliente y cuántos pedidos ha realizado. Tenga en cuenta que pueden existir clientes que no han realizado ningún pedido.
+### Devuelve el nombre del producto que tenga el precio de venta más caro.
+```sql
+SELECT nombre, MAX(precio_venta) FROM producto;
+┌───────────────────────┬───────────────────┐
+│        nombre         │ MAX(precio_venta) │
+├───────────────────────┼───────────────────┤
+│ Trachycarpus Fortunei │ 462               │
+└───────────────────────┴───────────────────┘
+```
+### Devuelve el nombre del producto del que se han vendido más unidades. (Tenga en cuenta que tendrá que calcular cuál es el número total de unidades que se han vendido de cada producto a partir de los datos de la tabla detalle_pedido)
+```sql
+SELECT p.nombre FROM producto p 
+   ...> JOIN ( 
+(x1...> SELECT codigo_producto, SUM(cantidad) as total_vendido 
+(x1...> FROM detalle_pedido
+(x1...> GROUP BY codigo_producto
+(x1...> ORDER BY total_vendido DESC 
+(x1...> LIMIT 1 ) as max_vendido on p.codigo_producto = max_vendido.codigo_producto;
+┌─────────────────┐
+│     nombre      │
+├─────────────────┤
+│ Thymus Vulgaris │
+└─────────────────┘
+```
+
+### Los clientes cuyo límite de crédito sea mayor que los pagos que haya realizado. (Sin utilizar INNER JOIN).
+```sql
+
+SELECT * from cliente WHERE limite_credito > (                                                                                                                                                                                        
+(x1...> SELECT SUM(total) FROM pago WHERE pago.codigo_cliente = cliente.codigo_cliente);
+┌────────────────┬────────────────────────────────┬─────────────────┬───────────────────┬─────────────┬─────────────┬────────────────────────────────────────────┬───────────────────┬──────────────────────────┬─────────────────────┬───────────┬───────────────┬────────────────────────────┬────────────────┐
+│ codigo_cliente │         nombre_cliente         │ nombre_contacto │ apellido_contacto │  telefono   │     fax     │              linea_direccion1              │ linea_direccion2  │          ciudad          │       region        │   pais    │ codigo_postal │ codigo_empleado_rep_ventas │ limite_credito │
+├────────────────┼────────────────────────────────┼─────────────────┼───────────────────┼─────────────┼─────────────┼────────────────────────────────────────────┼───────────────────┼──────────────────────────┼─────────────────────┼───────────┼───────────────┼────────────────────────────┼────────────────┤
+│ 5              │ Tendo Garden                   │ Akane           │ Tendo             │ 55591233210 │ 55591233211 │ Null Street nº69                           │                   │ Miami                    │                     │ USA       │ 696969        │ 22                         │ 600000         │
+│ 7              │ Beragua                        │ Jose            │ Bermejo           │ 654987321   │ 916549872   │ C/pintor segundo                           │ Getafe            │ Madrid                   │ Madrid              │ Spain     │ 28942         │ 11                         │ 20000          │
+│ 9              │ Naturagua                      │ Guillermo       │ Rengifo           │ 689234750   │ 916428956   │ C/majadahonda                              │ Boadilla          │ Madrid                   │ Madrid              │ Spain     │ 28947         │ 11                         │ 32000          │
+│ 13             │ Camunas Jardines S.L.          │ Pedro           │ Camunas           │ 34914873241 │ 34914871541 │ C/Virgenes 45                              │ C/Princesas 2 1ºB │ San Lorenzo del Escorial │ Madrid              │ Spain     │ 28145         │ 8                          │ 16481          │
+│ 14             │ Dardena S.A.                   │ Juan            │ Rodriguez         │ 34912453217 │ 34912484764 │ C/Nueva York 74                            │                   │ Madrid                   │ Madrid              │ Spain     │ 28003         │ 8                          │ 321000         │
+│ 15             │ Jardin de Flores               │ Javier          │ Villar            │ 654865643   │ 914538776   │ C/ Oña 34                                  │                   │ Madrid                   │ Madrid              │ Spain     │ 28950         │ 30                         │ 40000          │
+│ 19             │ Golf S.A.                      │ Luis            │ Martinez          │ 916458762   │ 912354475   │ C/Estancado                                │                   │ Santa cruz de Tenerife   │ Islas Canarias      │ Spain     │ 38297         │ 12                         │ 30000          │
+│ 23             │ Sotogrande                     │ Maria           │ Santillana        │ 915576622   │ 914825645   │ C/Paseo del Parque                         │                   │ Sotogrande               │ Cadiz               │ Spain     │ 11310         │ 12                         │ 60000          │
+│ 26             │ Jardines y Mansiones Cactus SL │ Eva María       │ Sánchez           │ 916877445   │ 914477777   │ Polígono Industrial Maspalomas, Nº52       │ Móstoles          │ Madrid                   │ Madrid              │ Spain     │ 29874         │ 9                          │ 76000          │
+│ 27             │ Jardinerías Matías SL          │ Matías          │ San Martín        │ 916544147   │ 917897474   │ C/Francisco Arce, Nº44                     │ Bustarviejo       │ Madrid                   │ Madrid              │ Spain     │ 37845         │ 9                          │ 100500         │
+│ 35             │ Tutifruti S.A                  │ Jacob           │ Jones             │ 2 9261-2433 │ 2 9283-1695 │ level 24, St. Martins Tower.-31 Market St. │                   │ Sydney                   │ Nueva Gales del Sur │ Australia │ 2000          │ 31                         │ 10000          │
+│ 38             │ El Jardin Viviente S.L         │ Justin          │ Smith             │ 2 8005-7161 │ 2 8005-7162 │ 176 Cumberland Street The rocks            │                   │ Sydney                   │ Nueva Gales del Sur │ Australia │ 2003          │ 31                         │ 8000           │
+└────────────────┴────────────────────────────────┴─────────────────┴───────────────────┴─────────────┴─────────────┴────────────────────────────────────────────┴───────────────────┴──────────────────────────┴─────────────────────┴───────────┴───────────────┴────────────────────────────┴────────────────┘
+```
+
+### Devuelve el producto que más unidades tiene en stock.
+```sql
+SELECT *, MAX(cantidad_en_stock) as cantidad_maxima FROM producto;   
+┌─────────────────┬─────────────┬──────────┬─────────────┬───────────────────────┬─────────────┬───────────────────┬──────────────┬──────────────────┬─────────────────┐
+│ codigo_producto │   nombre    │   gama   │ dimensiones │       proveedor       │ descripcion │ cantidad_en_stock │ precio_venta │ precio_proveedor │ cantidad_maxima │
+├─────────────────┼─────────────┼──────────┼─────────────┼───────────────────────┼─────────────┼───────────────────┼──────────────┼──────────────────┼─────────────────┤
+│ FR-23           │ Rosal copa  │ Frutales │             │ Frutales Talavera S.A │             │ 400               │ 8            │ 6                │ 400             │
+└─────────────────┴─────────────┴──────────┴─────────────┴───────────────────────┴─────────────┴───────────────────┴──────────────┴──────────────────┴─────────────────┘
+```
+
+### Devuelve el producto que menos unidades tiene en stock.
+```sql
+
+SELECT *, MIN(cantidad_en_stock) as cantidad_maxima FROM producto; 
+┌─────────────────┬───────────────┬──────────────┬─────────────┬──────────────────┬─────────────┬───────────────────┬──────────────┬──────────────────┬─────────────────┐
+│ codigo_producto │    nombre     │     gama     │ dimensiones │    proveedor     │ descripcion │ cantidad_en_stock │ precio_venta │ precio_proveedor │ cantidad_maxima │
+├─────────────────┼───────────────┼──────────────┼─────────────┼──────────────────┼─────────────┼───────────────────┼──────────────┼──────────────────┼─────────────────┤
+│ OR-214          │ Brahea Armata │ Ornamentales │ 45 - 60     │ Viveros EL OASIS │             │ 0                 │ 10           │ 8                │ 0               │
+└─────────────────┴───────────────┴──────────────┴─────────────┴──────────────────┴─────────────┴───────────────────┴──────────────┴──────────────────┴─────────────────┘
+```
+
+### Devuelve el nombre, los apellidos y el email de los empleados que están a cargo de Alberto Soria.
+```sql
+SELECT nombre, apellido1 || ' ' || apellido2 as apellidos, email FROM empleado
+   ...> WHERE codigo_jefe = ( SELECT codigo_empleado from empleado WHERE nombre = 'Alberto' AND apellido1 = 'Soria'); 
+┌─────────────┬───────────────┬───────────────────────────┐
+│   nombre    │   apellidos   │           email           │
+├─────────────┼───────────────┼───────────────────────────┤
+│ Felipe      │ Rosas Marquez │ frosas@jardineria.es      │
+│ Juan Carlos │ Ortiz Serrano │ cortiz@jardineria.es      │
+│ Carlos      │ Soria Jimenez │ csoria@jardineria.es      │
+│ Emmanuel    │ Magaña Perez  │ manu@jardineria.es        │
+│ Francois    │ Fignon        │ ffignon@gardening.com     │
+│ Michael     │ Bolton        │ mbolton@gardening.com     │
+│ Hilary      │ Washington    │ hwashington@gardening.com │
+│ Nei         │ Nishikori     │ nnishikori@gardening.com  │
+│ Amy         │ Johnson       │ ajohnson@gardening.com    │
+│ Kevin       │ Fallmer       │ kfalmer@gardening.com     │
+└─────────────┴───────────────┴───────────────────────────┘
+```
+### Devuelve el nombre del cliente con mayor límite de crédito.
+```sql
+SELECT nombre_cliente, MAX(limite_credito) as maximo FROM cliente; 
+┌────────────────┬────────┐
+│ nombre_cliente │ maximo │
+├────────────────┼────────┤
+│ Tendo Garden   │ 600000 │
+└────────────────┴────────┘
+```
+### Devuelve el nombre del producto que tenga el precio de venta más caro.
+```sql
+
+SELECT nombre, MAX(precio_venta) as precio_max FROM producto;
+┌───────────────────────┬────────────┐
+│        nombre         │ precio_max │
+├───────────────────────┼────────────┤
+│ Trachycarpus Fortunei │ 462        │
+└───────────────────────┴────────────┘
+```
+### Devuelve el producto que menos unidades tiene en stock.
+```sql
+
+ SELECT nombre, MIN(cantidad_en_stock) as min_stock FROM producto;  
+┌───────────────┬───────────┐
+│    nombre     │ min_stock │
+├───────────────┼───────────┤
+│ Brahea Armata │ 0         │
+└───────────────┴───────────┘
+```
+### Devuelve el nombre, apellido1 y cargo de los empleados que no representen a ningún cliente.
+```sql
+
+SELECT nombre, apellido1, puesto FROM empleado 
+   ...> WHERE codigo_empleado NOT IN (SELECT DISTINCT codigo_empleado from cliente);
+
+```
+### Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
+```sql
+SELECT * FROM cliente 
+   ...> WHERE codigo_cliente NOT IN (SELECT DISTINCT codigo_cliente from pago);
+┌────────────────┬─────────────────────────────┬─────────────────┬───────────────────┬────────────────┬────────────────┬──────────────────────────┬──────────────────┬──────────────────────┬─────────────┬────────────────┬───────────────┬────────────────────────────┬────────────────┐
+│ codigo_cliente │       nombre_cliente        │ nombre_contacto │ apellido_contacto │    telefono    │      fax       │     linea_direccion1     │ linea_direccion2 │        ciudad        │   region    │      pais      │ codigo_postal │ codigo_empleado_rep_ventas │ limite_credito │
+├────────────────┼─────────────────────────────┼─────────────────┼───────────────────┼────────────────┼────────────────┼──────────────────────────┼──────────────────┼──────────────────────┼─────────────┼────────────────┼───────────────┼────────────────────────────┼────────────────┤
+│ 6              │ Lasas S.A.                  │ Antonio         │ Lasas             │ 34916540145    │ 34914851312    │ C/Leganes 15             │                  │ Fuenlabrada          │ Madrid      │ Spain          │ 28945         │ 8                          │ 154310         │
+│ 8              │ Club Golf Puerta del hierro │ Paco            │ Lopez             │ 62456810       │ 919535678      │ C/sinesio delgado        │ Madrid           │ Madrid               │ Madrid      │ Spain          │ 28930         │ 11                         │ 40000          │
+│ 10             │ DaraDistribuciones          │ David           │ Serrano           │ 675598001      │ 916421756      │ C/azores                 │ Fuenlabrada      │ Madrid               │ Madrid      │ Spain          │ 28946         │ 11                         │ 50000          │
+│ 11             │ Madrileña de riegos         │ Jose            │ Tacaño            │ 655983045      │ 916689215      │ C/Lagañas                │ Fuenlabrada      │ Madrid               │ Madrid      │ Spain          │ 28943         │ 11                         │ 20000          │
+│ 12             │ Lasas S.A.                  │ Antonio         │ Lasas             │ 34916540145    │ 34914851312    │ C/Leganes 15             │                  │ Fuenlabrada          │ Madrid      │ Spain          │ 28945         │ 8                          │ 154310         │
+│ 17             │ Flowers, S.A                │ Beatriz         │ Fernandez         │ 698754159      │ 978453216      │ C/Luis Salquillo4        │                  │ Montornes del valles │ Barcelona   │ Spain          │ 24586         │ 5                          │ 3500           │
+│ 18             │ Naturajardin                │ Victoria        │ Cruz              │ 612343529      │ 916548735      │ Plaza Magallón 15        │                  │ Madrid               │ Madrid      │ Spain          │ 28011         │ 30                         │ 5050           │
+│ 20             │ Americh Golf Management SL  │ Mario           │ Suarez            │ 964493072      │ 964493063      │ C/Letardo                │                  │ Barcelona            │ Cataluña    │ Spain          │ 12320         │ 12                         │ 20000          │
+│ 21             │ Aloha                       │ Cristian        │ Rodrigez          │ 916485852      │ 914489898      │ C/Roman 3                │                  │ Canarias             │ Canarias    │ Spain          │ 35488         │ 12                         │ 50000          │
+│ 22             │ El Prat                     │ Francisco       │ Camacho           │ 916882323      │ 916493211      │ Avenida Tibidabo         │                  │ Barcelona            │ Cataluña    │ Spain          │ 12320         │ 12                         │ 30000          │
+│ 24             │ Vivero Humanes              │ Federico        │ Gomez             │ 654987690      │ 916040875      │ C/Miguel Echegaray 54    │                  │ Humanes              │ Madrid      │ Spain          │ 28970         │ 30                         │ 7430           │
+│ 25             │ Fuenla City                 │ Tony            │ Muñoz Mena        │ 675842139      │ 915483754      │ C/Callo 52               │                  │ Fuenlabrada          │ Madrid      │ Spain          │ 28574         │ 5                          │ 4500           │
+│ 29             │ Top Campo                   │ Joseluis        │ Sanchez           │ 685746512      │ 974315924      │ C/Ibiza 32               │                  │ Humanes              │ Madrid      │ Spain          │ 28574         │ 5                          │ 5500           │
+│ 31             │ Campohermoso                │ Luis            │ Jimenez           │ 645925376      │ 916159116      │ C/Peru 78                │                  │ Fuenlabrada          │ Madrid      │ Spain          │ 28945         │ 30                         │ 3250           │
+│ 32             │ france telecom              │ FraÃ§ois        │ Toulou            │ (33)5120578961 │ (33)5120578961 │ 6 place d Alleray 15Ã¨me │                  │ Paris                │             │ France         │ 75010         │ 16                         │ 10000          │
+│ 33             │ Musée du Louvre             │ Pierre          │ Delacroux         │ (33)0140205050 │ (33)0140205442 │ Quai du Louvre           │                  │ Paris                │             │ France         │ 75058         │ 16                         │ 30000          │
+│ 36             │ Flores S.L.                 │ Antonio         │ Romero            │ 654352981      │ 685249700      │ Avenida España           │                  │ Madrid               │ Fuenlabrada │ Spain          │ 29643         │ 18                         │ 6000           │
+│ 37             │ The Magic Garden            │ Richard         │ Mcain             │ 926523468      │ 9364875882     │ Lihgting Park            │                  │ London               │ London      │ United Kingdom │ 65930         │ 18                         │ 10000          │
+└────────────────┴─────────────────────────────┴─────────────────┴───────────────────┴────────────────┴────────────────┴──────────────────────────┴──────────────────┴──────────────────────┴─────────────┴────────────────┴───────────────┴────────────────────────────┴────────────────┘
+```
+### Devuelve un listado que muestre solamente los clientes que sí han realizado algún pago.
+```sql
+
+SELECT * from cliente 
+   ...> WHERE codigo_cliente in (SELECT DISTINCT codigo_cliente FROM pago);
+┌────────────────┬────────────────────────────────┬─────────────────┬───────────────────┬─────────────┬─────────────┬────────────────────────────────────────────┬───────────────────┬──────────────────────────┬─────────────────────┬───────────┬───────────────┬────────────────────────────┬────────────────┐
+│ codigo_cliente │         nombre_cliente         │ nombre_contacto │ apellido_contacto │  telefono   │     fax     │              linea_direccion1              │ linea_direccion2  │          ciudad          │       region        │   pais    │ codigo_postal │ codigo_empleado_rep_ventas │ limite_credito │
+├────────────────┼────────────────────────────────┼─────────────────┼───────────────────┼─────────────┼─────────────┼────────────────────────────────────────────┼───────────────────┼──────────────────────────┼─────────────────────┼───────────┼───────────────┼────────────────────────────┼────────────────┤
+│ 1              │ GoldFish Garden                │ Daniel G        │ GoldFish          │ 5556901745  │ 5556901746  │ False Street 52 2 A                        │                   │ San Francisco            │                     │ USA       │ 24006         │ 19                         │ 3000           │
+│ 3              │ Gardening Associates           │ Anne            │ Wright            │ 5557410345  │ 5557410346  │ Wall-e Avenue                              │                   │ Miami                    │ Miami               │ USA       │ 24010         │ 19                         │ 6000           │
+│ 4              │ Gerudo Valley                  │ Link            │ Flaute            │ 5552323129  │ 5552323128  │ Oaks Avenue nº22                           │                   │ New York                 │                     │ USA       │ 85495         │ 22                         │ 12000          │
+│ 5              │ Tendo Garden                   │ Akane           │ Tendo             │ 55591233210 │ 55591233211 │ Null Street nº69                           │                   │ Miami                    │                     │ USA       │ 696969        │ 22                         │ 600000         │
+│ 7              │ Beragua                        │ Jose            │ Bermejo           │ 654987321   │ 916549872   │ C/pintor segundo                           │ Getafe            │ Madrid                   │ Madrid              │ Spain     │ 28942         │ 11                         │ 20000          │
+│ 9              │ Naturagua                      │ Guillermo       │ Rengifo           │ 689234750   │ 916428956   │ C/majadahonda                              │ Boadilla          │ Madrid                   │ Madrid              │ Spain     │ 28947         │ 11                         │ 32000          │
+│ 13             │ Camunas Jardines S.L.          │ Pedro           │ Camunas           │ 34914873241 │ 34914871541 │ C/Virgenes 45                              │ C/Princesas 2 1ºB │ San Lorenzo del Escorial │ Madrid              │ Spain     │ 28145         │ 8                          │ 16481          │
+│ 14             │ Dardena S.A.                   │ Juan            │ Rodriguez         │ 34912453217 │ 34912484764 │ C/Nueva York 74                            │                   │ Madrid                   │ Madrid              │ Spain     │ 28003         │ 8                          │ 321000         │
+│ 15             │ Jardin de Flores               │ Javier          │ Villar            │ 654865643   │ 914538776   │ C/ Oña 34                                  │                   │ Madrid                   │ Madrid              │ Spain     │ 28950         │ 30                         │ 40000          │
+│ 16             │ Flores Marivi                  │ Maria           │ Rodriguez         │ 666555444   │ 912458657   │ C/Leganes24                                │                   │ Fuenlabrada              │ Madrid              │ Spain     │ 28945         │ 5                          │ 1500           │
+│ 19             │ Golf S.A.                      │ Luis            │ Martinez          │ 916458762   │ 912354475   │ C/Estancado                                │                   │ Santa cruz de Tenerife   │ Islas Canarias      │ Spain     │ 38297         │ 12                         │ 30000          │
+│ 23             │ Sotogrande                     │ Maria           │ Santillana        │ 915576622   │ 914825645   │ C/Paseo del Parque                         │                   │ Sotogrande               │ Cadiz               │ Spain     │ 11310         │ 12                         │ 60000          │
+│ 26             │ Jardines y Mansiones Cactus SL │ Eva María       │ Sánchez           │ 916877445   │ 914477777   │ Polígono Industrial Maspalomas, Nº52       │ Móstoles          │ Madrid                   │ Madrid              │ Spain     │ 29874         │ 9                          │ 76000          │
+│ 27             │ Jardinerías Matías SL          │ Matías          │ San Martín        │ 916544147   │ 917897474   │ C/Francisco Arce, Nº44                     │ Bustarviejo       │ Madrid                   │ Madrid              │ Spain     │ 37845         │ 9                          │ 100500         │
+│ 28             │ Agrojardin                     │ Benito          │ Lopez             │ 675432926   │ 916549264   │ C/Mar Caspio 43                            │                   │ Getafe                   │ Madrid              │ Spain     │ 28904         │ 30                         │ 8040           │
+│ 30             │ Jardineria Sara                │ Sara            │ Marquez           │ 675124537   │ 912475843   │ C/Lima 1                                   │                   │ Fuenlabrada              │ Madrid              │ Spain     │ 27584         │ 5                          │ 7500           │
+│ 35             │ Tutifruti S.A                  │ Jacob           │ Jones             │ 2 9261-2433 │ 2 9283-1695 │ level 24, St. Martins Tower.-31 Market St. │                   │ Sydney                   │ Nueva Gales del Sur │ Australia │ 2000          │ 31                         │ 10000          │
+│ 38             │ El Jardin Viviente S.L         │ Justin          │ Smith             │ 2 8005-7161 │ 2 8005-7162 │ 176 Cumberland Street The rocks            │                   │ Sydney                   │ Nueva Gales del Sur │ Australia │ 2003          │ 31                         │ 8000           │
+└────────────────┴────────────────────────────────┴─────────────────┴───────────────────┴─────────────┴─────────────┴────────────────────────────────────────────┴───────────────────┴──────────────────────────┴─────────────────────┴───────────┴───────────────┴────────────────────────────┴────────────────┘
+```
+### Devuelve un listado de los productos que nunca han aparecido en un pedido.
+```sql
+
+SELECT p.* from producto as p 
+   ...> JOIN detalle_pedido on p.codigo_producto = detalle_pedido.codigo_producto WHERE detalle_pedido.codigo_producto is NULL;
+```
+### Devuelve el nombre, apellidos, puesto y teléfono de la oficina de aquellos empleados que no sean representante de ventas de ningún cliente.
+```sql
+
+SELECT e.nombre, e.apellido1 || ' ' || e.apellido2 as apellidos, e.puesto, o.telefono FROM empleado e
+   ...> JOIN oficina o on e.codigo_oficina=o.codigo_oficina WHERE e.codigo_empleado NOT IN (
+(x1...> SELECT DISTINCT codigo_empleado_rep_ventas FROM cliente WHERE puesto='Representante Ventas');    
+┌─────────────┬───────────────────┬───────────────────────┬─────────────────┐
+│   nombre    │     apellidos     │        puesto         │    telefono     │
+├─────────────┼───────────────────┼───────────────────────┼─────────────────┤
+│ Marcos      │ Magaña Perez      │ Director General      │ +34 925 867231  │
+│ Ruben       │ López Martinez    │ Subdirector Marketing │ +34 925 867231  │
+│ Alberto     │ Soria Carrasco    │ Subdirector Ventas    │ +34 925 867231  │
+│ Maria       │ Solís Jerez       │ Secretaria            │ +34 925 867231  │
+│ Carlos      │ Soria Jimenez     │ Director Oficina      │ +34 91 7514487  │
+│ Emmanuel    │ Magaña Perez      │ Director Oficina      │ +34 93 3561182  │
+│ Francois    │ Fignon            │ Director Oficina      │ +33 14 723 4404 │
+│ Michael     │ Bolton            │ Director Oficina      │ +1 650 219 4782 │
+│ Hilary      │ Washington        │ Director Oficina      │ +1 215 837 0825 │
+│ Nei         │ Nishikori         │ Director Oficina      │ +81 33 224 5000 │
+│ Amy         │ Johnson           │ Director Oficina      │ +44 20 78772041 │
+│ Kevin       │ Fallmer           │ Director Oficina      │ +61 2 9264 2451 │
+└─────────────┴───────────────────┴───────────────────────┴─────────────────┘
+```
+### Devuelve las oficinas donde no trabajan ninguno de los empleados que hayan sido los representantes de ventas de algún cliente que haya realizado la compra de algún producto de la gama Frutales.
 ```sql
 ```
-Devuelve un listado con los nombres de los clientes y el total pagado por cada uno de ellos. Tenga en cuenta que pueden existir clientes que no han realizado ningún pago.
+### Devuelve un listado con los clientes que han realizado algún pedido pero no han realizado ningún pago.
 ```sql
+
+SELECT * from cliente         
+   ...> WHERE codigo_cliente in (SELECT DISTINCT codigo_cliente FROM pedido) 
+   ...> AND codigo_cliente NOT IN (SELECT DISTINCT codigo_cliente FROM pago);
+┌────────────────┬────────────────┬─────────────────┬───────────────────┬───────────┬───────────┬──────────────────┬──────────────────┬────────┬─────────────┬───────┬───────────────┬────────────────────────────┬────────────────┐
+│ codigo_cliente │ nombre_cliente │ nombre_contacto │ apellido_contacto │ telefono  │    fax    │ linea_direccion1 │ linea_direccion2 │ ciudad │   region    │ pais  │ codigo_postal │ codigo_empleado_rep_ventas │ limite_credito │
+├────────────────┼────────────────┼─────────────────┼───────────────────┼───────────┼───────────┼──────────────────┼──────────────────┼────────┼─────────────┼───────┼───────────────┼────────────────────────────┼────────────────┤
+│ 36             │ Flores S.L.    │ Antonio         │ Romero            │ 654352981 │ 685249700 │ Avenida España   │                  │ Madrid │ Fuenlabrada │ Spain │ 29643         │ 18                         │ 6000           │
+└────────────────┴────────────────┴─────────────────┴───────────────────┴───────────┴───────────┴──────────────────┴──────────────────┴────────┴─────────────┴───────┴───────────────┴────────────────────────────┴────────────────┘
 ```
-Devuelve el nombre de los clientes que hayan hecho pedidos en 2008 ordenados alfabéticamente de menor a mayor.
+
+### Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
 ```sql
+
+
+SELECT * from cliente 
+   ...> WHERE codigo_cliente NOT IN (SELECT DISTINCT codigo_cliente from pago);
+┌────────────────┬─────────────────────────────┬─────────────────┬───────────────────┬────────────────┬────────────────┬──────────────────────────┬──────────────────┬──────────────────────┬─────────────┬────────────────┬───────────────┬────────────────────────────┬────────────────┐
+│ codigo_cliente │       nombre_cliente        │ nombre_contacto │ apellido_contacto │    telefono    │      fax       │     linea_direccion1     │ linea_direccion2 │        ciudad        │   region    │      pais      │ codigo_postal │ codigo_empleado_rep_ventas │ limite_credito │
+├────────────────┼─────────────────────────────┼─────────────────┼───────────────────┼────────────────┼────────────────┼──────────────────────────┼──────────────────┼──────────────────────┼─────────────┼────────────────┼───────────────┼────────────────────────────┼────────────────┤
+│ 6              │ Lasas S.A.                  │ Antonio         │ Lasas             │ 34916540145    │ 34914851312    │ C/Leganes 15             │                  │ Fuenlabrada          │ Madrid      │ Spain          │ 28945         │ 8                          │ 154310         │
+│ 8              │ Club Golf Puerta del hierro │ Paco            │ Lopez             │ 62456810       │ 919535678      │ C/sinesio delgado        │ Madrid           │ Madrid               │ Madrid      │ Spain          │ 28930         │ 11                         │ 40000          │
+│ 10             │ DaraDistribuciones          │ David           │ Serrano           │ 675598001      │ 916421756      │ C/azores                 │ Fuenlabrada      │ Madrid               │ Madrid      │ Spain          │ 28946         │ 11                         │ 50000          │
+│ 11             │ Madrileña de riegos         │ Jose            │ Tacaño            │ 655983045      │ 916689215      │ C/Lagañas                │ Fuenlabrada      │ Madrid               │ Madrid      │ Spain          │ 28943         │ 11                         │ 20000          │
+│ 12             │ Lasas S.A.                  │ Antonio         │ Lasas             │ 34916540145    │ 34914851312    │ C/Leganes 15             │                  │ Fuenlabrada          │ Madrid      │ Spain          │ 28945         │ 8                          │ 154310         │
+│ 17             │ Flowers, S.A                │ Beatriz         │ Fernandez         │ 698754159      │ 978453216      │ C/Luis Salquillo4        │                  │ Montornes del valles │ Barcelona   │ Spain          │ 24586         │ 5                          │ 3500           │
+│ 18             │ Naturajardin                │ Victoria        │ Cruz              │ 612343529      │ 916548735      │ Plaza Magallón 15        │                  │ Madrid               │ Madrid      │ Spain          │ 28011         │ 30                         │ 5050           │
+│ 20             │ Americh Golf Management SL  │ Mario           │ Suarez            │ 964493072      │ 964493063      │ C/Letardo                │                  │ Barcelona            │ Cataluña    │ Spain          │ 12320         │ 12                         │ 20000          │
+│ 21             │ Aloha                       │ Cristian        │ Rodrigez          │ 916485852      │ 914489898      │ C/Roman 3                │                  │ Canarias             │ Canarias    │ Spain          │ 35488         │ 12                         │ 50000          │
+│ 22             │ El Prat                     │ Francisco       │ Camacho           │ 916882323      │ 916493211      │ Avenida Tibidabo         │                  │ Barcelona            │ Cataluña    │ Spain          │ 12320         │ 12                         │ 30000          │
+│ 24             │ Vivero Humanes              │ Federico        │ Gomez             │ 654987690      │ 916040875      │ C/Miguel Echegaray 54    │                  │ Humanes              │ Madrid      │ Spain          │ 28970         │ 30                         │ 7430           │
+│ 25             │ Fuenla City                 │ Tony            │ Muñoz Mena        │ 675842139      │ 915483754      │ C/Callo 52               │                  │ Fuenlabrada          │ Madrid      │ Spain          │ 28574         │ 5                          │ 4500           │
+│ 29             │ Top Campo                   │ Joseluis        │ Sanchez           │ 685746512      │ 974315924      │ C/Ibiza 32               │                  │ Humanes              │ Madrid      │ Spain          │ 28574         │ 5                          │ 5500           │
+│ 31             │ Campohermoso                │ Luis            │ Jimenez           │ 645925376      │ 916159116      │ C/Peru 78                │                  │ Fuenlabrada          │ Madrid      │ Spain          │ 28945         │ 30                         │ 3250           │
+│ 32             │ france telecom              │ FraÃ§ois        │ Toulou            │ (33)5120578961 │ (33)5120578961 │ 6 place d Alleray 15Ã¨me │                  │ Paris                │             │ France         │ 75010         │ 16                         │ 10000          │
+│ 33             │ Musée du Louvre             │ Pierre          │ Delacroux         │ (33)0140205050 │ (33)0140205442 │ Quai du Louvre           │                  │ Paris                │             │ France         │ 75058         │ 16                         │ 30000          │
+│ 36             │ Flores S.L.                 │ Antonio         │ Romero            │ 654352981      │ 685249700      │ Avenida España           │                  │ Madrid               │ Fuenlabrada │ Spain          │ 29643         │ 18                         │ 6000           │
+│ 37             │ The Magic Garden            │ Richard         │ Mcain             │ 926523468      │ 9364875882     │ Lihgting Park            │                  │ London               │ London      │ United Kingdom │ 65930         │ 18                         │ 10000          │
+└────────────────┴─────────────────────────────┴─────────────────┴───────────────────┴────────────────┴────────────────┴──────────────────────────┴──────────────────┴──────────────────────┴─────────────┴────────────────┴───────────────┴────────────────────────────┴────────────────┘
 ```
-Devuelve el nombre del cliente, el nombre y primer apellido de su representante de ventas y el número de teléfono de la oficina del representante de ventas, de aquellos clientes que no hayan realizado ningún pago.
+### Devuelve un listado que muestre solamente los clientes que sí han realizado algún pago.
 ```sql
+
+SELECT * from cliente
+   ...> WHERE codigo_cliente IN (SELECT DISTINCT codigo_cliente from pago);     
+┌────────────────┬────────────────────────────────┬─────────────────┬───────────────────┬─────────────┬─────────────┬────────────────────────────────────────────┬───────────────────┬──────────────────────────┬─────────────────────┬───────────┬───────────────┬────────────────────────────┬────────────────┐
+│ codigo_cliente │         nombre_cliente         │ nombre_contacto │ apellido_contacto │  telefono   │     fax     │              linea_direccion1              │ linea_direccion2  │          ciudad          │       region        │   pais    │ codigo_postal │ codigo_empleado_rep_ventas │ limite_credito │
+├────────────────┼────────────────────────────────┼─────────────────┼───────────────────┼─────────────┼─────────────┼────────────────────────────────────────────┼───────────────────┼──────────────────────────┼─────────────────────┼───────────┼───────────────┼────────────────────────────┼────────────────┤
+│ 1              │ GoldFish Garden                │ Daniel G        │ GoldFish          │ 5556901745  │ 5556901746  │ False Street 52 2 A                        │                   │ San Francisco            │                     │ USA       │ 24006         │ 19                         │ 3000           │
+│ 3              │ Gardening Associates           │ Anne            │ Wright            │ 5557410345  │ 5557410346  │ Wall-e Avenue                              │                   │ Miami                    │ Miami               │ USA       │ 24010         │ 19                         │ 6000           │
+│ 4              │ Gerudo Valley                  │ Link            │ Flaute            │ 5552323129  │ 5552323128  │ Oaks Avenue nº22                           │                   │ New York                 │                     │ USA       │ 85495         │ 22                         │ 12000          │
+│ 5              │ Tendo Garden                   │ Akane           │ Tendo             │ 55591233210 │ 55591233211 │ Null Street nº69                           │                   │ Miami                    │                     │ USA       │ 696969        │ 22                         │ 600000         │
+│ 7              │ Beragua                        │ Jose            │ Bermejo           │ 654987321   │ 916549872   │ C/pintor segundo                           │ Getafe            │ Madrid                   │ Madrid              │ Spain     │ 28942         │ 11                         │ 20000          │
+│ 9              │ Naturagua                      │ Guillermo       │ Rengifo           │ 689234750   │ 916428956   │ C/majadahonda                              │ Boadilla          │ Madrid                   │ Madrid              │ Spain     │ 28947         │ 11                         │ 32000          │
+│ 13             │ Camunas Jardines S.L.          │ Pedro           │ Camunas           │ 34914873241 │ 34914871541 │ C/Virgenes 45                              │ C/Princesas 2 1ºB │ San Lorenzo del Escorial │ Madrid              │ Spain     │ 28145         │ 8                          │ 16481          │
+│ 14             │ Dardena S.A.                   │ Juan            │ Rodriguez         │ 34912453217 │ 34912484764 │ C/Nueva York 74                            │                   │ Madrid                   │ Madrid              │ Spain     │ 28003         │ 8                          │ 321000         │
+│ 15             │ Jardin de Flores               │ Javier          │ Villar            │ 654865643   │ 914538776   │ C/ Oña 34                                  │                   │ Madrid                   │ Madrid              │ Spain     │ 28950         │ 30                         │ 40000          │
+│ 16             │ Flores Marivi                  │ Maria           │ Rodriguez         │ 666555444   │ 912458657   │ C/Leganes24                                │                   │ Fuenlabrada              │ Madrid              │ Spain     │ 28945         │ 5                          │ 1500           │
+│ 19             │ Golf S.A.                      │ Luis            │ Martinez          │ 916458762   │ 912354475   │ C/Estancado                                │                   │ Santa cruz de Tenerife   │ Islas Canarias      │ Spain     │ 38297         │ 12                         │ 30000          │
+│ 23             │ Sotogrande                     │ Maria           │ Santillana        │ 915576622   │ 914825645   │ C/Paseo del Parque                         │                   │ Sotogrande               │ Cadiz               │ Spain     │ 11310         │ 12                         │ 60000          │
+│ 26             │ Jardines y Mansiones Cactus SL │ Eva María       │ Sánchez           │ 916877445   │ 914477777   │ Polígono Industrial Maspalomas, Nº52       │ Móstoles          │ Madrid                   │ Madrid              │ Spain     │ 29874         │ 9                          │ 76000          │
+│ 27             │ Jardinerías Matías SL          │ Matías          │ San Martín        │ 916544147   │ 917897474   │ C/Francisco Arce, Nº44                     │ Bustarviejo       │ Madrid                   │ Madrid              │ Spain     │ 37845         │ 9                          │ 100500         │
+│ 28             │ Agrojardin                     │ Benito          │ Lopez             │ 675432926   │ 916549264   │ C/Mar Caspio 43                            │                   │ Getafe                   │ Madrid              │ Spain     │ 28904         │ 30                         │ 8040           │
+│ 30             │ Jardineria Sara                │ Sara            │ Marquez           │ 675124537   │ 912475843   │ C/Lima 1                                   │                   │ Fuenlabrada              │ Madrid              │ Spain     │ 27584         │ 5                          │ 7500           │
+│ 35             │ Tutifruti S.A                  │ Jacob           │ Jones             │ 2 9261-2433 │ 2 9283-1695 │ level 24, St. Martins Tower.-31 Market St. │                   │ Sydney                   │ Nueva Gales del Sur │ Australia │ 2000          │ 31                         │ 10000          │
+│ 38             │ El Jardin Viviente S.L         │ Justin          │ Smith             │ 2 8005-7161 │ 2 8005-7162 │ 176 Cumberland Street The rocks            │                   │ Sydney                   │ Nueva Gales del Sur │ Australia │ 2003          │ 31                         │ 8000           │
+└────────────────┴────────────────────────────────┴─────────────────┴───────────────────┴─────────────┴─────────────┴────────────────────────────────────────────┴───────────────────┴──────────────────────────┴─────────────────────┴───────────┴───────────────┴────────────────────────────┴────────────────┘
 ```
-Devuelve el listado de clientes donde aparezca el nombre del cliente, el nombre y primer apellido de su representante de ventas y la ciudad donde está su oficina.
+### Devuelve un listado de los productos que nunca han aparecido en un pedido.
 ```sql
+
+SELECT p.* from producto as p 
+   ...> JOIN detalle_pedido on p.codigo_producto = detalle_pedido.codigo_producto WHERE detalle_pedido.codigo_producto is NULL;
 ```
-Devuelve el nombre, apellidos, puesto y teléfono de la oficina de aquellos empleados que no sean representante de ventas de ningún cliente.
+### Devuelve un listado de los productos que han aparecido en un pedido alguna vez.
 ```sql
+SELECT p.* from producto as p 
+   ...> JOIN detalle_pedido on p.codigo_producto = detalle_pedido.codigo_producto;
+
+El resultado son casi todos
 ```
-Devuelve un listado indicando todas las ciudades donde hay oficinas y el número de empleados que tiene.
+
+### Devuelve el listado de clientes indicando el nombre del cliente y cuántos pedidos ha realizado. Tenga en cuenta que pueden existir clientes que no han realizado ningún pedido.
 ```sql
+SELECT c.nombre_cliente, COUNT(p.codigo_pedido) AS cantidad_pedidos FROM cliente as c
+   ...> JOIN pedido p on c.codigo_cliente=p.codigo_cliente 
+   ...> GROUP BY c.codigo_cliente, c.nombre_cliente;
+┌────────────────────────────────┬──────────────────┐
+│         nombre_cliente         │ cantidad_pedidos │
+├────────────────────────────────┼──────────────────┤
+│ GoldFish Garden                │ 11               │
+│ Gardening Associates           │ 9                │
+│ Gerudo Valley                  │ 5                │
+│ Tendo Garden                   │ 5                │
+│ Beragua                        │ 5                │
+│ Naturagua                      │ 5                │
+│ Camunas Jardines S.L.          │ 5                │
+│ Dardena S.A.                   │ 5                │
+│ Jardin de Flores               │ 5                │
+│ Flores Marivi                  │ 10               │
+│ Golf S.A.                      │ 5                │
+│ Sotogrande                     │ 5                │
+│ Jardines y Mansiones Cactus SL │ 5                │
+│ Jardinerías Matías SL          │ 5                │
+│ Agrojardin                     │ 5                │
+│ Jardineria Sara                │ 10               │
+│ Tutifruti S.A                  │ 5                │
+│ Flores S.L.                    │ 5                │
+│ El Jardin Viviente S.L         │ 5                │
+└────────────────────────────────┴──────────────────┘
+```
+
+### Devuelve un listado con los nombres de los clientes y el total pagado por cada uno de ellos. Tenga en cuenta que pueden existir clientes que no han realizado ningún pago.
+```sql
+
+SELECT c.nombre_cliente, SUM(p.total) as total_pagado FROM cliente c 
+   ...> JOIN pago p on c.codigo_cliente = p.codigo_cliente 
+   ...> GROUP BY c.codigo_cliente, c.nombre_cliente;
+┌────────────────────────────────┬──────────────┐
+│         nombre_cliente         │ total_pagado │
+├────────────────────────────────┼──────────────┤
+│ GoldFish Garden                │ 4000         │
+│ Gardening Associates           │ 10926        │
+│ Gerudo Valley                  │ 81849        │
+│ Tendo Garden                   │ 23794        │
+│ Beragua                        │ 2390         │
+│ Naturagua                      │ 929          │
+│ Camunas Jardines S.L.          │ 2246         │
+│ Dardena S.A.                   │ 4160         │
+│ Jardin de Flores               │ 12081        │
+│ Flores Marivi                  │ 4399         │
+│ Golf S.A.                      │ 232          │
+│ Sotogrande                     │ 272          │
+│ Jardines y Mansiones Cactus SL │ 18846        │
+│ Jardinerías Matías SL          │ 10972        │
+│ Agrojardin                     │ 8489         │
+│ Jardineria Sara                │ 7863         │
+│ Tutifruti S.A                  │ 3321         │
+│ El Jardin Viviente S.L         │ 1171         │
+└────────────────────────────────┴──────────────┘
+```
+### Devuelve el nombre de los clientes que hayan hecho pedidos en 2008 ordenados alfabéticamente de menor a mayor.
+```sql
+
+SELECT c.nombre_cliente FROM cliente c 
+   ...> JOIN pedido p ON c.codigo_cliente=p.codigo_cliente WHERE strftime('%Y', p.fecha_pedido) = '2008'
+   ...> GROUP BY c.nombre_cliente 
+   ...> ORDER BY c.nombre_cliente ASC;
+┌────────────────────────────────┐
+│         nombre_cliente         │
+├────────────────────────────────┤
+│ Camunas Jardines S.L.          │
+│ Dardena S.A.                   │
+│ El Jardin Viviente S.L         │
+│ Flores Marivi                  │
+│ Flores S.L.                    │
+│ Gerudo Valley                  │
+│ GoldFish Garden                │
+│ Jardin de Flores               │
+│ Jardines y Mansiones Cactus SL │
+│ Tendo Garden                   │
+│ Tutifruti S.A                  │
+└────────────────────────────────┘
+```
+### Devuelve el nombre del cliente, el nombre y primer apellido de su representante de ventas y el número de teléfono de la oficina del representante de ventas, de aquellos clientes que no hayan realizado ningún pago.
+```sql
+SELECT c.nombre_cliente, e.nombre, e.apellido1, o.telefono FROM cliente c
+   ...> JOIN empleado e ON c.codigo_empleado_rep_ventas = e.codigo_empleado 
+   ...> JOIN oficina o ON e.codigo_oficina = o.codigo_oficina 
+   ...> WHERE c.codigo_cliente NOT IN (SELECT codigo_cliente FROM pago);
+┌─────────────────────────────┬─────────────┬────────────┬─────────────────┐
+│       nombre_cliente        │   nombre    │ apellido1  │    telefono     │
+├─────────────────────────────┼─────────────┼────────────┼─────────────────┤
+│ Lasas S.A.                  │ Mariano     │ López      │ +34 91 7514487  │
+│ Club Golf Puerta del hierro │ Emmanuel    │ Magaña     │ +34 93 3561182  │
+│ DaraDistribuciones          │ Emmanuel    │ Magaña     │ +34 93 3561182  │
+│ Madrileña de riegos         │ Emmanuel    │ Magaña     │ +34 93 3561182  │
+│ Lasas S.A.                  │ Mariano     │ López      │ +34 91 7514487  │
+│ Flowers, S.A                │ Felipe      │ Rosas      │ +34 925 867231  │
+│ Naturajardin                │ Julian      │ Bellinelli │ +61 2 9264 2451 │
+│ Americh Golf Management SL  │ José Manuel │ Martinez   │ +34 93 3561182  │
+│ Aloha                       │ José Manuel │ Martinez   │ +34 93 3561182  │
+│ El Prat                     │ José Manuel │ Martinez   │ +34 93 3561182  │
+│ Vivero Humanes              │ Julian      │ Bellinelli │ +61 2 9264 2451 │
+│ Fuenla City                 │ Felipe      │ Rosas      │ +34 925 867231  │
+│ Top Campo                   │ Felipe      │ Rosas      │ +34 925 867231  │
+│ Campohermoso                │ Julian      │ Bellinelli │ +61 2 9264 2451 │
+│ france telecom              │ Lionel      │ Narvaez    │ +33 14 723 4404 │
+│ Musée du Louvre             │ Lionel      │ Narvaez    │ +33 14 723 4404 │
+│ Flores S.L.                 │ Michael     │ Bolton     │ +1 650 219 4782 │
+│ The Magic Garden            │ Michael     │ Bolton     │ +1 650 219 4782 │
+└─────────────────────────────┴─────────────┴────────────┴─────────────────┘
+
+```
+### Devuelve el listado de clientes donde aparezca el nombre del cliente, el nombre y primer apellido de su representante de ventas y la ciudad donde está su oficina.
+```sql
+
+SELECT c.nombre_cliente, e.nombre, e.apellido1, o.ciudad FROM cliente c
+   ...> JOIN empleado e ON c.codigo_empleado_rep_ventas = e.codigo_empleado 
+   ...> JOIN oficina o ON e.codigo_oficina = o.codigo_oficina;
+┌────────────────────────────────┬─────────────────┬────────────┬──────────────────────┐
+│         nombre_cliente         │     nombre      │ apellido1  │        ciudad        │
+├────────────────────────────────┼─────────────────┼────────────┼──────────────────────┤
+│ GoldFish Garden                │ Walter Santiago │ Sanchez    │ San Francisco        │
+│ Gardening Associates           │ Walter Santiago │ Sanchez    │ San Francisco        │
+│ Gerudo Valley                  │ Lorena          │ Paxton     │ Boston               │
+│ Tendo Garden                   │ Lorena          │ Paxton     │ Boston               │
+│ Lasas S.A.                     │ Mariano         │ López      │ Madrid               │
+│ Beragua                        │ Emmanuel        │ Magaña     │ Barcelona            │
+│ Club Golf Puerta del hierro    │ Emmanuel        │ Magaña     │ Barcelona            │
+│ Naturagua                      │ Emmanuel        │ Magaña     │ Barcelona            │
+│ DaraDistribuciones             │ Emmanuel        │ Magaña     │ Barcelona            │
+│ Madrileña de riegos            │ Emmanuel        │ Magaña     │ Barcelona            │
+│ Lasas S.A.                     │ Mariano         │ López      │ Madrid               │
+│ Camunas Jardines S.L.          │ Mariano         │ López      │ Madrid               │
+│ Dardena S.A.                   │ Mariano         │ López      │ Madrid               │
+│ Jardin de Flores               │ Julian          │ Bellinelli │ Sydney               │
+│ Flores Marivi                  │ Felipe          │ Rosas      │ Talavera de la Reina │
+│ Flowers, S.A                   │ Felipe          │ Rosas      │ Talavera de la Reina │
+│ Naturajardin                   │ Julian          │ Bellinelli │ Sydney               │
+│ Golf S.A.                      │ José Manuel     │ Martinez   │ Barcelona            │
+│ Americh Golf Management SL     │ José Manuel     │ Martinez   │ Barcelona            │
+│ Aloha                          │ José Manuel     │ Martinez   │ Barcelona            │
+│ El Prat                        │ José Manuel     │ Martinez   │ Barcelona            │
+│ Sotogrande                     │ José Manuel     │ Martinez   │ Barcelona            │
+│ Vivero Humanes                 │ Julian          │ Bellinelli │ Sydney               │
+│ Fuenla City                    │ Felipe          │ Rosas      │ Talavera de la Reina │
+│ Jardines y Mansiones Cactus SL │ Lucio           │ Campoamor  │ Madrid               │
+│ Jardinerías Matías SL          │ Lucio           │ Campoamor  │ Madrid               │
+│ Agrojardin                     │ Julian          │ Bellinelli │ Sydney               │
+│ Top Campo                      │ Felipe          │ Rosas      │ Talavera de la Reina │
+│ Jardineria Sara                │ Felipe          │ Rosas      │ Talavera de la Reina │
+│ Campohermoso                   │ Julian          │ Bellinelli │ Sydney               │
+│ france telecom                 │ Lionel          │ Narvaez    │ Paris                │
+│ Musée du Louvre                │ Lionel          │ Narvaez    │ Paris                │
+│ Tutifruti S.A                  │ Mariko          │ Kishi      │ Sydney               │
+│ Flores S.L.                    │ Michael         │ Bolton     │ San Francisco        │
+│ The Magic Garden               │ Michael         │ Bolton     │ San Francisco        │
+│ El Jardin Viviente S.L         │ Mariko          │ Kishi      │ Sydney               │
+└────────────────────────────────┴─────────────────┴────────────┴──────────────────────┘
+```
+### Devuelve el nombre, apellidos, puesto y teléfono de la oficina de aquellos empleados que no sean representante de ventas de ningún cliente.
+```sql
+SELECT e.nombre, e.apellido1, e.puesto, o.telefono FROM empleado e
+   ...> JOIN oficina o ON e.codigo_oficina = o.codigo_oficina
+   ...> WHERE e.codigo_empleado NOT IN (
+(x1...> SELECT codigo_empleado_rep_ventas FROM cliente WHERE codigo_empleado_rep_ventas IS NOT NULL);
+┌─────────────┬────────────┬───────────────────────┬─────────────────┐
+│   nombre    │ apellido1  │        puesto         │    telefono     │
+├─────────────┼────────────┼───────────────────────┼─────────────────┤
+│ Marcos      │ Magaña     │ Director General      │ +34 925 867231  │
+│ Ruben       │ López      │ Subdirector Marketing │ +34 925 867231  │
+│ Alberto     │ Soria      │ Subdirector Ventas    │ +34 925 867231  │
+│ Maria       │ Solís      │ Secretaria            │ +34 925 867231  │
+│ Juan Carlos │ Ortiz      │ Representante Ventas  │ +34 925 867231  │
+│ Carlos      │ Soria      │ Director Oficina      │ +34 91 7514487  │
+│ Hilario     │ Rodriguez  │ Representante Ventas  │ +34 91 7514487  │
+│ David       │ Palma      │ Representante Ventas  │ +34 93 3561182  │
+│ Oscar       │ Palma      │ Representante Ventas  │ +34 93 3561182  │
+│ Francois    │ Fignon     │ Director Oficina      │ +33 14 723 4404 │
+│ Laurent     │ Serra      │ Representante Ventas  │ +33 14 723 4404 │
+│ Hilary      │ Washington │ Director Oficina      │ +1 215 837 0825 │
+│ Marcus      │ Paxton     │ Representante Ventas  │ +1 215 837 0825 │
+│ Nei         │ Nishikori  │ Director Oficina      │ +81 33 224 5000 │
+│ Narumi      │ Riko       │ Representante Ventas  │ +81 33 224 5000 │
+│ Takuma      │ Nomura     │ Representante Ventas  │ +81 33 224 5000 │
+│ Amy         │ Johnson    │ Director Oficina      │ +44 20 78772041 │
+│ Larry       │ Westfalls  │ Representante Ventas  │ +44 20 78772041 │
+│ John        │ Walton     │ Representante Ventas  │ +44 20 78772041 │
+│ Kevin       │ Fallmer    │ Director Oficina      │ +61 2 9264 2451 │
+└─────────────┴────────────┴───────────────────────┴─────────────────┘
+```
+### Devuelve un listado indicando todas las ciudades donde hay oficinas y el número de empleados que tiene.
+```sql
+
+SELECT o.ciudad, COUNT(e.codigo_empleado) as numero_empleados FROM oficina o
+   ...> JOIN empleado e ON o.codigo_oficina = e.codigo_oficina 
+   ...> GROUP BY o.ciudad;
+┌──────────────────────┬──────────────────┐
+│        ciudad        │ numero_empleados │
+├──────────────────────┼──────────────────┤
+│ Barcelona            │ 4                │
+│ Boston               │ 3                │
+│ Londres              │ 3                │
+│ Madrid               │ 4                │
+│ Paris                │ 3                │
+│ San Francisco        │ 2                │
+│ Sydney               │ 3                │
+│ Talavera de la Reina │ 6                │
+│ Tokyo                │ 3                │
+└──────────────────────┴──────────────────┘
 ```
