@@ -6,18 +6,20 @@ from pathlib import Path
 
 def run(data_path: Path, target_word: str) -> list:
     matches = []
-
+    columns = 0
+    
     with open(data_path, 'r') as file:
-        for line_num, line in enumerate(file, 1):
-            words = line.strip().split()
-            total_pos = 1
-            for word in words:
-                if word.lower() == target_word.lower():
-                    matches.append((line_num, total_pos))
-                    break
-                total_pos += len(word) + 1
-            else:
-                total_pos += len(line) + 1
+       for line_number, line in enumerate(file, start= 1):
+           line_lower = line.lower()
+           target_word_lower = target_word.lower()
+           index = line_lower.find(target_word_lower)
+           while index != -1:
+               if (index == 0 or not line[index - 1].isalnum()) and (index + len(target_word_lower) == len(line_lower) or not line[index + len(target_word_lower).isalnum()]):
+                    columns = index + 1
+                    matches.append((line_number, columns))
+                    index = line_lower.find(target_word_lower, index + 1)
+        
+       
     return matches
 
 

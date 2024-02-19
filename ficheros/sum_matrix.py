@@ -21,9 +21,6 @@ def run(matrix1_path: Path, matrix2_path: Path) -> bool:
                 total_sum = num1 + num2
                 result.write(str(total_sum) + ' ')
             result.write('\n')
-    result.close()  
-    matrix1.close()
-    matrix2.close()
          
     return filecmp.cmp(result_path, 'data\sum_matrix\.expected', shallow=False)
 

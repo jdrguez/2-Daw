@@ -15,8 +15,6 @@ def run(text_path: Path) -> bool:
             if total_tabs == 0:
                 total_tabs = 0  
             markdown.write('#' * (total_tabs + 1) + ' ' + line.strip('\t') )
-        markdown.close()
-    file.close()
     
     return filecmp.cmp(md_path, 'data/txt2md/.expected', shallow=False)
 

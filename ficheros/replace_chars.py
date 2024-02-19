@@ -8,13 +8,16 @@ from pathlib import Path
 def run(input_path: Path, replacements: str) -> bool:
     output_path = 'data/replace_chars/r_noticia.txt'
     file = open(input_path)
-    splited_replacements = tuple(replacements.split('|'))
+    all_replaces = [replacement for replacement in replacements.split('|')]
     
     with open(output_path, 'w') as result:
-        for old_char, new_char in splited_replacements:
-            content = file.read().replace(old_char, new_char)
-            result.write(content)
-        
+        for line in file:
+            for word in line:
+                for letter in word:
+                    for old_char, new_char in all_replaces:
+                        content = letter.replace(old_char, new_char)
+                        result.write(content)
+                
 
         
 
