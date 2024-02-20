@@ -157,8 +157,8 @@ SELECT nombre FROM cliente
 
 ## Devuelve un listado con el identificador, nombre y los apellidos de todos los clientes que han realizado algún pedido. El listado debe estar ordenado alfabéticamente y se deben eliminar los elementos repetidos.
 ```sql
-SELECT DISTINCT c.id, c.nombre, c.apellido1 || ' ' || c.apellido2 as apellidos from cliente c 
-   ...> JOIN pedido p on p.id_cliente=c.id;
+SELECT DISTINCT c.id, c.nombre, COALESCE(c.apellido1, '') || ' ' || COALESCE(c.apellido2, '') as apellidos from cliente c 
+JOIN pedido p on p.id_cliente=c.id;
 ┌────┬────────┬────────────────┐
 │ id │ nombre │   apellidos    │
 ├────┼────────┼────────────────┤
@@ -166,8 +166,8 @@ SELECT DISTINCT c.id, c.nombre, c.apellido1 || ' ' || c.apellido2 as apellidos f
 │ 1  │ Aarón  │ Rivero Gómez   │
 │ 2  │ Adela  │ Salas Díaz     │
 │ 8  │ Pepe   │ Ruiz Santana   │
-│ 7  │ Pilar  │                │
-│ 4  │ Adrián │                │
+│ 7  │ Pilar  │ Ruiz           │
+│ 4  │ Adrián │ Suárez         │
 │ 3  │ Adolfo │ Rubio Flores   │
 │ 6  │ María  │ Santana Moreno │
 └────┴────────┴────────────────┘
