@@ -473,16 +473,18 @@ SELECT c.id, c.nombre, c.apellido1, MAX(p.total) maxima_cantidad FROM cliente c
 ```
 ## Devuelve cuál ha sido el pedido de máximo valor que se ha realizado cada año.
 ```sql
-SELECT strftime('%Y',fecha) as fecha, MAX(total) as maximo_valor FROM pedido 
-   ...> GROUP BY strftime('%Y', fecha);
-┌───────┬──────────────┐
-│ fecha │ maximo_valor │
-├───────┼──────────────┤
-│ 2015  │ 5760.0       │
-│ 2016  │ 2480.4       │
-│ 2017  │ 3045.6       │
-│ 2019  │ 2389.23      │
-└───────┴──────────────┘
+SELECT strftime('%Y',fecha) as anio, MAX(total) as maximo_valor FROM pedido 
+   ...> GROUP BY anio;
+
+┌──────┬──────────────┐
+│ anio │ maximo_valor │
+├──────┼──────────────┤
+│ 2015 │ 5760.0       │
+│ 2016 │ 2480.4       │
+│ 2017 │ 3045.6       │
+│ 2019 │ 2389.23      │
+└──────┴──────────────┘
+
 ```
 ## Devuelve el número total de pedidos que se han realizado cada año.
 ```sql
