@@ -561,13 +561,26 @@ SELECT c.*, p.* from cliente c
 
 ## Devuelve un listado de los clientes que no han realizado ningún pedido. (Utilizando IN o NOT IN).
 ```sql
-SELECT * from pedido  
-   ...> WHERE id_cliente not in (SELECT id FROM cliente);
+SELECT * from cliente  
+   ...> WHERE id not in (SELECT id_cliente FROM pedido);
+┌────┬───────────┬───────────┬───────────┬─────────┬───────────┐
+│ id │  nombre   │ apellido1 │ apellido2 │ ciudad  │ categoria │
+├────┼───────────┼───────────┼───────────┼─────────┼───────────┤
+│ 9  │ Guillermo │ López     │ Gómez     │ Granada │ 225       │
+│ 10 │ Daniel    │ Santana   │ Loyola    │ Sevilla │ 125       │
+└────┴───────────┴───────────┴───────────┴─────────┴───────────
 ```
 ## Devuelve un listado de los comerciales que no han realizado ningún pedido. (Utilizando IN o NOT IN).
 ```sql
-SELECT * from pedido
-   ...> WHERE id_comercial not in (SELECT id FROM comercial); 
+SELECT * from comercial
+   ...> WHERE id not in (SELECT id_comercial FROM pedido); 
+┌────┬─────────┬───────────┬───────────┬───────────┐
+│ id │ nombre  │ apellido1 │ apellido2 │ categoria │
+├────┼─────────┼───────────┼───────────┼───────────┤
+│ 4  │ Marta   │ Herrera   │ Gil       │ 0.14      │
+│ 8  │ Alfredo │ Ruiz      │ Flores    │ 0.05      │
+└────┴─────────┴───────────┴───────────┴───────────┘
+
 ```
 # Subconsultas con EXISTS y NOT EXISTS
 
