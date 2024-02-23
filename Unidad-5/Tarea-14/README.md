@@ -258,68 +258,154 @@ GROUP BY dep.nombre, p.apellido1, p.apellido2, p.nombre;
 ```
 
 ## Devuelve un listado con los profesores que no están asociados a un departamento.
-```slq
+```sql
+
 ```
 ## Devuelve un listado con los departamentos que no tienen profesores asociados.
-```slq
+```sql
+
 ```
 ## Devuelve un listado con los profesores que no imparten ninguna asignatura.
-```slq
+```sql
+
 ```
 ## Devuelve un listado con las asignaturas que no tienen un profesor asignado.
-```slq
+```sql
+
 ```
 ## Devuelve un listado con todos los departamentos que tienen alguna asignatura que no se haya impartido en ningún curso escolar. El resultado debe mostrar el nombre del departamento y el nombre de la asignatura que no se haya impartido nunca.
-```slq
+```sql
+
 ```
 # Consultas resúmen (Funciones)
 
 ## Devuelve el número total de alumnas que hay.
-```slq
+```sql
+
+SELECT COUNT(sexo) as total_de_alumnas FROM persona
+   ...> WHERE tipo='alumno' and sexo='M';
+┌──────────────────┐
+│ total_de_alumnas │
+├──────────────────┤
+│ 3                │
+└──────────────────┘
+
 ```
 
 ## Calcula cuántos alumnos nacieron en 1999.
-```slq
+```sql
+
+SELECT COUNT(id) as total_nacidos FROM persona
+   ...> WHERE fecha_nacimiento REGEXP '1999' and tipo='alumno';
+┌───────────────┐
+│ total_nacidos │
+├───────────────┤
+│ 2             │
+└───────────────┘
 ```
 
 ## Calcula cuántos profesores hay en cada departamento. El resultado sólo debe mostrar dos columnas, una con el nombre del departamento y otra con el número de profesores que hay en ese departamento. El resultado sólo debe incluir los departamentos que tienen profesores asociados y deberá estar ordenado de mayor a menor por el número de profesores.
-```slq
+```sql
+SELECT dep.nombre,  count(prof.id_profesor) as total_profesores FROM profesor as prof
+   ...> JOIN departamento dep on prof.id_departamento=dep.id
+   ...> GROUP BY dep.nombre;
+┌────────────────────┬──────────────────┐
+│       nombre       │ total_profesores │
+├────────────────────┼──────────────────┤
+│ Agronomía          │ 1                │
+│ Economía y Empresa │ 2                │
+│ Educación          │ 3                │
+│ Informática        │ 2                │
+│ Matemáticas        │ 2                │
+│ Química y Física   │ 2                │
+└────────────────────┴──────────────────┘
 ```
 ## Devuelve un listado con todos los departamentos y el número de profesores que hay en cada uno de ellos. Tenga en cuenta que pueden existir departamentos que no tienen profesores asociados. Estos departamentos también tienen que aparecer en el listado.
-```slq
+```sql
+
+
+SELECT dep.nombre,  count(prof.id_profesor) as total_profesores FROM profesor as prof
+   ...> JOIN departamento dep on prof.id_departamento=dep.id
+   ...> GROUP BY dep.nombre;
+┌────────────────────┬──────────────────┐
+│       nombre       │ total_profesores │
+├────────────────────┼──────────────────┤
+│ Agronomía          │ 1                │
+│ Economía y Empresa │ 2                │
+│ Educación          │ 3                │
+│ Informática        │ 2                │
+│ Matemáticas        │ 2                │
+│ Química y Física   │ 2                │
+└────────────────────┴──────────────────┘
+
+
 ```
 ## Devuelve un listado con el nombre de todos los grados existentes en la base de datos y el número de asignaturas que tiene cada uno. Tenga en cuenta que pueden existir grados que no tienen asignaturas asociadas. Estos grados también tienen que aparecer en el listado. El resultado deberá estar ordenado de mayor a menor por el número de asignaturas.
-```slq
+```sql
+SELECT g.nombre, IFNULL((SELECT count(*) from asignatura asig where asig.id_grado=g.id), 0) as total_asignaturas FROM grado g ORDER BY total_asignaturas DESC;
+┌────────────────────────────────────────────────────────┬───────────────────┐
+│                         nombre                         │ total_asignaturas │
+├────────────────────────────────────────────────────────┼───────────────────┤
+│ Grado en Ingeniería Informática (Plan 2015)            │ 51                │
+│ Grado en Biotecnología (Plan 2015)                     │ 32                │
+│ Grado en Ingeniería Agrícola (Plan 2015)               │ 0                 │
+│ Grado en Ingeniería Eléctrica (Plan 2014)              │ 0                 │
+│ Grado en Ingeniería Electrónica Industrial (Plan 2010) │ 0                 │
+│ Grado en Ingeniería Mecánica (Plan 2010)               │ 0                 │
+│ Grado en Ingeniería Química Industrial (Plan 2010)     │ 0                 │
+│ Grado en Ciencias Ambientales (Plan 2009)              │ 0                 │
+│ Grado en Matemáticas (Plan 2010)                       │ 0                 │
+│ Grado en Química (Plan 2009)                           │ 0                 │
+└────────────────────────────────────────────────────────┴───────────────────┘
+
 ```
 ## Devuelve un listado con el nombre de todos los grados existentes en la base de datos y el número de asignaturas que tiene cada uno, de los grados que tengan más de 40 asignaturas asociadas.
-```slq
+```sql
+
+SELECT g.nombre, IFNULL((SELECT count(*) from asignatura asig where asig.id_grado=g.id), 0) as total_asignaturas FROM grado g WHERE total_asignaturas > 40 ORDER BY total_asignaturas DESC
+   ...> ;
+┌─────────────────────────────────────────────┬───────────────────┐
+│                   nombre                    │ total_asignaturas │
+├─────────────────────────────────────────────┼───────────────────┤
+│ Grado en Ingeniería Informática (Plan 2015) │ 51                │
+└─────────────────────────────────────────────┴───────────────────┘
+
 ```
 ## Devuelve un listado que muestre el nombre de los grados y la suma del número total de créditos que hay para cada tipo de asignatura. El resultado debe tener tres columnas: nombre del grado, tipo de asignatura y la suma de los créditos de todas las asignaturas que hay de ese tipo. Ordene el resultado de mayor a menor por el número total de crédidos.
-```slq
+```sql
+
 ```
 ## Devuelve un listado que muestre cuántos alumnos se han matriculado de alguna asignatura en cada uno de los cursos escolares. El resultado deberá mostrar dos columnas, una columna con el año de inicio del curso escolar y otra con el número de alumnos matriculados.
-```slq
+```sql
+
 ```
 ## Devuelve un listado con el número de asignaturas que imparte cada profesor. El listado debe tener en cuenta aquellos profesores que no imparten ninguna asignatura. El resultado mostrará cinco columnas: id, nombre, primer apellido, segundo apellido y número de asignaturas. El resultado estará ordenado de mayor a menor por el número de asignaturas.
-```slq
+```sql
+
 ```
 # Subconsultas
 
 ## Devuelve todos los datos del alumno más joven.
-```slq
+```sql
+
 ```
 ## Devuelve un listado con los profesores que no están asociados a un departamento.
-```slq
+```sql
+
 ```
 ## Devuelve un listado con los departamentos que no tienen profesores asociados.
-```slq
+```sql
+
 ```
 ## Devuelve un listado con los profesores que tienen un departamento asociado y que no imparten ninguna asignatura.
-```slq
+```sql
+
 ```
 ## Devuelve un listado con las asignaturas que no tienen un profesor asignado.
-```slq
+```sql
+
 ```
 ## Devuelve un listado con todos los departamentos que no han impartido asignaturas en ningún curso escolar.
-```slq
+```sql
+
 ```
