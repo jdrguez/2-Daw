@@ -259,14 +259,34 @@ GROUP BY dep.nombre, p.apellido1, p.apellido2, p.nombre;
 
 ## Devuelve un listado con los profesores que no están asociados a un departamento.
 ```sql
-SELECT p.nombre from persona p, proferos as prof, departamento as dep 
-WHERE p.tipo='profesor' and where prof.id_profesor=p.id and  dep.id_director=p.id is NULL;
+SELECT d.* from departamento as d
+WHERE d.id not in(
+   SELECT DISTINCT(id_departamento)
+   FROM profesor
+);
+┌────┬─────────────────────┐
+│ id │       nombre        │
+├────┼─────────────────────┤
+│ 7  │ Filología           │
+│ 8  │ Derecho             │
+│ 9  │ Biología y Geología │
+└────┴─────────────────────┘
 
 ```
 ## Devuelve un listado con los departamentos que no tienen profesores asociados.
 ```sql
- SELECT p.nombre from persona p, profesor as prof, departamento as dep
-   ...> WHERE p.tipo='profesor' and  prof.id_profesor=p.id and  dep.id=prof.id_departamento is NULL; 
+SELECT p.* from profesro as p
+WHERE p.id_profesor not in(
+   SELECT DISTINCT(id_departamento)
+   FROM departamento
+);
+┌────┬─────────────────────┐
+│ id │       nombre        │
+├────┼─────────────────────┤
+│ 7  │ Filología           │
+│ 8  │ Derecho             │
+│ 9  │ Biología y Geología │
+└────┴─────────────────────┘
 
 ```
 ## Devuelve un listado con los profesores que no imparten ninguna asignatura.
@@ -450,14 +470,138 @@ SELECT * from departamento d WHERE NOT EXISTS (SELECT * from profesor p where p.
 ## Devuelve un listado con los profesores que tienen un departamento asociado y que no imparten ninguna asignatura.
 ```sql
 
+SELECT p.nombre from persona as p
+JOIN profesor as pr on p.id=pr.id_profesor
+where pr.id_profesor not in (
+   SELECT distinct (id_profesor) from asignatura a WHERE a.id_profesor=pr.id_profesor
+);
 
+┌───────────┐
+│  nombre   │
+├───────────┤
+│ David     │
+│ Cristina  │
+│ Esther    │
+│ Carmen    │
+│ Alfredo   │
+│ Alejandro │
+│ Antonio   │
+│ Guillermo │
+│ Micaela   │
+│ Francesca │
+└───────────┘
 
 ```
 ## Devuelve un listado con las asignaturas que no tienen un profesor asignado.
 ```sql
-SELECT * from asignatura a WHERE id NOT IN (SELECT a.id from asignatura where id_profesor is NOT NULL);
+SELECT a.nombre from asignatura a WHERE id  IN (SELECT a.id from asignatura where id_profesor is NULL);
+────────────────────────────────────────────────────────────────────────┐
+│                                 nombre                                 │
+├────────────────────────────────────────────────────────────────────────┤
+│ Álgegra lineal y matemática discreta                                   │
+│ Cálculo                                                                │
+│ Física para informática                                                │
+│ Introducción a la programación                                         │
+│ Organización y gestión de empresas                                     │
+│ Estadística                                                            │
+│ Estructura y tecnología de computadores                                │
+│ Fundamentos de electrónica                                             │
+│ Lógica y algorítmica                                                   │
+│ Metodología de la programación                                         │
+│ Arquitectura de Computadores                                           │
+│ Estructura de Datos y Algoritmos I                                     │
+│ Ingeniería del Software                                                │
+│ Sistemas Inteligentes                                                  │
+│ Sistemas Operativos                                                    │
+│ Bases de Datos                                                         │
+│ Estructura de Datos y Algoritmos II                                    │
+│ Fundamentos de Redes de Computadores                                   │
+│ Planificación y Gestión de Proyectos Informáticos                      │
+│ Programación de Servicios Software                                     │
+│ Desarrollo de interfaces de usuario                                    │
+│ Ingeniería de Requisitos                                               │
+│ Integración de las Tecnologías de la Información en las Organizaciones │
+│ Modelado y Diseño del Software 1                                       │
+│ Multiprocesadores                                                      │
+│ Seguridad y cumplimiento normativo                                     │
+│ Sistema de Información para las Organizaciones                         │
+│ Tecnologías web                                                        │
+│ Teoría de códigos y criptografía                                       │
+│ Administración de bases de datos                                       │
+│ Herramientas y Métodos de Ingeniería del Software                      │
+│ Informática industrial y robótica                                      │
+│ Ingeniería de Sistemas de Información                                  │
+│ Modelado y Diseño del Software 2                                       │
+│ Negocio Electrónico                                                    │
+│ Periféricos e interfaces                                               │
+│ Sistemas de tiempo real                                                │
+│ Tecnologías de acceso a red                                            │
+│ Tratamiento digital de imágenes                                        │
+│ Administración de redes y sistemas operativos                          │
+│ Almacenes de Datos                                                     │
+│ Fiabilidad y Gestión de Riesgos                                        │
+│ Líneas de Productos Software                                           │
+│ Procesos de Ingeniería del Software 1                                  │
+│ Tecnologías multimedia                                                 │
+│ Análisis y planificación de las TI                                     │
+│ Desarrollo Rápido de Aplicaciones                                      │
+│ Gestión de la Calidad y de la Innovación Tecnológica                   │
+│ Inteligencia del Negocio                                               │
+│ Procesos de Ingeniería del Software 2                                  │
+│ Seguridad Informática                                                  │
+│ Biologia celular                                                       │
+│ Física                                                                 │
+│ Matemáticas I                                                          │
+│ Química general                                                        │
+│ Química orgánica                                                       │
+│ Biología vegetal y animal                                              │
+│ Bioquímica                                                             │
+│ Genética                                                               │
+│ Matemáticas II                                                         │
+│ Microbiología                                                          │
+│ Botánica agrícola                                                      │
+│ Fisiología vegetal                                                     │
+│ Genética molecular                                                     │
+│ Ingeniería bioquímica                                                  │
+│ Termodinámica y cinética química aplicada                              │
+│ Biorreactores                                                          │
+│ Biotecnología microbiana                                               │
+│ Ingeniería genética                                                    │
+│ Inmunología                                                            │
+│ Virología                                                              │
+│ Bases moleculares del desarrollo vegetal                               │
+│ Fisiología animal                                                      │
+│ Metabolismo y biosíntesis de biomoléculas                              │
+│ Operaciones de separación                                              │
+│ Patología molecular de plantas                                         │
+│ Técnicas instrumentales básicas                                        │
+│ Bioinformática                                                         │
+│ Biotecnología de los productos hortofrutículas                         │
+│ Biotecnología vegetal                                                  │
+│ Genómica y proteómica                                                  │
+│ Procesos biotecnológicos                                               │
+│ Técnicas instrumentales avanzadas                                      │
+└────────────────────────────────────────────────────────────────────────┘
 ```
 ## Devuelve un listado con todos los departamentos que no han impartido asignaturas en ningún curso escolar.
 ```sql
+
+SELECT d.* from departamento as d where d.id not in (
+SELECT d.id from departamento as d
+JOIN profesor as p on d.id=p.id_departamento
+JOIN asignatura a on p.id_profesor=a.id_profesor);
+
+┌────┬─────────────────────┐
+│ id │       nombre        │
+├────┼─────────────────────┤
+│ 2  │ Matemáticas         │
+│ 3  │ Economía y Empresa  │
+│ 4  │ Educación           │
+│ 5  │ Agronomía           │
+│ 6  │ Química y Física    │
+│ 7  │ Filología           │
+│ 8  │ Derecho             │
+│ 9  │ Biología y Geología │
+└────┴─────────────────────┘
 
 ```
