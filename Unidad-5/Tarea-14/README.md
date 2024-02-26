@@ -259,10 +259,14 @@ GROUP BY dep.nombre, p.apellido1, p.apellido2, p.nombre;
 
 ## Devuelve un listado con los profesores que no están asociados a un departamento.
 ```sql
+SELECT p.nombre from persona p, proferos as prof, departamento as dep 
+WHERE p.tipo='profesor' and where prof.id_profesor=p.id and  dep.id_director=p.id is NULL;
 
 ```
 ## Devuelve un listado con los departamentos que no tienen profesores asociados.
 ```sql
+ SELECT p.nombre from persona p, profesor as prof, departamento as dep
+   ...> WHERE p.tipo='profesor' and  prof.id_profesor=p.id and  dep.id=prof.id_departamento is NULL; 
 
 ```
 ## Devuelve un listado con los profesores que no imparten ninguna asignatura.
@@ -373,37 +377,85 @@ SELECT g.nombre, IFNULL((SELECT count(*) from asignatura asig where asig.id_grad
 ```
 ## Devuelve un listado que muestre el nombre de los grados y la suma del número total de créditos que hay para cada tipo de asignatura. El resultado debe tener tres columnas: nombre del grado, tipo de asignatura y la suma de los créditos de todas las asignaturas que hay de ese tipo. Ordene el resultado de mayor a menor por el número total de crédidos.
 ```sql
-
+SELECT g.nombre, a.tipo, SUM(a.creditos) as total_creditos FROM asignatura as a
+   ...> JOIN grado g on a.id_grado=g.id
+   ...> GROUP BY g.nombre, a.tipo
+   ...> ORDER BY total_creditos DESC;
+┌─────────────────────────────────────────────┬─────────────┬────────────────┐
+│                   nombre                    │    tipo     │ total_creditos │
+├─────────────────────────────────────────────┼─────────────┼────────────────┤
+│ Grado en Ingeniería Informática (Plan 2015) │ optativa    │ 180.0          │
+│ Grado en Biotecnología (Plan 2015)          │ obligatoria │ 120.0          │
+│ Grado en Ingeniería Informática (Plan 2015) │ básica      │ 72.0           │
+│ Grado en Biotecnología (Plan 2015)          │ básica      │ 60.0           │
+│ Grado en Ingeniería Informática (Plan 2015) │ obligatoria │ 54.0           │
+└─────────────────────────────────────────────┴─────────────┴────────────────┘
 ```
 ## Devuelve un listado que muestre cuántos alumnos se han matriculado de alguna asignatura en cada uno de los cursos escolares. El resultado deberá mostrar dos columnas, una columna con el año de inicio del curso escolar y otra con el número de alumnos matriculados.
 ```sql
 
+SELECT ce.anyo_inicio, COUNT(DISTINCT matri.id_alumno) as numero_de_alumnos  
+   ...> FROM curso_escolar ce
+   ...> LEFT JOIN alumno_se_matricula_asignatura matri on ce.id=matri.id_curso_escolar
+   ...> GROUP BY ce.anyo_inicio 
+   ...> ORDER BY ce.anyo_inicio;
+┌─────────────┬───────────────────┐
+│ anyo_inicio │ numero_de_alumnos │
+├─────────────┼───────────────────┤
+│ 2014        │ 3                 │
+│ 2015        │ 0                 │
+│ 2016        │ 0                 │
+│ 2017        │ 0                 │
+│ 2018        │ 3                 │
+└─────────────┴───────────────────┘
+
+
 ```
 ## Devuelve un listado con el número de asignaturas que imparte cada profesor. El listado debe tener en cuenta aquellos profesores que no imparten ninguna asignatura. El resultado mostrará cinco columnas: id, nombre, primer apellido, segundo apellido y número de asignaturas. El resultado estará ordenado de mayor a menor por el número de asignaturas.
 ```sql
+
+
+
+
 
 ```
 # Subconsultas
 
 ## Devuelve todos los datos del alumno más joven.
 ```sql
-
+SELECT * from persona
+   ...> WHERE tipo='alumno' and fecha_nacimiento = (SELECT MAX(fecha_nacimiento) from persona where tipo='alumno');  
+┌────┬───────────┬────────┬───────────┬───────────┬─────────┬───────────────────┬──────────┬──────────────────┬──────┬────────┐
+│ id │    nif    │ nombre │ apellido1 │ apellido2 │ ciudad  │     direccion     │ telefono │ fecha_nacimiento │ sexo │  tipo  │
+├────┼───────────┼────────┼───────────┼───────────┼─────────┼───────────────────┼──────────┼──────────────────┼──────┼────────┤
+│ 4  │ 17105885A │ Pedro  │ Heller    │ Pagac     │ Almería │ C/ Estrella fugaz │          │ 2000/10/05       │ H    │ alumno │
+└────┴───────────┴────────┴───────────┴───────────┴─────────┴───────────────────┴──────────┴──────────────────┴──────┴────────┘
 ```
 ## Devuelve un listado con los profesores que no están asociados a un departamento.
 ```sql
+SELECT p.* from profesor p WHERE NOT EXISTS (SELECT * from departamento d where d.id = p.id_departamento);
 
 ```
 ## Devuelve un listado con los departamentos que no tienen profesores asociados.
 ```sql
-
+SELECT * from departamento d WHERE NOT EXISTS (SELECT * from profesor p where p.id_departamento = d.id);
+┌────┬─────────────────────┐
+│ id │       nombre        │
+├────┼─────────────────────┤
+│ 7  │ Filología           │
+│ 8  │ Derecho             │
+│ 9  │ Biología y Geología │
+└────┴─────────────────────┘
 ```
 ## Devuelve un listado con los profesores que tienen un departamento asociado y que no imparten ninguna asignatura.
 ```sql
 
+
+
 ```
 ## Devuelve un listado con las asignaturas que no tienen un profesor asignado.
 ```sql
-
+SELECT * from asignatura a WHERE id NOT IN (SELECT a.id from asignatura where id_profesor is NOT NULL);
 ```
 ## Devuelve un listado con todos los departamentos que no han impartido asignaturas en ningún curso escolar.
 ```sql
