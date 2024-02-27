@@ -453,7 +453,7 @@ SELECT * from persona
 ```
 ## Devuelve un listado con los profesores que no están asociados a un departamento.
 ```sql
-SELECT p.* from profesor p WHERE p.ide_departamento NOT EXISTS (SELECT * from departamento d where d.id = p.id_departamento);
+SELECT p.* from profesor p WHERE p.ide_departamentoNOT EXISTS (SELECT * from departamento d where d.id = p.id_departamento);
 
 ```
 ## Devuelve un listado con los departamentos que no tienen profesores asociados.
@@ -475,7 +475,8 @@ JOIN profesor as pr on p.id=pr.id_profesor
 where pr.id_profesor not in (
    SELECT distinct (id_profesor) from asignatura a WHERE a.id_profesor=pr.id_profesor
 );
-SELECT p.id_profesor from profesor p where p.id_porfeosr not in(SELECT id_departamento from profesor where id_profesor  in(SELECT DISTINCT (id_profesor) from asignatura a))
+
+SELECT * FROM persona as p where p.tipo='profesor' and p.id not in (SELECT DISTINCT(id_profesor) from profesor)
 
 ┌───────────┐
 │  nombre   │
