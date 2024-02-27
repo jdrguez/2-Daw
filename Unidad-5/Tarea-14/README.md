@@ -453,7 +453,7 @@ SELECT * from persona
 ```
 ## Devuelve un listado con los profesores que no están asociados a un departamento.
 ```sql
-SELECT p.* from profesor p WHERE NOT EXISTS (SELECT * from departamento d where d.id = p.id_departamento);
+SELECT p.* from profesor p WHERE p.ide_departamento NOT EXISTS (SELECT * from departamento d where d.id = p.id_departamento);
 
 ```
 ## Devuelve un listado con los departamentos que no tienen profesores asociados.
@@ -475,6 +475,7 @@ JOIN profesor as pr on p.id=pr.id_profesor
 where pr.id_profesor not in (
    SELECT distinct (id_profesor) from asignatura a WHERE a.id_profesor=pr.id_profesor
 );
+SELECT p.id_profesor from profesor p where p.id_porfeosr not in(SELECT id_departamento from profesor where id_profesor  in(SELECT DISTINCT (id_profesor) from asignatura a))
 
 ┌───────────┐
 │  nombre   │
@@ -494,94 +495,73 @@ where pr.id_profesor not in (
 ```
 ## Devuelve un listado con las asignaturas que no tienen un profesor asignado.
 ```sql
-SELECT a.nombre from asignatura a WHERE id  IN (SELECT a.id from asignatura where id_profesor is NULL);
-────────────────────────────────────────────────────────────────────────┐
-│                                 nombre                                 │
-├────────────────────────────────────────────────────────────────────────┤
-│ Álgegra lineal y matemática discreta                                   │
-│ Cálculo                                                                │
-│ Física para informática                                                │
-│ Introducción a la programación                                         │
-│ Organización y gestión de empresas                                     │
-│ Estadística                                                            │
-│ Estructura y tecnología de computadores                                │
-│ Fundamentos de electrónica                                             │
-│ Lógica y algorítmica                                                   │
-│ Metodología de la programación                                         │
-│ Arquitectura de Computadores                                           │
-│ Estructura de Datos y Algoritmos I                                     │
-│ Ingeniería del Software                                                │
-│ Sistemas Inteligentes                                                  │
-│ Sistemas Operativos                                                    │
-│ Bases de Datos                                                         │
-│ Estructura de Datos y Algoritmos II                                    │
-│ Fundamentos de Redes de Computadores                                   │
-│ Planificación y Gestión de Proyectos Informáticos                      │
-│ Programación de Servicios Software                                     │
-│ Desarrollo de interfaces de usuario                                    │
-│ Ingeniería de Requisitos                                               │
-│ Integración de las Tecnologías de la Información en las Organizaciones │
-│ Modelado y Diseño del Software 1                                       │
-│ Multiprocesadores                                                      │
-│ Seguridad y cumplimiento normativo                                     │
-│ Sistema de Información para las Organizaciones                         │
-│ Tecnologías web                                                        │
-│ Teoría de códigos y criptografía                                       │
-│ Administración de bases de datos                                       │
-│ Herramientas y Métodos de Ingeniería del Software                      │
-│ Informática industrial y robótica                                      │
-│ Ingeniería de Sistemas de Información                                  │
-│ Modelado y Diseño del Software 2                                       │
-│ Negocio Electrónico                                                    │
-│ Periféricos e interfaces                                               │
-│ Sistemas de tiempo real                                                │
-│ Tecnologías de acceso a red                                            │
-│ Tratamiento digital de imágenes                                        │
-│ Administración de redes y sistemas operativos                          │
-│ Almacenes de Datos                                                     │
-│ Fiabilidad y Gestión de Riesgos                                        │
-│ Líneas de Productos Software                                           │
-│ Procesos de Ingeniería del Software 1                                  │
-│ Tecnologías multimedia                                                 │
-│ Análisis y planificación de las TI                                     │
-│ Desarrollo Rápido de Aplicaciones                                      │
-│ Gestión de la Calidad y de la Innovación Tecnológica                   │
-│ Inteligencia del Negocio                                               │
-│ Procesos de Ingeniería del Software 2                                  │
-│ Seguridad Informática                                                  │
-│ Biologia celular                                                       │
-│ Física                                                                 │
-│ Matemáticas I                                                          │
-│ Química general                                                        │
-│ Química orgánica                                                       │
-│ Biología vegetal y animal                                              │
-│ Bioquímica                                                             │
-│ Genética                                                               │
-│ Matemáticas II                                                         │
-│ Microbiología                                                          │
-│ Botánica agrícola                                                      │
-│ Fisiología vegetal                                                     │
-│ Genética molecular                                                     │
-│ Ingeniería bioquímica                                                  │
-│ Termodinámica y cinética química aplicada                              │
-│ Biorreactores                                                          │
-│ Biotecnología microbiana                                               │
-│ Ingeniería genética                                                    │
-│ Inmunología                                                            │
-│ Virología                                                              │
-│ Bases moleculares del desarrollo vegetal                               │
-│ Fisiología animal                                                      │
-│ Metabolismo y biosíntesis de biomoléculas                              │
-│ Operaciones de separación                                              │
-│ Patología molecular de plantas                                         │
-│ Técnicas instrumentales básicas                                        │
-│ Bioinformática                                                         │
-│ Biotecnología de los productos hortofrutículas                         │
-│ Biotecnología vegetal                                                  │
-│ Genómica y proteómica                                                  │
-│ Procesos biotecnológicos                                               │
-│ Técnicas instrumentales avanzadas                                      │
-└────────────────────────────────────────────────────────────────────────┘
+SELECT a.* from asignatura a WHERE a.Id NOT IN (SELECT DISTINCT(id) from asignatura where id_profesor is NOT NULL);
+┌────┬────────────────────────────────────────────────────────────────────────┬──────────┬─────────────┬───────┬──────────────┬─────────────┬──────────┐
+│ id │                                 nombre                                 │ creditos │    tipo     │ curso │ cuatrimestre │ id_profesor │ id_grado │
+├────┼────────────────────────────────────────────────────────────────────────┼──────────┼─────────────┼───────┼──────────────┼─────────────┼──────────┤
+│ 22 │ Ingeniería de Requisitos                                               │ 6.0      │ optativa    │ 3     │ 1            │             │ 4        │
+│ 23 │ Integración de las Tecnologías de la Información en las Organizaciones │ 6.0      │ optativa    │ 3     │ 1            │             │ 4        │
+│ 24 │ Modelado y Diseño del Software 1                                       │ 6.0      │ optativa    │ 3     │ 1            │             │ 4        │
+│ 25 │ Multiprocesadores                                                      │ 6.0      │ optativa    │ 3     │ 1            │             │ 4        │
+│ 26 │ Seguridad y cumplimiento normativo                                     │ 6.0      │ optativa    │ 3     │ 1            │             │ 4        │
+│ 27 │ Sistema de Información para las Organizaciones                         │ 6.0      │ optativa    │ 3     │ 1            │             │ 4        │
+│ 28 │ Tecnologías web                                                        │ 6.0      │ optativa    │ 3     │ 1            │             │ 4        │
+│ 29 │ Teoría de códigos y criptografía                                       │ 6.0      │ optativa    │ 3     │ 1            │             │ 4        │
+│ 30 │ Administración de bases de datos                                       │ 6.0      │ optativa    │ 3     │ 2            │             │ 4        │
+│ 31 │ Herramientas y Métodos de Ingeniería del Software                      │ 6.0      │ optativa    │ 3     │ 2            │             │ 4        │
+│ 32 │ Informática industrial y robótica                                      │ 6.0      │ optativa    │ 3     │ 2            │             │ 4        │
+│ 33 │ Ingeniería de Sistemas de Información                                  │ 6.0      │ optativa    │ 3     │ 2            │             │ 4        │
+│ 34 │ Modelado y Diseño del Software 2                                       │ 6.0      │ optativa    │ 3     │ 2            │             │ 4        │
+│ 35 │ Negocio Electrónico                                                    │ 6.0      │ optativa    │ 3     │ 2            │             │ 4        │
+│ 36 │ Periféricos e interfaces                                               │ 6.0      │ optativa    │ 3     │ 2            │             │ 4        │
+│ 37 │ Sistemas de tiempo real                                                │ 6.0      │ optativa    │ 3     │ 2            │             │ 4        │
+│ 38 │ Tecnologías de acceso a red                                            │ 6.0      │ optativa    │ 3     │ 2            │             │ 4        │
+│ 39 │ Tratamiento digital de imágenes                                        │ 6.0      │ optativa    │ 3     │ 2            │             │ 4        │
+│ 40 │ Administración de redes y sistemas operativos                          │ 6.0      │ optativa    │ 4     │ 1            │             │ 4        │
+│ 41 │ Almacenes de Datos                                                     │ 6.0      │ optativa    │ 4     │ 1            │             │ 4        │
+│ 42 │ Fiabilidad y Gestión de Riesgos                                        │ 6.0      │ optativa    │ 4     │ 1            │             │ 4        │
+│ 43 │ Líneas de Productos Software                                           │ 6.0      │ optativa    │ 4     │ 1            │             │ 4        │
+│ 44 │ Procesos de Ingeniería del Software 1                                  │ 6.0      │ optativa    │ 4     │ 1            │             │ 4        │
+│ 45 │ Tecnologías multimedia                                                 │ 6.0      │ optativa    │ 4     │ 1            │             │ 4        │
+│ 46 │ Análisis y planificación de las TI                                     │ 6.0      │ optativa    │ 4     │ 2            │             │ 4        │
+│ 47 │ Desarrollo Rápido de Aplicaciones                                      │ 6.0      │ optativa    │ 4     │ 2            │             │ 4        │
+│ 48 │ Gestión de la Calidad y de la Innovación Tecnológica                   │ 6.0      │ optativa    │ 4     │ 2            │             │ 4        │
+│ 49 │ Inteligencia del Negocio                                               │ 6.0      │ optativa    │ 4     │ 2            │             │ 4        │
+│ 50 │ Procesos de Ingeniería del Software 2                                  │ 6.0      │ optativa    │ 4     │ 2            │             │ 4        │
+│ 51 │ Seguridad Informática                                                  │ 6.0      │ optativa    │ 4     │ 2            │             │ 4        │
+│ 52 │ Biologia celular                                                       │ 6.0      │ básica      │ 1     │ 1            │             │ 7        │
+│ 53 │ Física                                                                 │ 6.0      │ básica      │ 1     │ 1            │             │ 7        │
+│ 54 │ Matemáticas I                                                          │ 6.0      │ básica      │ 1     │ 1            │             │ 7        │
+│ 55 │ Química general                                                        │ 6.0      │ básica      │ 1     │ 1            │             │ 7        │
+│ 56 │ Química orgánica                                                       │ 6.0      │ básica      │ 1     │ 1            │             │ 7        │
+│ 57 │ Biología vegetal y animal                                              │ 6.0      │ básica      │ 1     │ 2            │             │ 7        │
+│ 58 │ Bioquímica                                                             │ 6.0      │ básica      │ 1     │ 2            │             │ 7        │
+│ 59 │ Genética                                                               │ 6.0      │ básica      │ 1     │ 2            │             │ 7        │
+│ 60 │ Matemáticas II                                                         │ 6.0      │ básica      │ 1     │ 2            │             │ 7        │
+│ 61 │ Microbiología                                                          │ 6.0      │ básica      │ 1     │ 2            │             │ 7        │
+│ 62 │ Botánica agrícola                                                      │ 6.0      │ obligatoria │ 2     │ 1            │             │ 7        │
+│ 63 │ Fisiología vegetal                                                     │ 6.0      │ obligatoria │ 2     │ 1            │             │ 7        │
+│ 64 │ Genética molecular                                                     │ 6.0      │ obligatoria │ 2     │ 1            │             │ 7        │
+│ 65 │ Ingeniería bioquímica                                                  │ 6.0      │ obligatoria │ 2     │ 1            │             │ 7        │
+│ 66 │ Termodinámica y cinética química aplicada                              │ 6.0      │ obligatoria │ 2     │ 1            │             │ 7        │
+│ 67 │ Biorreactores                                                          │ 6.0      │ obligatoria │ 2     │ 2            │             │ 7        │
+│ 68 │ Biotecnología microbiana                                               │ 6.0      │ obligatoria │ 2     │ 2            │             │ 7        │
+│ 69 │ Ingeniería genética                                                    │ 6.0      │ obligatoria │ 2     │ 2            │             │ 7        │
+│ 70 │ Inmunología                                                            │ 6.0      │ obligatoria │ 2     │ 2            │             │ 7        │
+│ 71 │ Virología                                                              │ 6.0      │ obligatoria │ 2     │ 2            │             │ 7        │
+│ 72 │ Bases moleculares del desarrollo vegetal                               │ 4.5      │ obligatoria │ 3     │ 1            │             │ 7        │
+│ 73 │ Fisiología animal                                                      │ 4.5      │ obligatoria │ 3     │ 1            │             │ 7        │
+│ 74 │ Metabolismo y biosíntesis de biomoléculas                              │ 6.0      │ obligatoria │ 3     │ 1            │             │ 7        │
+│ 75 │ Operaciones de separación                                              │ 6.0      │ obligatoria │ 3     │ 1            │             │ 7        │
+│ 76 │ Patología molecular de plantas                                         │ 4.5      │ obligatoria │ 3     │ 1            │             │ 7        │
+│ 77 │ Técnicas instrumentales básicas                                        │ 4.5      │ obligatoria │ 3     │ 1            │             │ 7        │
+│ 78 │ Bioinformática                                                         │ 4.5      │ obligatoria │ 3     │ 2            │             │ 7        │
+│ 79 │ Biotecnología de los productos hortofrutículas                         │ 4.5      │ obligatoria │ 3     │ 2            │             │ 7        │
+│ 80 │ Biotecnología vegetal                                                  │ 6.0      │ obligatoria │ 3     │ 2            │             │ 7        │
+│ 81 │ Genómica y proteómica                                                  │ 4.5      │ obligatoria │ 3     │ 2            │             │ 7        │
+│ 82 │ Procesos biotecnológicos                                               │ 6.0      │ obligatoria │ 3     │ 2            │             │ 7        │
+│ 83 │ Técnicas instrumentales avanzadas                                      │ 4.5      │ obligatoria │ 3     │ 2            │             │ 7        │
+└────┴────────────────────────────────────────────────────────────────────────┴──────────┴─────────────┴───────┴──────────────┴─────────────┴──────────┘
 ```
 ## Devuelve un listado con todos los departamentos que no han impartido asignaturas en ningún curso escolar.
 ```sql
