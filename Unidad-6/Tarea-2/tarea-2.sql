@@ -610,13 +610,9 @@ SELECT o.*, p.*, c.* FROM clientes as c
 |       20 |         20 |          20 |        2 |         20 | Cliente 20 | Dirección 20  |          20 | Producto 20 |  200.5 |
 +----------+------------+-------------+----------+------------+------------+---------------+-------------+-------------+--------+
 20 rows in set (0,00 sec)
-
-mysql> SELECT o.*, p.*, c.* FROM clientes as c
-    ->     -> LEFT JOIN ordenes as o on o.id_cliente=c.id_cliente
-    ->     -> LEFT JOIN productos as p on p.id_producto=o.id_producto;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> LEFT JOIN ordenes as o on o.id_cliente=c.id_cliente
-    -> LEFT JOIN producto' at line 2
+**/
 mysql> SELECT o.*, p.*, c.* FROM clientes as c LEFT JOIN ordenes as o on o.id_cliente=c.id_cliente LEFT JOIN productos as p on p.id_producto=o.id_producto;
+/**
 +----------+------------+-------------+----------+-------------+-------------+--------+------------+------------+---------------+
 | id_orden | id_cliente | id_producto | cantidad | id_producto | nombre      | precio | id_cliente | nombre     | direccion     |
 +----------+------------+-------------+----------+-------------+-------------+--------+------------+------------+---------------+
