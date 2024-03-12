@@ -36,28 +36,28 @@ SELECT * FROM productos;
 +-------------+-------------+--------+
 | id_producto | nombre      | precio |
 +-------------+-------------+--------+
-|           1 | Producto 1  |     11 |
-|           2 | Producto 2  |     21 |
-|           3 | Producto 3  |     31 |
-|           4 | Producto 4  |     41 |
-|           5 | Producto 5  |     51 |
-|           6 | Producto 6  |     61 |
-|           7 | Producto 7  |     71 |
-|           8 | Producto 8  |     81 |
-|           9 | Producto 9  |     91 |
-|          10 | Producto 10 |    101 |
-|          11 | Producto 11 |    111 |
-|          12 | Producto 12 |    121 |
-|          13 | Producto 13 |    131 |
-|          14 | Producto 14 |    141 |
-|          15 | Producto 15 |    151 |
-|          16 | Producto 16 |    161 |
-|          17 | Producto 17 |    171 |
-|          18 | Producto 18 |    181 |
-|          19 | Producto 19 |    191 |
-|          20 | Producto 20 |    201 |
+|           1 | Producto 1  |  10.99 |
+|           2 | Producto 2  |   20.5 |
+|           3 | Producto 3  |  30.99 |
+|           4 | Producto 4  |   40.5 |
+|           5 | Producto 5  |  50.99 |
+|           6 | Producto 6  |   60.5 |
+|           7 | Producto 7  |  70.99 |
+|           8 | Producto 8  |   80.5 |
+|           9 | Producto 9  |  90.99 |
+|          10 | Producto 10 |  100.5 |
+|          11 | Producto 11 | 110.99 |
+|          12 | Producto 12 |  120.5 |
+|          13 | Producto 13 | 130.99 |
+|          14 | Producto 14 |  140.5 |
+|          15 | Producto 15 | 150.99 |
+|          16 | Producto 16 |  160.5 |
+|          17 | Producto 17 | 170.99 |
+|          18 | Producto 18 |  180.5 |
+|          19 | Producto 19 | 190.99 |
+|          20 | Producto 20 |  200.5 |
 +-------------+-------------+--------+
-20 rows in set (0,01 sec)
+20 rows in set (0,00 sec)
 **/
 -- Mostrar todas las órdenes.
 
@@ -112,23 +112,24 @@ SELECT * FROM productos  WHERE precio > 50;
 +-------------+-------------+--------+
 | id_producto | nombre      | precio |
 +-------------+-------------+--------+
-|           5 | Producto 5  |     51 |
-|           6 | Producto 6  |     61 |
-|           7 | Producto 7  |     71 |
-|           8 | Producto 8  |     81 |
-|           9 | Producto 9  |     91 |
-|          10 | Producto 10 |    101 |
-|          11 | Producto 11 |    111 |
-|          12 | Producto 12 |    121 |
-|          13 | Producto 13 |    131 |
-|          14 | Producto 14 |    141 |
-|          15 | Producto 15 |    151 |
-|          16 | Producto 16 |    161 |
-|          17 | Producto 17 |    171 |
-|          18 | Producto 18 |    181 |
-|          19 | Producto 19 |    191 |
-|          20 | Producto 20 |    201 |
+|           5 | Producto 5  |  50.99 |
+|           6 | Producto 6  |   60.5 |
+|           7 | Producto 7  |  70.99 |
+|           8 | Producto 8  |   80.5 |
+|           9 | Producto 9  |  90.99 |
+|          10 | Producto 10 |  100.5 |
+|          11 | Producto 11 | 110.99 |
+|          12 | Producto 12 |  120.5 |
+|          13 | Producto 13 | 130.99 |
+|          14 | Producto 14 |  140.5 |
+|          15 | Producto 15 | 150.99 |
+|          16 | Producto 16 |  160.5 |
+|          17 | Producto 17 | 170.99 |
+|          18 | Producto 18 |  180.5 |
+|          19 | Producto 19 | 190.99 |
+|          20 | Producto 20 |  200.5 |
 +-------------+-------------+--------+
+16 rows in set (0,00 sec)
 **/
 --Mostrar todas las órdenes realizadas por el cliente con ID 1.
 
@@ -168,32 +169,32 @@ Empty set (0,01 sec)
 
 --Mostrar los productos ordenados por precio de forma descendente.
 
-SELECT * FROM productos 
+SELECT * FROM productos
     -> ORDER BY precio DESC;
 /**
 +-------------+-------------+--------+
 | id_producto | nombre      | precio |
 +-------------+-------------+--------+
-|          20 | Producto 20 |    201 |
-|          19 | Producto 19 |    191 |
-|          18 | Producto 18 |    181 |
-|          17 | Producto 17 |    171 |
-|          16 | Producto 16 |    161 |
-|          15 | Producto 15 |    151 |
-|          14 | Producto 14 |    141 |
-|          13 | Producto 13 |    131 |
-|          12 | Producto 12 |    121 |
-|          11 | Producto 11 |    111 |
-|          10 | Producto 10 |    101 |
-|           9 | Producto 9  |     91 |
-|           8 | Producto 8  |     81 |
-|           7 | Producto 7  |     71 |
-|           6 | Producto 6  |     61 |
-|           5 | Producto 5  |     51 |
-|           4 | Producto 4  |     41 |
-|           3 | Producto 3  |     31 |
-|           2 | Producto 2  |     21 |
-|           1 | Producto 1  |     11 |
+|          20 | Producto 20 |  200.5 |
+|          19 | Producto 19 | 190.99 |
+|          18 | Producto 18 |  180.5 |
+|          17 | Producto 17 | 170.99 |
+|          16 | Producto 16 |  160.5 |
+|          15 | Producto 15 | 150.99 |
+|          14 | Producto 14 |  140.5 |
+|          13 | Producto 13 | 130.99 |
+|          12 | Producto 12 |  120.5 |
+|          11 | Producto 11 | 110.99 |
+|          10 | Producto 10 |  100.5 |
+|           9 | Producto 9  |  90.99 |
+|           8 | Producto 8  |   80.5 |
+|           7 | Producto 7  |  70.99 |
+|           6 | Producto 6  |   60.5 |
+|           5 | Producto 5  |  50.99 |
+|           4 | Producto 4  |   40.5 |
+|           3 | Producto 3  |  30.99 |
+|           2 | Producto 2  |   20.5 |
+|           1 | Producto 1  |  10.99 |
 +-------------+-------------+--------+
 20 rows in set (0,00 sec)
 **/
@@ -240,28 +241,28 @@ SELECT * FROM ordenes as o
 +----------+------------+-------------+----------+-------------+-------------+--------+
 | id_orden | id_cliente | id_producto | cantidad | id_producto | nombre      | precio |
 +----------+------------+-------------+----------+-------------+-------------+--------+
-|        1 |          1 |           1 |        2 |           1 | Producto 1  |     11 |
-|        2 |          2 |           2 |        1 |           2 | Producto 2  |     21 |
-|        3 |          3 |           3 |        3 |           3 | Producto 3  |     31 |
-|        4 |          4 |           4 |        2 |           4 | Producto 4  |     41 |
-|        5 |          5 |           5 |        1 |           5 | Producto 5  |     51 |
-|        6 |          6 |           6 |        2 |           6 | Producto 6  |     61 |
-|        7 |          7 |           7 |        3 |           7 | Producto 7  |     71 |
-|        8 |          8 |           8 |        2 |           8 | Producto 8  |     81 |
-|        9 |          9 |           9 |        1 |           9 | Producto 9  |     91 |
-|       10 |         10 |          10 |        2 |          10 | Producto 10 |    101 |
-|       11 |         11 |          11 |        3 |          11 | Producto 11 |    111 |
-|       12 |         12 |          12 |        2 |          12 | Producto 12 |    121 |
-|       13 |         13 |          13 |        1 |          13 | Producto 13 |    131 |
-|       14 |         14 |          14 |        2 |          14 | Producto 14 |    141 |
-|       15 |         15 |          15 |        3 |          15 | Producto 15 |    151 |
-|       16 |         16 |          16 |        2 |          16 | Producto 16 |    161 |
-|       17 |         17 |          17 |        1 |          17 | Producto 17 |    171 |
-|       18 |         18 |          18 |        2 |          18 | Producto 18 |    181 |
-|       19 |         19 |          19 |        3 |          19 | Producto 19 |    191 |
-|       20 |         20 |          20 |        2 |          20 | Producto 20 |    201 |
+|        1 |          1 |           1 |        2 |           1 | Producto 1  |  10.99 |
+|        2 |          2 |           2 |        1 |           2 | Producto 2  |   20.5 |
+|        3 |          3 |           3 |        3 |           3 | Producto 3  |  30.99 |
+|        4 |          4 |           4 |        2 |           4 | Producto 4  |   40.5 |
+|        5 |          5 |           5 |        1 |           5 | Producto 5  |  50.99 |
+|        6 |          6 |           6 |        2 |           6 | Producto 6  |   60.5 |
+|        7 |          7 |           7 |        3 |           7 | Producto 7  |  70.99 |
+|        8 |          8 |           8 |        2 |           8 | Producto 8  |   80.5 |
+|        9 |          9 |           9 |        1 |           9 | Producto 9  |  90.99 |
+|       10 |         10 |          10 |        2 |          10 | Producto 10 |  100.5 |
+|       11 |         11 |          11 |        3 |          11 | Producto 11 | 110.99 |
+|       12 |         12 |          12 |        2 |          12 | Producto 12 |  120.5 |
+|       13 |         13 |          13 |        1 |          13 | Producto 13 | 130.99 |
+|       14 |         14 |          14 |        2 |          14 | Producto 14 |  140.5 |
+|       15 |         15 |          15 |        3 |          15 | Producto 15 | 150.99 |
+|       16 |         16 |          16 |        2 |          16 | Producto 16 |  160.5 |
+|       17 |         17 |          17 |        1 |          17 | Producto 17 | 170.99 |
+|       18 |         18 |          18 |        2 |          18 | Producto 18 |  180.5 |
+|       19 |         19 |          19 |        3 |          19 | Producto 19 | 190.99 |
+|       20 |         20 |          20 |        2 |          20 | Producto 20 |  200.5 |
 +----------+------------+-------------+----------+-------------+-------------+--------+
-20 rows in set (0,00 sec)
+20 rows in set (0,01 sec)
 **/
 
 --Mostrar el nombre de los clientes que han realizado órdenes de productos que cuestan más de 50
@@ -461,27 +462,29 @@ SELECT * from ordenes as o
 +----------+------------+-------------+----------+------------+------------+---------------+-------------+-------------+--------+
 | id_orden | id_cliente | id_producto | cantidad | id_cliente | nombre     | direccion     | id_producto | nombre      | precio |
 +----------+------------+-------------+----------+------------+------------+---------------+-------------+-------------+--------+
-|        1 |          1 |           1 |        2 |          1 | Cliente 1  | Dirección 1   |           1 | Producto 1  |     11 |
-|        2 |          2 |           2 |        1 |          2 | Cliente 2  | Dirección 2   |           2 | Producto 2  |     21 |
-|        3 |          3 |           3 |        3 |          3 | Cliente 3  | Dirección 3   |           3 | Producto 3  |     31 |
-|        4 |          4 |           4 |        2 |          4 | Cliente 4  | Dirección 4   |           4 | Producto 4  |     41 |
-|        5 |          5 |           5 |        1 |          5 | Cliente 5  | Dirección 5   |           5 | Producto 5  |     51 |
-|        6 |          6 |           6 |        2 |          6 | Cliente 6  | Dirección 6   |           6 | Producto 6  |     61 |
-|        7 |          7 |           7 |        3 |          7 | Cliente 7  | Dirección 7   |           7 | Producto 7  |     71 |
-|        8 |          8 |           8 |        2 |          8 | Cliente 8  | Dirección 8   |           8 | Producto 8  |     81 |
-|        9 |          9 |           9 |        1 |          9 | Cliente 9  | Dirección 9   |           9 | Producto 9  |     91 |
-|       10 |         10 |          10 |        2 |         10 | Cliente 10 | Dirección 10  |          10 | Producto 10 |    101 |
-|       11 |         11 |          11 |        3 |         11 | Cliente 11 | Dirección 11  |          11 | Producto 11 |    111 |
-|       12 |         12 |          12 |        2 |         12 | Cliente 12 | Dirección 12  |          12 | Producto 12 |    121 |
-|       13 |         13 |          13 |        1 |         13 | Cliente 13 | Dirección 13  |          13 | Producto 13 |    131 |
-|       14 |         14 |          14 |        2 |         14 | Cliente 14 | Dirección 14  |          14 | Producto 14 |    141 |
-|       15 |         15 |          15 |        3 |         15 | Cliente 15 | Dirección 15  |          15 | Producto 15 |    151 |
-|       16 |         16 |          16 |        2 |         16 | Cliente 16 | Dirección 16  |          16 | Producto 16 |    161 |
-|       17 |         17 |          17 |        1 |         17 | Cliente 17 | Dirección 17  |          17 | Producto 17 |    171 |
-|       18 |         18 |          18 |        2 |         18 | Cliente 18 | Dirección 18  |          18 | Producto 18 |    181 |
-|       19 |         19 |          19 |        3 |         19 | Cliente 19 | Dirección 19  |          19 | Producto 19 |    191 |
-|       20 |         20 |          20 |        2 |         20 | Cliente 20 | Dirección 20  |          20 | Producto 20 |    201 |
+|        1 |          1 |           1 |        2 |          1 | Cliente 1  | Dirección 1   |           1 | Producto 1  |  10.99 |
+|        2 |          2 |           2 |        1 |          2 | Cliente 2  | Dirección 2   |           2 | Producto 2  |   20.5 |
+|        3 |          3 |           3 |        3 |          3 | Cliente 3  | Dirección 3   |           3 | Producto 3  |  30.99 |
+|        4 |          4 |           4 |        2 |          4 | Cliente 4  | Dirección 4   |           4 | Producto 4  |   40.5 |
+|        5 |          5 |           5 |        1 |          5 | Cliente 5  | Dirección 5   |           5 | Producto 5  |  50.99 |
+|        6 |          6 |           6 |        2 |          6 | Cliente 6  | Dirección 6   |           6 | Producto 6  |   60.5 |
+|        7 |          7 |           7 |        3 |          7 | Cliente 7  | Dirección 7   |           7 | Producto 7  |  70.99 |
+|        8 |          8 |           8 |        2 |          8 | Cliente 8  | Dirección 8   |           8 | Producto 8  |   80.5 |
+|        9 |          9 |           9 |        1 |          9 | Cliente 9  | Dirección 9   |           9 | Producto 9  |  90.99 |
+|       10 |         10 |          10 |        2 |         10 | Cliente 10 | Dirección 10  |          10 | Producto 10 |  100.5 |
+|       11 |         11 |          11 |        3 |         11 | Cliente 11 | Dirección 11  |          11 | Producto 11 | 110.99 |
+|       12 |         12 |          12 |        2 |         12 | Cliente 12 | Dirección 12  |          12 | Producto 12 |  120.5 |
+|       13 |         13 |          13 |        1 |         13 | Cliente 13 | Dirección 13  |          13 | Producto 13 | 130.99 |
+|       14 |         14 |          14 |        2 |         14 | Cliente 14 | Dirección 14  |          14 | Producto 14 |  140.5 |
+|       15 |         15 |          15 |        3 |         15 | Cliente 15 | Dirección 15  |          15 | Producto 15 | 150.99 |
+|       16 |         16 |          16 |        2 |         16 | Cliente 16 | Dirección 16  |          16 | Producto 16 |  160.5 |
+|       17 |         17 |          17 |        1 |         17 | Cliente 17 | Dirección 17  |          17 | Producto 17 | 170.99 |
+|       18 |         18 |          18 |        2 |         18 | Cliente 18 | Dirección 18  |          18 | Producto 18 |  180.5 |
+|       19 |         19 |          19 |        3 |         19 | Cliente 19 | Dirección 19  |          19 | Producto 19 | 190.99 |
+|       20 |         20 |          20 |        2 |         20 | Cliente 20 | Dirección 20  |          20 | Producto 20 |  200.5 |
 +----------+------------+-------------+----------+------------+------------+---------------+-------------+-------------+--------+
+20 rows in set (0,00 sec)
+
 **/
 -- Obtener el nombre de los productos junto con el nombre de los clientes que han realizado órdenes de esos productos, incluyendo los productos que no han sido ordenados
 SELECT p.nombre, c.nombre, o.* from ordenes as o 
@@ -582,29 +585,61 @@ SELECT o.*, p.*, c.* FROM clientes as c
     -> LEFT JOIN ordenes as o on o.id_cliente=c.id_cliente
     -> LEFT JOIN productos as p on p.id_producto=o.id_producto;
 /**
++----------+------------+-------------+----------+------------+------------+---------------+-------------+-------------+--------+
+| id_orden | id_cliente | id_producto | cantidad | id_cliente | nombre     | direccion     | id_producto | nombre      | precio |
++----------+------------+-------------+----------+------------+------------+---------------+-------------+-------------+--------+
+|        1 |          1 |           1 |        2 |          1 | Cliente 1  | Dirección 1   |           1 | Producto 1  |  10.99 |
+|        2 |          2 |           2 |        1 |          2 | Cliente 2  | Dirección 2   |           2 | Producto 2  |   20.5 |
+|        3 |          3 |           3 |        3 |          3 | Cliente 3  | Dirección 3   |           3 | Producto 3  |  30.99 |
+|        4 |          4 |           4 |        2 |          4 | Cliente 4  | Dirección 4   |           4 | Producto 4  |   40.5 |
+|        5 |          5 |           5 |        1 |          5 | Cliente 5  | Dirección 5   |           5 | Producto 5  |  50.99 |
+|        6 |          6 |           6 |        2 |          6 | Cliente 6  | Dirección 6   |           6 | Producto 6  |   60.5 |
+|        7 |          7 |           7 |        3 |          7 | Cliente 7  | Dirección 7   |           7 | Producto 7  |  70.99 |
+|        8 |          8 |           8 |        2 |          8 | Cliente 8  | Dirección 8   |           8 | Producto 8  |   80.5 |
+|        9 |          9 |           9 |        1 |          9 | Cliente 9  | Dirección 9   |           9 | Producto 9  |  90.99 |
+|       10 |         10 |          10 |        2 |         10 | Cliente 10 | Dirección 10  |          10 | Producto 10 |  100.5 |
+|       11 |         11 |          11 |        3 |         11 | Cliente 11 | Dirección 11  |          11 | Producto 11 | 110.99 |
+|       12 |         12 |          12 |        2 |         12 | Cliente 12 | Dirección 12  |          12 | Producto 12 |  120.5 |
+|       13 |         13 |          13 |        1 |         13 | Cliente 13 | Dirección 13  |          13 | Producto 13 | 130.99 |
+|       14 |         14 |          14 |        2 |         14 | Cliente 14 | Dirección 14  |          14 | Producto 14 |  140.5 |
+|       15 |         15 |          15 |        3 |         15 | Cliente 15 | Dirección 15  |          15 | Producto 15 | 150.99 |
+|       16 |         16 |          16 |        2 |         16 | Cliente 16 | Dirección 16  |          16 | Producto 16 |  160.5 |
+|       17 |         17 |          17 |        1 |         17 | Cliente 17 | Dirección 17  |          17 | Producto 17 | 170.99 |
+|       18 |         18 |          18 |        2 |         18 | Cliente 18 | Dirección 18  |          18 | Producto 18 |  180.5 |
+|       19 |         19 |          19 |        3 |         19 | Cliente 19 | Dirección 19  |          19 | Producto 19 | 190.99 |
+|       20 |         20 |          20 |        2 |         20 | Cliente 20 | Dirección 20  |          20 | Producto 20 |  200.5 |
++----------+------------+-------------+----------+------------+------------+---------------+-------------+-------------+--------+
+20 rows in set (0,00 sec)
+
+mysql> SELECT o.*, p.*, c.* FROM clientes as c
+    ->     -> LEFT JOIN ordenes as o on o.id_cliente=c.id_cliente
+    ->     -> LEFT JOIN productos as p on p.id_producto=o.id_producto;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> LEFT JOIN ordenes as o on o.id_cliente=c.id_cliente
+    -> LEFT JOIN producto' at line 2
+mysql> SELECT o.*, p.*, c.* FROM clientes as c LEFT JOIN ordenes as o on o.id_cliente=c.id_cliente LEFT JOIN productos as p on p.id_producto=o.id_producto;
 +----------+------------+-------------+----------+-------------+-------------+--------+------------+------------+---------------+
 | id_orden | id_cliente | id_producto | cantidad | id_producto | nombre      | precio | id_cliente | nombre     | direccion     |
 +----------+------------+-------------+----------+-------------+-------------+--------+------------+------------+---------------+
-|        1 |          1 |           1 |        2 |           1 | Producto 1  |     11 |          1 | Cliente 1  | Dirección 1   |
-|        2 |          2 |           2 |        1 |           2 | Producto 2  |     21 |          2 | Cliente 2  | Dirección 2   |
-|        3 |          3 |           3 |        3 |           3 | Producto 3  |     31 |          3 | Cliente 3  | Dirección 3   |
-|        4 |          4 |           4 |        2 |           4 | Producto 4  |     41 |          4 | Cliente 4  | Dirección 4   |
-|        5 |          5 |           5 |        1 |           5 | Producto 5  |     51 |          5 | Cliente 5  | Dirección 5   |
-|        6 |          6 |           6 |        2 |           6 | Producto 6  |     61 |          6 | Cliente 6  | Dirección 6   |
-|        7 |          7 |           7 |        3 |           7 | Producto 7  |     71 |          7 | Cliente 7  | Dirección 7   |
-|        8 |          8 |           8 |        2 |           8 | Producto 8  |     81 |          8 | Cliente 8  | Dirección 8   |
-|        9 |          9 |           9 |        1 |           9 | Producto 9  |     91 |          9 | Cliente 9  | Dirección 9   |
-|       10 |         10 |          10 |        2 |          10 | Producto 10 |    101 |         10 | Cliente 10 | Dirección 10  |
-|       11 |         11 |          11 |        3 |          11 | Producto 11 |    111 |         11 | Cliente 11 | Dirección 11  |
-|       12 |         12 |          12 |        2 |          12 | Producto 12 |    121 |         12 | Cliente 12 | Dirección 12  |
-|       13 |         13 |          13 |        1 |          13 | Producto 13 |    131 |         13 | Cliente 13 | Dirección 13  |
-|       14 |         14 |          14 |        2 |          14 | Producto 14 |    141 |         14 | Cliente 14 | Dirección 14  |
-|       15 |         15 |          15 |        3 |          15 | Producto 15 |    151 |         15 | Cliente 15 | Dirección 15  |
-|       16 |         16 |          16 |        2 |          16 | Producto 16 |    161 |         16 | Cliente 16 | Dirección 16  |
-|       17 |         17 |          17 |        1 |          17 | Producto 17 |    171 |         17 | Cliente 17 | Dirección 17  |
-|       18 |         18 |          18 |        2 |          18 | Producto 18 |    181 |         18 | Cliente 18 | Dirección 18  |
-|       19 |         19 |          19 |        3 |          19 | Producto 19 |    191 |         19 | Cliente 19 | Dirección 19  |
-|       20 |         20 |          20 |        2 |          20 | Producto 20 |    201 |         20 | Cliente 20 | Dirección 20  |
+|        1 |          1 |           1 |        2 |           1 | Producto 1  |  10.99 |          1 | Cliente 1  | Dirección 1   |
+|        2 |          2 |           2 |        1 |           2 | Producto 2  |   20.5 |          2 | Cliente 2  | Dirección 2   |
+|        3 |          3 |           3 |        3 |           3 | Producto 3  |  30.99 |          3 | Cliente 3  | Dirección 3   |
+|        4 |          4 |           4 |        2 |           4 | Producto 4  |   40.5 |          4 | Cliente 4  | Dirección 4   |
+|        5 |          5 |           5 |        1 |           5 | Producto 5  |  50.99 |          5 | Cliente 5  | Dirección 5   |
+|        6 |          6 |           6 |        2 |           6 | Producto 6  |   60.5 |          6 | Cliente 6  | Dirección 6   |
+|        7 |          7 |           7 |        3 |           7 | Producto 7  |  70.99 |          7 | Cliente 7  | Dirección 7   |
+|        8 |          8 |           8 |        2 |           8 | Producto 8  |   80.5 |          8 | Cliente 8  | Dirección 8   |
+|        9 |          9 |           9 |        1 |           9 | Producto 9  |  90.99 |          9 | Cliente 9  | Dirección 9   |
+|       10 |         10 |          10 |        2 |          10 | Producto 10 |  100.5 |         10 | Cliente 10 | Dirección 10  |
+|       11 |         11 |          11 |        3 |          11 | Producto 11 | 110.99 |         11 | Cliente 11 | Dirección 11  |
+|       12 |         12 |          12 |        2 |          12 | Producto 12 |  120.5 |         12 | Cliente 12 | Dirección 12  |
+|       13 |         13 |          13 |        1 |          13 | Producto 13 | 130.99 |         13 | Cliente 13 | Dirección 13  |
+|       14 |         14 |          14 |        2 |          14 | Producto 14 |  140.5 |         14 | Cliente 14 | Dirección 14  |
+|       15 |         15 |          15 |        3 |          15 | Producto 15 | 150.99 |         15 | Cliente 15 | Dirección 15  |
+|       16 |         16 |          16 |        2 |          16 | Producto 16 |  160.5 |         16 | Cliente 16 | Dirección 16  |
+|       17 |         17 |          17 |        1 |          17 | Producto 17 | 170.99 |         17 | Cliente 17 | Dirección 17  |
+|       18 |         18 |          18 |        2 |          18 | Producto 18 |  180.5 |         18 | Cliente 18 | Dirección 18  |
+|       19 |         19 |          19 |        3 |          19 | Producto 19 | 190.99 |         19 | Cliente 19 | Dirección 19  |
+|       20 |         20 |          20 |        2 |          20 | Producto 20 |  200.5 |         20 | Cliente 20 | Dirección 20  |
 +----------+------------+-------------+----------+-------------+-------------+--------+------------+------------+---------------+
-20 rows in set (0,00 sec)
+20 rows in set (0,01 sec)
 **/
