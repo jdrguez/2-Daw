@@ -290,10 +290,12 @@ SELECT c.nombre from clientes as c JOIN ordenes as o on o.id_cliente=c.id_client
 **/
 --Obtener el nombre de los productos que no se han ordenado aún
 
-
-
-
-
+SELECT p.nombre FROM ordenes as o
+    -> JOIN productos as p on o.id_producto=p.id_producto
+    -> WHERE o.id_producto not in (SELECT id_producto from ordenes);
+/**
+Empty set (0,00 sec)
+**/
 
 --Mostrar el nombre del cliente, el producto y la cantidad para todas las órdenes
 
