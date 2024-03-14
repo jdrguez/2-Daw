@@ -376,8 +376,8 @@ SELECT * FROM detalles_ordenes as do
 
 --    Realizar un full join entre clientes y órdenes.
 SELECT * from clientes as c 
-    -> LEFT JOIN ordenes as o ON c.id_cliente=o.id_cliente 
-    -> UNION
+    -> LEFT JOIN ordenes as o ON c.id_cliente=o.id_cliente WHERE c.id_cliente is NULL
+    -> UNION ALL
     -> SELECT * from clientes as c 
     -> RIGHT JOIN ordenes as o ON c.id_cliente=o.id_cliente WHERE c.id_cliente is NULL;
 /**
@@ -394,9 +394,9 @@ SELECT * from clientes as c
 --    Realizar un full join entre órdenes y detalles de órdenes.
 
 SELECT * from ordenes as o 
-    -> LEFT JOIN detalles_ordenes as do ON o.id_orden=do.id_orden
-    -> UNION
-    -> SELECT * from ordenes as o 
+    -> LEFT JOIN detalles_ordenes as do ON o.id_orden=do.id_orden where o.id_orden is NULL
+    -> UNION ALL
+    -> SELECT * from ordenes as o
     -> RIGHT JOIN detalles_ordenes as do ON o.id_orden=do.id_orden where o.id_orden is NULL;
 /**
 +----------+------------+-------------+------------+----------+-------------+----------+
@@ -410,8 +410,8 @@ SELECT * from ordenes as o
 **/
 --    Realizar un full join entre productos y detalles de órdenes.
 SELECT * from ordenes as o 
-    -> LEFT JOIN detalles_ordenes as do ON o.id_orden=do.id_orden
-    -> UNION
+    -> LEFT JOIN detalles_ordenes as do ON o.id_orden=do.id_orden where o.id_orden is NULL
+    -> UNION ALL
     -> SELECT * from ordenes as o 
     -> RIGHT JOIN detalles_ordenes as do ON o.id_orden=do.id_orden where o.id_orden is NULL;
 /**
