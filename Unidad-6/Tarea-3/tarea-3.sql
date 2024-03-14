@@ -317,13 +317,25 @@ SELECT c.nombre_cliente, COUNT(o.id_orden) as total FROM ordenes as o
 
 --    Mostrar todas las órdenes con sus clientes y productos, incluyendo las órdenes y productos que no tienen información.
 
-
-
-
+SELECT o.*, c.*, p.* from clientes as c 
+    -> RIGHT JOIN ordenes as o ON c.id_cliente=o.id_cliente
+    -> RIGHT JOIN detalles_ordenes as do ON o.id_orden=do.id_orden
+    -> RIGHT JOIN productos as p ON do.id_producto=p.id_producto;
+/**
++----------+------------+-------------+------------+----------------+----------------+-------------+-----------------+-----------------+
+| id_orden | id_cliente | fecha_orden | id_cliente | nombre_cliente | ciudad_cliente | id_producto | nombre_producto | precio_producto |
++----------+------------+-------------+------------+----------------+----------------+-------------+-----------------+-----------------+
+|        1 |          1 | 2024-03-01  |          1 | Juan           | Ciudad A       |           1 | Producto A      |           50.00 |
+|        2 |          2 | 2024-03-02  |          2 | María          | Ciudad B       |           2 | Producto B      |           75.00 |
+|        3 |          3 | 2024-03-03  |          3 | Pedro          | Ciudad C       |           3 | Producto C      |          100.00 |
++----------+------------+-------------+------------+----------------+----------------+-------------+-----------------+-----------------+
+3 rows in set (0,00 sec)
+**/
 --    Realizar un inner join entre clientes y órdenes.
 
 SELECT * FROM clientes as c
     -> JOIN ordenes as o on o.id_cliente=c.id_cliente;
+/**
 +------------+----------------+----------------+----------+------------+-------------+
 | id_cliente | nombre_cliente | ciudad_cliente | id_orden | id_cliente | fecha_orden |
 +------------+----------------+----------------+----------+------------+-------------+
@@ -332,11 +344,12 @@ SELECT * FROM clientes as c
 |          3 | Pedro          | Ciudad C       |        3 |          3 | 2024-03-03  |
 +------------+----------------+----------------+----------+------------+-------------+
 3 rows in set (0,00 sec)
-
+**/
 --    Realizar un left join entre órdenes y detalles de órdenes.
 
 SELECT * FROM detalles_ordenes as do
     -> LEFT JOIN ordenes as o on do.id_orden=o.id_orden;
+/**
 +------------+----------+-------------+----------+----------+------------+-------------+
 | id_detalle | id_orden | id_producto | cantidad | id_orden | id_cliente | fecha_orden |
 +------------+----------+-------------+----------+----------+------------+-------------+
@@ -344,12 +357,13 @@ SELECT * FROM detalles_ordenes as do
 |          2 |        2 |           2 |        1 |        2 |          2 | 2024-03-02  |
 |          3 |        3 |           3 |        3 |        3 |          3 | 2024-03-03  |
 +------------+----------+-------------+----------+----------+------------+-------------+
-
+**/
 --    Realizar un right join entre productos y detalles de órdenes.
 
 
 SELECT * FROM detalles_ordenes as do
     -> RIGHT JOIN productos as p on do.id_producto=p.id_producto;
+/**
 +------------+----------+-------------+----------+-------------+-----------------+-----------------+
 | id_detalle | id_orden | id_producto | cantidad | id_producto | nombre_producto | precio_producto |
 +------------+----------+-------------+----------+-------------+-----------------+-----------------+
@@ -358,13 +372,55 @@ SELECT * FROM detalles_ordenes as do
 |          3 |        3 |           3 |        3 |           3 | Producto C      |          100.00 |
 +------------+----------+-------------+----------+-------------+-----------------+-----------------+
 3 rows in set (0,00 sec)
-
+**/
 
 --    Realizar un full join entre clientes y órdenes.
-
-SELECT * FROM clientes as c
-FULL JOIN ordenes as o;
-
+SELECT * from clientes as c 
+    -> LEFT JOIN ordenes as o ON c.id_cliente=o.id_cliente 
+    -> UNION
+    -> SELECT * from clientes as c 
+    -> RIGHT JOIN ordenes as o ON c.id_cliente=o.id_cliente WHERE c.id_cliente is NULL;
+/**
++------------+----------------+----------------+----------+------------+-------------+
+| id_cliente | nombre_cliente | ciudad_cliente | id_orden | id_cliente | fecha_orden |
++------------+----------------+----------------+----------+------------+-------------+
+|          1 | Juan           | Ciudad A       |        1 |          1 | 2024-03-01  |
+|          2 | María          | Ciudad B       |        2 |          2 | 2024-03-02  |
+|          3 | Pedro          | Ciudad C       |        3 |          3 | 2024-03-03  |
++------------+----------------+----------------+----------+------------+-------------+
+3 rows in set (0,00 sec)
+**/
 
 --    Realizar un full join entre órdenes y detalles de órdenes.
+
+SELECT * from ordenes as o 
+    -> LEFT JOIN detalles_ordenes as do ON o.id_orden=do.id_orden
+    -> UNION
+    -> SELECT * from ordenes as o 
+    -> RIGHT JOIN detalles_ordenes as do ON o.id_orden=do.id_orden where o.id_orden is NULL;
+/**
++----------+------------+-------------+------------+----------+-------------+----------+
+| id_orden | id_cliente | fecha_orden | id_detalle | id_orden | id_producto | cantidad |
++----------+------------+-------------+------------+----------+-------------+----------+
+|        1 |          1 | 2024-03-01  |          1 |        1 |           1 |        2 |
+|        2 |          2 | 2024-03-02  |          2 |        2 |           2 |        1 |
+|        3 |          3 | 2024-03-03  |          3 |        3 |           3 |        3 |
++----------+------------+-------------+------------+----------+-------------+----------+
+3 rows in set (0,00 sec)
+**/
 --    Realizar un full join entre productos y detalles de órdenes.
+SELECT * from ordenes as o 
+    -> LEFT JOIN detalles_ordenes as do ON o.id_orden=do.id_orden
+    -> UNION
+    -> SELECT * from ordenes as o 
+    -> RIGHT JOIN detalles_ordenes as do ON o.id_orden=do.id_orden where o.id_orden is NULL;
+/**
++----------+------------+-------------+------------+----------+-------------+----------+
+| id_orden | id_cliente | fecha_orden | id_detalle | id_orden | id_producto | cantidad |
++----------+------------+-------------+------------+----------+-------------+----------+
+|        1 |          1 | 2024-03-01  |          1 |        1 |           1 |        2 |
+|        2 |          2 | 2024-03-02  |          2 |        2 |           2 |        1 |
+|        3 |          3 | 2024-03-03  |          3 |        3 |           3 |        3 |
++----------+------------+-------------+------------+----------+-------------+----------+
+3 rows in set (0,00 sec)
+**/
