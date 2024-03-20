@@ -14,7 +14,7 @@ def run(data_path: Path) -> bool:
         for letter in sorted(uniq_letter):
             total_repeat_letter = letters.count(letter)
             result.write(f'{letter} {"█" * total_repeat_letter} {total_repeat_letter}\n')
-    return filecmp.cmp(histogram_path, 'data\histogram\.expected', shallow=False)
+    return filecmp.cmp(histogram_path, 'data/histogram/.expected', shallow=False)
 
 
 if __name__ == '__main__':

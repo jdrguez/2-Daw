@@ -12,17 +12,16 @@ def run(route_path: Path) -> tuple:
         moves = route.readline().strip().split(',')
         for move in moves:
             x, y = move.split(':')
-            x = int(x)
-            y = int(y)
-            
-            distance += x
-            depth += y
-            consume = 3 * abs(x) + 2 * abs(y)
+            distance += int(x)
+            depth += int(y)
+            consume = abs(3 * (int(x))) + abs(2 * (int(y)))
             fuel -= consume
-            
-            if fuel < 0 or depth <= 0 or depth >= 600:
+            if fuel <= 0:
+                fuel = 0
                 break
-               
+            if depth < 0 or depth > 600:
+                break
+
     return distance, depth, fuel
 
 
