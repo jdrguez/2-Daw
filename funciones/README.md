@@ -13,7 +13,7 @@
 -    pycheck: count_vowels_rec
         - [] Hecho [] No enviado
 -    pycheck: pangram
-        - [] Hecho []No enviado
+        - [X] Hecho []No enviado
 -    pycheck: cycle_alphabet
         - [] Hecho [] No enviado
 -    pycheck: bubble_sort
@@ -21,12 +21,12 @@
 -    pycheck: consecutive_seq
         - [] Hecho []No enviado
 -    pycheck: magic_square
-
+        - [] Hecho []No enviado
 -   pycheck: sum_nested
-
+        - [X] Hecho []No enviado
 -   pycheck: power_recursive
-
+        - [] Hecho []No enviado
 -   pycheck: hyperfactorial
-
+        - [] Hecho []No enviado
 -   pycheck: fibonacci_generator
-
+        - [] Hecho []No enviado
