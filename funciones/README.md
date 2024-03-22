@@ -9,11 +9,11 @@
 -    pycheck: perfect
         - [X] Hecho [X] No enviado
 -    pycheck: palindrome
-        - [] Hecho [] No enviado
+        - [X] Hecho [X] No enviado
 -    pycheck: count_vowels_rec
-        - [] Hecho [] No enviado
+        - [X] Hecho [X] No enviado
 -    pycheck: pangram
-        - [X] Hecho []No enviado
+        - [X] Hecho [X]No enviado
 -    pycheck: cycle_alphabet
         - [] Hecho [] No enviado
 -    pycheck: bubble_sort
@@ -23,10 +23,10 @@
 -    pycheck: magic_square
         - [] Hecho []No enviado
 -   pycheck: sum_nested
-        - [X] Hecho []No enviado
+        - [X] Hecho [X]No enviado
 -   pycheck: power_recursive
         - [] Hecho []No enviado
 -   pycheck: hyperfactorial
-        - [] Hecho []No enviado
+        - [X] Hecho [X]No enviado
 -   pycheck: fibonacci_generator
         - [] Hecho []No enviado
