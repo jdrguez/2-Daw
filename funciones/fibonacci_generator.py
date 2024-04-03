@@ -2,11 +2,11 @@
 # FIBONACCI GENERADOR
 # *******************
 
+def fibonacci_generator(n: int):
+    num1, num2 = 0, 1
+    for _ in range(n):
+        yield num1
+        num1, num2 = num2, num1 + num2
 
 def run(n: int) -> list:
-    if n == 0:
-        return 0
-    if n == 1:
-        return 0, 1
-
-    return list(run(n - 1) + run(n - 2))
+    return list(fibonacci_generator(n))

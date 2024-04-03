@@ -17,7 +17,7 @@
 -    pycheck: cycle_alphabet
         - [] Hecho [] No enviado
 -    pycheck: bubble_sort
-        - [x] Hecho [X] No enviado
+        - [x] Hecho [] No enviado
 -    pycheck: consecutive_seq
         - [] Hecho []No enviado
 -    pycheck: magic_square
@@ -25,8 +25,8 @@
 -   pycheck: sum_nested
         - [X] Hecho [X]No enviado
 -   pycheck: power_recursive
-        - [] Hecho []No enviado
+        - [X] Hecho []No enviado
 -   pycheck: hyperfactorial
-        - [X] Hecho [X]No enviado
+        - [X] Hecho []No enviado
 -   pycheck: fibonacci_generator
         - [] Hecho []No enviado
