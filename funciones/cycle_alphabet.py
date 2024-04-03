@@ -4,19 +4,13 @@
 
 
 def generator_alphabet(limit: int):
-    alphabete = 'abcdefghijklmñopqrstuvwxyz'
-    limits = abs(limit - len(alphabete))
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
     for letter_pos in range(limit):
-        yield alphabete[letter_pos]
+        yield alphabet[letter_pos % len(alphabet)]
 
 
 def run(max_letters: int) -> str:
-    text = ''
-    alphabet = generator_alphabet(max_letters)
-    for letter in alphabet:
-        text += letter
-
-    return text
+    return ''.join(generator_alphabet(max_letters))
 
 
 if __name__ == '__main__':

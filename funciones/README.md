@@ -29,4 +29,4 @@
 -   pycheck: hyperfactorial
         - [X] Hecho []No enviado
 -   pycheck: fibonacci_generator
-        - [] Hecho []No enviado
+        - [X] Hecho []No enviado
