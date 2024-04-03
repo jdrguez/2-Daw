@@ -13,9 +13,9 @@
 -    pycheck: count_vowels_rec
         - [X] Hecho [X] No enviado
 -    pycheck: pangram
-        - [X] Hecho [X]No enviado
+        - [X] Hecho []No enviado
 -    pycheck: cycle_alphabet
-        - [] Hecho [] No enviado
+        - [X] Hecho [] No enviado
 -    pycheck: bubble_sort
         - [x] Hecho [] No enviado
 -    pycheck: consecutive_seq
