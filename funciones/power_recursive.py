@@ -4,6 +4,8 @@
 
 
 def power(num: int, n: int):
-    if n <= 0:
-        return 0
-    return num * num * power(num, n - 1)
+    if n == 0:
+        return 1
+    if n == 1:
+        return num
+    return  num * power(num, n - 1)
