@@ -264,4 +264,6 @@ EXPLAIN SELECT fecha FROM MOVIMIENTO_BIS WHERE fecha BETWEEN '01/01/2012' AND '0
 Podemos observar la importancia de los índices, vemos que solo se centra en las 3 que cazan con los BETWEEN en la consulta con el SELECT de Fecha en la Tabla Movimiento.
 
 Al ver la siguiente consulta sobre la tabla MOVIMIENTO_BIS no tiene índices a los que atacar y tiene que recorrer toda la tabla para buscar la información pues
-no tiene el límite necesario
+no tiene el límite necesario.
+
+Además podemos observar que cuando usamos el * recorre todas las entradas por el simple hecho de que pides todo, cuando justificas la columnas está va más rápido al casar antes con los índices.
