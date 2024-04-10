@@ -3455,4 +3455,57 @@ SELECT count(f.film_id) as total_películas FROM film as f join film_actor as fa
 1 row in set (0,00 sec)
 ```
 ### Media de duración de las películas cada categoría.
-SELECT rating, avg(length) as cantidad FROM film as f join film_category as fc on f. group by c.category_id;
+```sql
+SELECT fc.category_id,avg(length) as cantidad FROM film as f join film_category as fc on f.film_id=fc.film_id GROUP BY fc.category_id;
++-------------+----------+
+| category_id | cantidad |
++-------------+----------+
+|           1 | 111.6094 |
+|           2 | 111.0152 |
+|           3 | 109.8000 |
+|           4 | 111.6667 |
+|           5 | 115.8276 |
+|           6 | 108.7500 |
+|           7 | 120.8387 |
+|           8 | 114.7826 |
+|           9 | 121.6986 |
+|          10 | 127.8361 |
+|          11 | 112.4821 |
+|          12 | 113.6471 |
+|          13 | 111.1270 |
+|          14 | 108.1967 |
+|          15 | 128.2027 |
+|          16 | 113.3158 |
++-------------+----------+
+16 rows in set (0,03 sec)
+```
+
+## Crear las vistas
+
+```sql
+
+CREATE VIEW FILMS as (
+    SELECT f.title, cat.name FROM film as f
+    JOIN film_category as fc on fc.film_id=f.film_id
+    JOIN category as cat on cat.category_id=fc.category_id
+)
+
+```
+
+```sql
+CREATE VIEW Basic_Customer as (
+    SELECT c.first_name, c.last_name, c.email, a.address, cty.city, cou.country FROM customer as c
+    JOIN address as a on a.address_id=c.address_id
+    JOIN city as cty on cty.city_id=a.city_id
+    JOIN country as cou on cou.country_id=cty.country_id
+);
+```
+
+```sql
+CREATE VIEW Countries as (
+    SELECT cou.country, cty.city, a.address FROM country as cou 
+    JOIN city as cty on cty.country_id=cou.country_id
+    JOIN address as a on a.city_id=cty.city_id
+)
+
+```
