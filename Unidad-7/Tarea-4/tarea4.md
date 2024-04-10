@@ -3509,3 +3509,22 @@ CREATE VIEW Countries as (
 )
 
 ```
+
+```sql
+
+CREATE VIEW Film_Inventory as (
+    SELECT DISTINCT(f.title), i.store_id as tienda, ft.description FROM film as f
+    JOIN inventory as i on i.film_id=f.film_id
+    JOIN film_text as ft on ft.film_id=i.film_id
+);
+```
+
+```sql
+
+CREATE VIEW Actor_Film as (
+    SELECT DISTINCT(f.title), a.first_name FROM actor as a
+    JOIN film_actor as fa on fa.actor_id=a.actor_id
+    LEFT JOIN film as f on f.film_id=fa.film_id 
+);
+```
+
