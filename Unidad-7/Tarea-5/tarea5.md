@@ -156,7 +156,8 @@ Por el uso de Like, ambas al usar esta funcion tendran que recorrer todas las fi
   Records: 0  Duplicates: 0  Warnings: 1
   ```
 - Una vez creado el índice del ejercicio anterior realiza las siguientes consultas haciendo uso de la función MATCH, para buscar todos los productos que:
-  - Contienen la palabra planta en el nombre o en la descripción. 
+
+### Contienen la palabra planta en el nombre o en la descripción. 
   ```sql
   SELECT * FROM producto
     -> WHERE MATCH(nombre, descripcion) AGAINST('planta');
@@ -172,8 +173,8 @@ Por el uso de Like, ambas al usar esta funcion tendran que recorrer todas las fi
 +-----------------+-----------------------------------+-------------+-------------+-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------+--------------+------------------+
 5 rows in set (0.00 sec)
 ```
-  - Realice una consulta para cada uno de los modos de búsqueda full-text que existen en MySQL (IN NATURAL LANGUAGE MODE, IN BOOLEAN MODE y WITH QUERY EXPANSION) y compare los resultados que ha obtenido en cada caso.
-    - In natural language mode:
+### Realice una consulta para cada uno de los modos de búsqueda full-text que existen en MySQL (IN NATURAL LANGUAGE MODE, IN BOOLEAN MODE y WITH QUERY EXPANSION) y compare los resultados que ha obtenido en cada caso.
+#### In natural language mode:
   ```sql
       SELECT * FROM producto
       -> WHERE MATCH(nombre,descripcion) AGAINST('planta' IN NATURAL LANGUAGE MODE);
@@ -190,7 +191,7 @@ Por el uso de Like, ambas al usar esta funcion tendran que recorrer todas las fi
   5 rows in set (0.00 sec)
   ```
 
-    - IN boolean mode:
+#### IN boolean mode:
     ```sql
       SELECT * FROM producto  WHERE MATCH(nombre,descripcion) AGAINST('planta' IN BOOLEAN MODE);
 +-----------------+-----------------------------------+-------------+-------------+-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------+--------------+------------------+
@@ -207,7 +208,7 @@ Por el uso de Like, ambas al usar esta funcion tendran que recorrer todas las fi
 
     ```
 
-    - WITH QUERY EXPANSION:
+#### WITH QUERY EXPANSION:
 
       ```sql
 
@@ -367,7 +368,7 @@ En China se piensa que comer melocotón confiere longevidad al ser humano, ya qu
 131 rows in set (0.02 sec)
       ```
       
-  - Contienen la palabra planta seguida de cualquier carácter o conjunto de caracteres, en el nombre o en la descripción.
+#### Contienen la palabra planta seguida de cualquier carácter o conjunto de caracteres, en el nombre o en la descripción.
     ```sql
     SELECT *
     -> FROM producto
