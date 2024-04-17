@@ -183,19 +183,59 @@ DROP FUNCTION IF EXISTS total_producto;
 
 DELIMITER $$
 CREATE FUNCTION total_producto(
+    limit_product INT
 )
 RETURNS FLOAT
 DETERMINISTIC
-
 BEGIN
     DECLARE total FLOAT;
-    SELECT SUM(Price) FROM Products LIMIT 1 into total;
+    SELECT SUM(Price) INTO total FROM (
+        SELECT Price FROM Products ORDER BY ProductID LIMIT limit_product
+    ) AS limited_products;
+
     RETURN total;
 END$$
 DELIMITER ;
+
+-- Resultado:
+
+SELECT total_producto(4);
++-------------------+
+| total_producto(4) |
++-------------------+
+|              78.2 |
++-------------------+
+1 row in set (0.00 sec)
 
 
 ```
 
 
 ### Función para contar el número de usuarios.
+
+
+```sql
+
+DROP FUNCTION IF EXISTS count_users;
+
+DELIMITER $$
+CREATE FUNCTION count_users() RETURNS INT
+DETERMINISTIC
+BEGIN 
+    DECLARE total INT;
+    SELECT COUNT(UserID) as total_usuarios FROM Users into total;
+    RETURN total;
+END$$
+DELIMITER ;
+
+
+-- Resultado:
+SELECT count_users();
++---------------+
+| count_users() |
++---------------+
+|             7 |
++---------------+
+1 row in set (0.00 sec)
+
+```
