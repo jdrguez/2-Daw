@@ -61,15 +61,3 @@ class Plane:
         return self.get_total_passengers() > self.max_passengers
 
 
-myplane = Plane(
-    fuel_capacity=1258.97,
-    max_passengers=30,
-    storage_capacity=1968.25,
-    manufacturer="Airbus",
-    model='A987',
-    reactor=True,
-)
-
-print(myplane.get_total_passengers())
-
-print(myplane.is_overbooking())
