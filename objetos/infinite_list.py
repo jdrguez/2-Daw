@@ -11,7 +11,7 @@ class InfiniteList:
 
     def __setitem__(self, index: int, item) -> None:
         if index > len(self.items):
-            for _ in range(len(self.items), index + 1):
+            for _ in range(index + 1):
                 self.items.append(self.fill_value)
         self.items[index] = item
 
