@@ -25,21 +25,37 @@ class Date:
 
     @staticmethod
     def days_in_month(month: int, year: int) -> int:
-        match month:
-            case 1, 3, 5, 7, 8, 10, 12:
-                return 31
-            case 2:
-                if Date.is_leap_year(year):
-                    return 29
-                return 28
-            case 4, 6, 9, 11:
-                return 30
-            case _:
-                return None
+        thirty_one_months = [1, 3, 5, 7, 8, 10, 12]
+        thirty_months = [4, 6, 9, 11]
+        total_days = 0
+
+        if month in thirty_one_months:
+            total_days = 31
+        elif month in thirty_months:
+            total_days = 31
+        elif month == 2:
+            total_days = 28
+            if Date.is_leap_year(year):
+                total_days = 29
+
+        return total_days
+
+    def get_total_days_in_leap_year(self, total_years: int) -> int:
+        return sum([364 for year in range(total_years + 1) if Date.is_leap_year(year)])
+
+    def get_total_days_in_normal_year(self, total_years: int) -> int:
+        return sum([365 for year in range(total_years + 1) if not Date.is_leap_year(year)])
 
     def get_delta_days(self) -> int:
         '''Número de días transcurridos desde el 1-1-1900 hasta la fecha'''
-        return 0
+        total_years = self.year - 1900 - 1
+        total_days_without_date = self.get_total_days_in_leap_year(
+            total_years
+        ) + self.get_total_days_in_normal_year(total_years)
+        current_days_in_date = sum(
+            [self.days_in_month(month, self.year) for month in range(self.month + 1)]
+        )
+        return total_days_without_date + current_days_in_date + self.day
 
     @property
     def weekday(self) -> int:
@@ -53,7 +69,7 @@ class Date:
     @property
     def short_date(self) -> str:
         '''02/09/2003'''
-        return ''
+        return f'{self.day}/{self.month}/{self.year}'
 
     def __str__(self):
         '''MARTES 2 DE SEPTIEMBRE DE 2003'''
@@ -61,16 +77,19 @@ class Date:
 
     def __add__(self, days: int) -> Date:
         '''Sumar un número de días a la fecha'''
-        ...
+        return Date
 
     def __sub__(self, other: Date | int) -> int | Date:
         '''Dos opciones:
         1) Restar una fecha a otra fecha -> Número de días
         2) Restar un número de días la fecha -> Nueva fecha'''
-        ...
+        return Date
 
-    def __lt__(self, other) -> bool: ...
+    def __lt__(self, other) -> bool:
+        return Date
 
-    def __gt__(self, other) -> bool: ...
+    def __gt__(self, other) -> bool:
+        return Date
 
-    def __eq__(self, other) -> bool: ...
+    def __eq__(self, other) -> bool:
+        return Date
