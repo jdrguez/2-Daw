@@ -196,7 +196,7 @@ BEGIN
     RETURN total;
 END$$
 DELIMITER ;
-
+exit
 -- Resultado:
 
 SELECT total_producto(4);

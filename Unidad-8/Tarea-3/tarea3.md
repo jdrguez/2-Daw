@@ -1,24 +1,5 @@
 
 
-Select * from empleados
-    -> ;
-+----+--------+---------+
-| id | nombre | salario |
-+----+--------+---------+
-|  1 | Juan   | 3000.00 |
-|  2 | María  | 3500.00 |
-|  3 | Pedro  | 3200.00 |
-+----+--------+---------+
-
-
-
-
-
-
-
-
-
-
 ## Escribe un procedimiento almacenado que aumente los salarios de todos los empleados en un 5%, pero excluya a aquellos cuyo salario sea superior a 3200. El procedimiento debe tener parámetros de entrada.
 
 ```sql
