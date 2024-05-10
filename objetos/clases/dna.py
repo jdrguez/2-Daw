@@ -41,15 +41,17 @@ class DNA:
             elif dna1 == DNA.CYTOSINE and dna2 == DNA.GUANINE:
                 new_sequence += DNA.GUANINE
             elif dna1 == DNA.ADENINE and dna2 == DNA.CYTOSINE:
-                new_sequence += DNA.CYTOSINE
-            elif dna1 == DNA.ADENINE and dna2 == DNA.GUANINE:
                 new_sequence += DNA.GUANINE
+            elif dna1 == DNA.CYTOSINE and dna2 == DNA.ADENINE:
+                new_sequence += DNA.GUANINE
+            elif dna1 == DNA.THYMINE and dna2 == DNA.CYTOSINE:
+                new_sequence += DNA.THYMINE
             elif dna1 == DNA.CYTOSINE and dna2 == DNA.THYMINE:
                 new_sequence += DNA.THYMINE
             elif dna1 == dna2:
                 new_sequence += dna1
             else:
-                new_sequence += dna1
+                new_sequence += DNA.ADENINE
 
         return DNA(new_sequence)
 
