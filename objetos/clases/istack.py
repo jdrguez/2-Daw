@@ -67,7 +67,7 @@ class IntegerStack:
         - El primer elemento del fichero corresponde con el TOP de la pila.
         - Si la pila se llena al ir añadiendo elementos habrá que expandir con los valores
         por defecto'''
-        ...
+        return None
 
     def __getitem__(self, index: int) -> int:
         '''Devuelve el elemento de la pila en el índice indicado'''
@@ -75,7 +75,10 @@ class IntegerStack:
 
     def __setitem__(self, index: int, item: int) -> None:
         '''Establece el valor de un elemento de la pila mediante el índice indicado'''
-        ...
+        if index < len(self.items):
+            self.items[index] = item
+        else:
+            raise IndexError
 
     def __len__(self):
         '''Número de elementos que contiene la pila'''
@@ -83,22 +86,21 @@ class IntegerStack:
 
     def __str__(self):
         '''Cada elemento en una línea distinta empezando por el TOP de la pila'''
-        return None
+        return '\n'.join([str(num) for num in self.items])
 
     def __add__(self, other: IntegerStack) -> IntegerStack:
         '''Sumar dos pilas.
         - La segunda pila va "encima" de la primera
         - El tamaño máximo de la pila resultante es la suma de los tamaños
         máximos de cada pila.'''
-        ...
+        new_items = other.items + self.items
 
-    def __iter__(self) -> IntegerStackIterator:
-        ...
+        return IntegerStack(max_size=self.max_size + other.max_size)
+
+    def __iter__(self) -> IntegerStackIterator: ...
 
 
 class IntegerStackIterator:
-    def __init__(self, stack: IntegerStack):
-        ...
+    def __init__(self, stack: IntegerStack): ...
 
-    def __next__(self) -> int:
-        ...
+    def __next__(self) -> int: ...

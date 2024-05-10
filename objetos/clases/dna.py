@@ -32,27 +32,12 @@ class DNA:
     def __add__(self, other: DNA):
         new_sequence = ''
         for dna1, dna2 in zip(self.sequence, other.sequence):
-            if dna1 == DNA.ADENINE and dna2 == DNA.THYMINE:
-                new_sequence += DNA.THYMINE
-            elif dna1 == DNA.THYMINE and dna2 == DNA.ADENINE:
-                new_sequence += DNA.THYMINE
-            elif dna1 == DNA.GUANINE and dna2 == DNA.CYTOSINE:
-                new_sequence += DNA.GUANINE
-            elif dna1 == DNA.CYTOSINE and dna2 == DNA.GUANINE:
-                new_sequence += DNA.GUANINE
-            elif dna1 == DNA.ADENINE and dna2 == DNA.CYTOSINE:
-                new_sequence += DNA.GUANINE
-            elif dna1 == DNA.CYTOSINE and dna2 == DNA.ADENINE:
-                new_sequence += DNA.GUANINE
-            elif dna1 == DNA.THYMINE and dna2 == DNA.CYTOSINE:
-                new_sequence += DNA.THYMINE
-            elif dna1 == DNA.CYTOSINE and dna2 == DNA.THYMINE:
-                new_sequence += DNA.THYMINE
-            elif dna1 == dna2:
+            if dna1 > dna2:
                 new_sequence += dna1
+            elif dna2 > dna1:
+                new_sequence += dna2
             else:
-                new_sequence += DNA.ADENINE
-
+                new_sequence += dna1
         return DNA(new_sequence)
 
     def __len__(self):
