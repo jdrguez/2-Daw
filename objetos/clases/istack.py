@@ -58,7 +58,12 @@ class IntegerStack:
         '''Vuelca la pila a un fichero.
         - Cada item en una línea.
         - El primer elemento del fichero corresponde con el TOP de la pila.'''
-        ...
+        
+        with open(path, 'w') as f:
+            for item in self.items[:len(self.items) - 1]:
+                f.write(str(item) + '\n')
+            if self.items:
+                f.write(str(self.items[-1]))
 
     @classmethod
     def load_from_file(cls, path: str) -> IntegerStack:
@@ -67,7 +72,15 @@ class IntegerStack:
         - El primer elemento del fichero corresponde con el TOP de la pila.
         - Si la pila se llena al ir añadiendo elementos habrá que expandir con los valores
         por defecto'''
-        return None
+        new_stack = IntegerStack()
+        items = []
+        content = reversed(open(path).readlines())
+        for line in content:
+            element = int(line.strip())
+            if not new_stack.push(element):
+                new_stack.expand()
+                new_stack.push(element)
+        return new_stack
 
     def __getitem__(self, index: int) -> int:
         '''Devuelve el elemento de la pila en el índice indicado'''
@@ -93,14 +106,22 @@ class IntegerStack:
         - La segunda pila va "encima" de la primera
         - El tamaño máximo de la pila resultante es la suma de los tamaños
         máximos de cada pila.'''
-        new_items = other.items + self.items
+        new_stack = IntegerStack(max_size= self.max_size + other.max_size)
+        new_stack.items = other.items + self.items
+        return new_stack
 
-        return IntegerStack(max_size=self.max_size + other.max_size)
-
-    def __iter__(self) -> IntegerStackIterator: ...
+    def __iter__(self) -> IntegerStackIterator:
+        return IntegerStackIterator(self)
 
 
 class IntegerStackIterator:
-    def __init__(self, stack: IntegerStack): ...
+    def __init__(self, stack: IntegerStack):
+        self.stack = stack
+        self.pointer = 0
 
-    def __next__(self) -> int: ...
+    def __next__(self) -> int:
+        if self.pointer >= len(self.stack.items):
+            raise StopIteration
+        stack = self.stack.items[self.pointer]
+        self.pointer += 1
+        return stack
