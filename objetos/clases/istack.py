@@ -73,7 +73,6 @@ class IntegerStack:
         - Si la pila se llena al ir añadiendo elementos habrá que expandir con los valores
         por defecto'''
         new_stack = IntegerStack()
-        items = []
         content = reversed(open(path).readlines())
         for line in content:
             element = int(line.strip())
