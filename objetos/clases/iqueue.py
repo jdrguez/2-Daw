@@ -18,7 +18,7 @@ class IntegerQueue:
     def enqueue(self, item: int) -> bool:
         '''Añade item a la cola.
         Si la cola está llena retornar False, en otro caso retornar True'''
-        if len(self.items) < self.max_size:
+        if len(self) < self.max_size:
             self.items.append(item)
             return True
         return False
@@ -30,7 +30,7 @@ class IntegerQueue:
 
     def head(self) -> int:
         '''Devolver el elemento que está en el HEAD de la cola (sin extracción)'''
-        return self.items[0]
+        return self[0]
 
     def is_empty(self) -> bool:
         '''Indica si la cola está vacía'''
@@ -38,7 +38,7 @@ class IntegerQueue:
 
     def is_full(self) -> bool:
         '''Indica si la cola está llena -> max_size'''
-        return len(self.items) == self.max_size
+        return len(self) == self.max_size
     def expand(self, factor: int = 2) -> None:
         '''Expande el tamaño máximo de la cola en el factor indicado'''
         self.max_size *= factor
