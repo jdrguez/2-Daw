@@ -23,7 +23,7 @@ class IntegerStack:
     def push(self, item: int) -> bool:
         '''Añade item a la pila.
         Si la pila está llena retornar False, en otro caso retornar True'''
-        if len(self.items) < self.max_size:
+        if len(self) < self.max_size:
             self.items.insert(0, item)
             return True
         return False
@@ -36,7 +36,7 @@ class IntegerStack:
 
     def top(self) -> int:
         '''Devolver el elemento que está en el TOP de la pila (sin extracción)'''
-        return self.items[0]
+        return self[0]
         ...
 
     def is_empty(self) -> bool:
@@ -46,7 +46,7 @@ class IntegerStack:
 
     def is_full(self) -> bool:
         '''Indica si la pila está llena -> max_size'''
-        return len(self.items) == self.max_size
+        return len(self) == self.max_size
 
     def expand(self, factor: int = 2) -> None:
         '''Expande el tamaño máximo de la pila en el factor indicado'''
@@ -60,7 +60,7 @@ class IntegerStack:
         - El primer elemento del fichero corresponde con el TOP de la pila.'''
         
         with open(path, 'w') as f:
-            for item in self.items[:len(self.items) - 1]:
+            for item in self.items[:len(self) - 1]:
                 f.write(str(item) + '\n')
             if self.items:
                 f.write(str(self.items[-1]))
@@ -87,7 +87,7 @@ class IntegerStack:
 
     def __setitem__(self, index: int, item: int) -> None:
         '''Establece el valor de un elemento de la pila mediante el índice indicado'''
-        if index < len(self.items):
+        if index < len(self):
             self.items[index] = item
         else:
             raise IndexError
@@ -98,7 +98,7 @@ class IntegerStack:
 
     def __str__(self):
         '''Cada elemento en una línea distinta empezando por el TOP de la pila'''
-        return '\n'.join([str(num) for num in self.items])
+        return '\n'.join(str(num) for num in self.items)
 
     def __add__(self, other: IntegerStack) -> IntegerStack:
         '''Sumar dos pilas.
