@@ -39,8 +39,7 @@ class DNA:
             new_sequence += self.sequence[other_lenght:]
         elif other_lenght > self_lenght:
             new_sequence += other.sequence[self_lenght:]
-        
-            
+
         return DNA(new_sequence)
 
     def __len__(self):
@@ -55,7 +54,7 @@ class DNA:
             DNA.THYMINE: self.thymines / lenght_sequence * 100,
         }
 
-    def __mul__(self, other): 
+    def __mul__(self, other):
         new_sequence = []
         for dna1, dna2 in zip(self.sequence, other.sequence):
             if dna1 == dna2:
@@ -63,12 +62,12 @@ class DNA:
         return DNA(''.join(new_sequence))
 
     @classmethod
-    def build_from_file(cls, path: str) -> DNA: 
+    def build_from_file(cls, path: str) -> DNA:
         with open(path) as f:
             new_sequence = f.read().replace('\n', '')
             return DNA(new_sequence)
 
-    def dump_to_file(self, path: str) -> None: 
+    def dump_to_file(self, path: str) -> None:
         with open(path, 'w') as f:
             f.write(self.sequence)
         return None
@@ -80,4 +79,4 @@ class DNA:
         ALL_BASES = [DNA.ADENINE, DNA.CYTOSINE, DNA.GUANINE, DNA.THYMINE]
         if base not in ALL_BASES:
             base = DNA.ADENINE
-        self.sequence = self.sequence[:index] + base + self.sequence[index + 1:]
+        self.sequence = self.sequence[:index] + base + self.sequence[index + 1 :]

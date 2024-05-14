@@ -1,7 +1,7 @@
 class File:
-    def __init__(self, path: str): 
+    def __init__(self, path: str):
         self.path = path
-        self.contents= []
+        self.contents = []
 
     def add_content(self, content: str):
         if content not in self.contents:
@@ -18,7 +18,7 @@ class File:
 
 
 class MediaFile(File):
-    def __init__(self, path: str, codec: str, geoloc: tuple[float], duration: int): 
+    def __init__(self, path: str, codec: str, geoloc: tuple[float], duration: int):
         super().__init__(self.path)
         self.codec = codec
         self.geoloc = geoloc
@@ -27,7 +27,7 @@ class MediaFile(File):
     @property
     def info(self):
         base_info = super(File, self).info()
-        return f'''{base_info} 
+        return f'''{base_info}
         Codec: {self.codec}
         Geolocalization: {self.geoloc}
         Duration: {self.duration}'''
@@ -36,12 +36,12 @@ class MediaFile(File):
 class VideoFile(MediaFile):
     def __init__(
         self, path: str, codec: str, geoloc: tuple[float], duration: int, dimensions: tuple[int]
-    ): 
+    ):
         super().__init__(self.path, codec, geoloc, duration)
         self.dimensions = dimensions
 
     @property
-    def info(self): 
+    def info(self):
         base_info = super(MediaFile, self).info()
         return f'''{base_info}
         Dimensions: {self.dimensions}'''

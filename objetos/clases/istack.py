@@ -58,9 +58,9 @@ class IntegerStack:
         '''Vuelca la pila a un fichero.
         - Cada item en una línea.
         - El primer elemento del fichero corresponde con el TOP de la pila.'''
-        
+
         with open(path, 'w') as f:
-            for item in self.items[:len(self.items) - 1]:
+            for item in self.items[: len(self.items) - 1]:
                 f.write(str(item) + '\n')
             if self.items:
                 f.write(str(self.items[-1]))
@@ -105,7 +105,7 @@ class IntegerStack:
         - La segunda pila va "encima" de la primera
         - El tamaño máximo de la pila resultante es la suma de los tamaños
         máximos de cada pila.'''
-        new_stack = IntegerStack(max_size= self.max_size + other.max_size)
+        new_stack = IntegerStack(max_size=self.max_size + other.max_size)
         new_stack.items = other.items + self.items
         return new_stack
 
