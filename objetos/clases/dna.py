@@ -31,8 +31,8 @@ class DNA:
 
     def __add__(self, other: DNA):
         new_sequence = ''
-        self_lenght = len(self.sequence)
-        other_lenght = len(other.sequence)
+        self_lenght = len(self)
+        other_lenght = len(other)
         for dna1, dna2 in zip(self.sequence, other.sequence):
             new_sequence += max(dna1, dna2)
         if self_lenght > other_lenght:
