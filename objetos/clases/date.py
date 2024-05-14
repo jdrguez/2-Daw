@@ -57,16 +57,22 @@ class Date:
         return total_days
 
     def get_total_days(self) -> int:
+<<<<<<< HEAD
         total_years = self.year - 1900 - 1
         return sum([366 for year in range(total_years + 1) if Date.is_leap_year(year)]) + sum(
             [365 for year in range(total_years + 1) if not Date.is_leap_year(year)]
         )
+=======
+        total_years = self.year - 1900
+        return sum(365 + if Date.is_leap_year(year) for year in range(total_years))
+        
+>>>>>>> 2bf6ff4b415b7809e5942c1b2f1ab1bf1236a46f
 
     def get_delta_days(self) -> int:
         '''Número de días transcurridos desde el 1-1-1900 hasta la fecha'''
         total_days_without_date = self.get_total_days()
         current_days_in_date = sum(
-            [self.days_in_month(month, self.year) for month in range(self.month)]
+            self.days_in_month(month, self.year) for month in range(self.month)
         )
         return total_days_without_date + current_days_in_date + self.day - 1
 
@@ -98,7 +104,7 @@ class Date:
 
     @property
     def is_weekend(self) -> bool:
-        return self.weekday == 6 or self.weekday == 0
+        return self.weekday in (6, 0)
 
     @property
     def short_date(self) -> str:
@@ -134,11 +140,11 @@ class Date:
             total_days_without_date_self = self.get_total_days()
             total_days_without_date_other = other.get_total_days()
             actual_self_days = (
-                sum([self.days_in_month(month, self.year) for month in range(self.month)])
+                sum(self.days_in_month(month, self.year) for month in range(self.month))
                 + self.day
             )
             actual_other_days = (
-                sum([other.days_in_month(month, other.year) for month in range(other.month)])
+                sum(other.days_in_month(month, other.year) for month in range(other.month))
                 + other.day
             )
             self_days = total_days_without_date_self + actual_self_days
