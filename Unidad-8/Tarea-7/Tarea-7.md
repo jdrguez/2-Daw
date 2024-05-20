@@ -122,7 +122,6 @@ BEGIN
         SET aux = aux + FLOOR(RAND() * (10 - 100 + 1) + 100);
         SET nombre_random = CONCAT('Empleado', '-', aux);
 
-        -- Insertar todas las columnas necesarias
         INSERT INTO persona (id, nombre, salario_base, subsidio, salud, pension, bono, integral)
         VALUES (id_random, nombre_random, 0, 0, 0, 0, 0, 0);
 
