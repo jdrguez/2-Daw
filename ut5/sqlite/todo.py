@@ -17,11 +17,11 @@ def create_db(db_path: str) -> None:
         └ done indica si la tarea está hecha o no"""
 
     sql = '''CREATE DATABASE todo;
-    USE DATABASE todo;
+    USE todo;
     CREATE TABLE tasks(
     id INT PRIMARY KEY,
     name TEXT,
-    done BOOLEAN 
+    done BOOLEAN
     )'''
     cur.executescript(sql)
     con.commit()
@@ -32,6 +32,7 @@ class Task:
     - con: para la conexión a la base de datos. Establecer consultas como "filas".
     - cur: para el cursor de manejo."""
 
+    create_db(DB_PATH)
     con = sqlite3.connect(DB_PATH)
     con.row_factory = sqlite3.Row
     cur = con.cursor()
