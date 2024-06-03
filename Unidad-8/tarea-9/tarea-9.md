@@ -132,11 +132,4 @@ mysql> SELECT * FROM alumno;
 +----+-----------+--------------+--------------+-----------------------+
 11 rows in set (0.00 sec)
 
-
-
-UPDATE persona
-SET fecha_transaccion = (SELECT DATE_ADD('2014-01-01', INTERVAL FLOOR(RAND() * 3650) DAY));
-
-
-
 ```

@@ -118,46 +118,4 @@ SELECT * FROM log_cambios_eliminados;
 1 row in set (0,00 sec)
 
 
-
-
-CREATE TABLE persona (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(255) NOT NULL,
-    fecha_transaccion DATETIME NOT NULL
-);
-
-CREATE TABLE total_transacciones (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    persona_id INT NOT NULL,
-    total INT NOT NULL DEFAULT 0,
-    FOREIGN KEY (persona_id) REFERENCES persona(id)
-);
-
-
-DELIMITER $$
-
-CREATE TRIGGER after_persona_update
-AFTER UPDATE ON persona
-FOR EACH ROW
-BEGIN
-    IF EXISTS (SELECT * FROM total_transacciones WHERE persona_id = NEW.id) THEN
-        UPDATE total_transacciones
-        SET total = total + 1
-        WHERE persona_id = NEW.id;
-    ELSE
-        INSERT INTO total_transacciones (persona_id, total)
-        VALUES (NEW.id, 1);
-    END IF;
-END$$
-
-DELIMITER ;
-
-
-
-
-
-
-
-
-
 ```
