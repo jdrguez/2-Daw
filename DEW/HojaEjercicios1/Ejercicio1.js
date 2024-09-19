@@ -178,3 +178,35 @@ function ejercicio6c(){
 
 /** Ejercicio 7 */
 
+function days_calculator(date){
+    const birth = "114/04/2000";
+    var cleanead_birth = birth.split("/");
+    var clean_date = date.split("/");
+    var date1 = Date.UTC(cleanead_birth[2],cleanead_birth[1]-1,cleanead_birth[0]);
+    var date2 = Date.UTC(clean_date[2],clean_date[1]-1,clean_date[0]);
+    var dif = date2 - date1;
+    var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
+    return dias
+}
+
+function ejercicio7(date,aswn){
+    var date = document.getElementById("date").value;
+    var aswn = document.getElementById("aswn").value;
+    total_days = days_calculator(date)
+
+    if (aswn == 'd'){
+        console.log("Han pasado un total de " + total_days + " " + "días")
+    }else if(aswn == 'h'){
+        let total_hours = Math.floor(total_days / 60);
+        console.log("Han pasado un total de " + total_hours + " " + "segundos");
+    }else if(aswn == 'm'){
+        let total_minutes = Math.floor(((total_days / 60) / 60));
+        console.log("Han pasodo un total de " + total_minutes + " minutos");
+    }else if(aswn == 's'){
+        let total_seconds = Math.floor(((total_days / 60)/ 60)/ 60);
+        console.log("Han pasado un total de " + total_seconds + " segundos");
+    }else{
+        console.log("No se proporciono medida")
+    }
+
+}
