@@ -232,4 +232,53 @@ function hdec2hms(){
 
 /**Ejercicio 9 */
 
+function juliana_convert(date){
+    let fecha= new Date(date);
+    let unix_temp = fecha.getTime();
 
+    let unix_temp_days = Math.floor(unix_temp / (100 * 60 * 60 * 24));
+    let juliana_date = Math.floor(unix_temp_days + 2440587.5);
+    return juliana_date
+}
+
+function ejercicio9(){
+    let date = document.getElementById("date_juliana").value;
+
+    let juliana_date = juliana_convert(date);
+    console.log("Fecha Juliana: ", juliana_date);
+}
+
+/** Ejercicio 10 */
+
+function deg2rand(){
+    let deg = parseInt(document.getElementById("ang1").value);
+    console.log(deg * (Math.PI / 180));
+}
+
+function rad2deg(){
+    let rad = parseInt(document.getElementById("ang1").value);
+    console.log( rad * (180 / Math.PI));
+}
+
+function sinDeg(){
+    let deg = parseInt(document.getElementById("ang3").value);
+    console.log( Math.sign(deg2rand(deg)));
+}
+
+function cosDeg(){
+    let deg = parseInt(document.getElementById("ang4").value);
+    console.log( Math.cos(deg2rand(deg)));
+}
+
+function sinDegAlt(){
+    let deg = parseInt(document.getElementById("ang5").value);
+    let cosValue = cosDeg(deg);
+
+    return Math.sqrt(1 - cosValue * cosValue);
+}
+
+function cosDegAlt(){
+    let deg = parseInt(document.getElementById("ang6").value);
+    let sinValue = sinDeg(deg);
+    return Math.sqrt(1 - sinValue * sinValue);
+}
