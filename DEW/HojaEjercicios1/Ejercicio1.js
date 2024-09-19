@@ -191,22 +191,45 @@ function days_calculator(date){
 
 function ejercicio7(date,aswn){
     var date = document.getElementById("date").value;
-    var aswn = document.getElementById("aswn").value;
-    total_days = days_calculator(date)
+    var aswn = document.getElementById("asnw").value;
+    let total_days = days_calculator(date)
 
     if (aswn == 'd'){
         console.log("Han pasado un total de " + total_days + " " + "días")
     }else if(aswn == 'h'){
-        let total_hours = Math.floor(total_days / 60);
-        console.log("Han pasado un total de " + total_hours + " " + "segundos");
+        let total_hours = total_days * 60;
+        console.log("Han pasado un total de " + total_hours + " " + "horas");
     }else if(aswn == 'm'){
-        let total_minutes = Math.floor(((total_days / 60) / 60));
+        let total_minutes = total_days * 60 * 60;
         console.log("Han pasodo un total de " + total_minutes + " minutos");
     }else if(aswn == 's'){
-        let total_seconds = Math.floor(((total_days / 60)/ 60)/ 60);
+        let total_seconds = total_days * 60 * 60 * 60;
         console.log("Han pasado un total de " + total_seconds + " segundos");
     }else{
         console.log("No se proporciono medida")
     }
 
 }
+
+
+/**Ejercicio 8 */
+
+
+
+function hdec2hms(){
+    let num = parseFloat(document.getElementById("decimal").value);
+
+    let hours = Math.floor(num);
+    let rest_hours = Math.floor( num % 1 * 100);
+    let decimal_minutes = rest_hours * 60 / 100;
+    let minutes = Math.floor(decimal_minutes);
+    let rest_mins = Math.floor(decimal_minutes % 1 * 100);
+    let seconds = Math.floor(rest_mins * 60 / 100);
+
+    console.log("Tu número hexadecimal sería la siguiente fecha " + hours + ":"+ minutes + ":" + seconds)
+}
+
+
+/**Ejercicio 9 */
+
+
