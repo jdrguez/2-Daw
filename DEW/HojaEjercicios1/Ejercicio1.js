@@ -46,3 +46,135 @@ function ejercicio1(){
     console.log("la suma de los elementos sería:");
     console.log(sum);
 }
+
+/**Ejercicio número 2 */
+
+function its_even(num){
+    return num % 2 == 0
+}
+
+function ejercicio2(num){
+    num = parseFloat((num).value);
+    const max_number = [0, 1, 2, 3, 4, 5, 6];
+    if (!(num in max_number)){
+        console.log("¡¡Sólo se contar de 0 a 6!!")
+    }else if (num == 0){
+        console.log("Este es muy fácil.... ¡prueba otro!")
+    }else if (its_even(num)){
+        console.log("El número es par")
+    }else{
+        console.log("Tu numero es impar")
+    }       
+}
+
+/** Ejercicio 3 */
+
+function ejercicio3(){
+    for (i = 0, j = 20; i < 8, j > 0; i++, j = j - 3){
+        console.log(i, j)
+    }
+}
+
+/**Ejercicio 4 */
+
+function ejercicio4a(){
+    let result, arg1, arg2, res1, res2;
+
+    while(true){
+        arg1 = Math.random() - 0.5;
+        if (arg1 < 0){
+            continue;
+        }
+
+        res1 = Math.sqrt(arg1);
+        arg2 = Math.random();
+
+        if (arg1 + arg2 == 0){
+            break;
+        }
+
+        res2 = res1 / (arg1 + arg2);
+        result = res1 + res2;
+        console.log(result);
+
+        if (result <= 0){
+            break;
+        }
+    }
+}
+
+function ejercicio4b(){
+    let result = 1, arg1, arg2, res1, res2;
+
+    while (result > 0){
+        arg1 = Math.random() - 0.5;
+
+        if (arg1 >= 0){
+            res1 = Math.sqrt(arg1);
+            arg2 = Math.random();
+        }
+
+        if (arg1 + arg2 !== 0){
+            res2 = res1 / (arg1 + arg2);
+            result = res1 + res2;
+            console.log(result);
+        }
+    }
+}
+
+function ejercicio4c(){
+    let arg1, arg2, res1, res2;
+
+    while (true){
+        arg1 = Math.random() - 0.5;
+
+        if (arg1 >= 0) {
+            res1 = Math.sqrt(arg1);
+            arg2 = Math.random();
+        }
+
+        if (arg1 + arg2 !== 0) {
+                res2 = res1 / (arg1 + arg2);
+                let result = res1 + res2;
+                console.log(result);
+                
+                if (result <= 0) {
+                    break;
+                }
+            }
+        }
+    }
+
+
+/** Ejercicio 5 */
+
+function ejercicio5(){
+    let date = Date.now()
+    let today = new Date(date)
+    console.log(today)
+}
+
+/** Ejercicio 6 */
+
+function ejercicio6a(){
+    let date = document.getElementById("date1").value;
+    const clean_date = date.replace("/", " ")
+    let new_date = new Date(clean_date)
+    console.log(new_date)
+}
+
+function ejercicio6b(){
+    let date = document.getElementById("date2").value;
+    const clean_date = date.replace("-", " ")
+    let new_date = new Date(clean_date)
+    console.log(new_date)
+}
+
+function ejercicio6c(){
+    let date = document.getElementById("date3").value;
+    let new_date = new Date(date)
+    console.log(new_date)
+}
+
+/** Ejercicio 7 */
+
