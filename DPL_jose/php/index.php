@@ -6,10 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="get_post.php" method="get">
-        <p>nombre:<input type="text" name="usuario"></input></p>
+    <form action="get_post.php" method="get" enctype="multipart/form-data">
+        nombre 1:<input type="text" name="usuario"></input>
         <br>
+        Fichero: <input type="file" name="fichero">
         <input type="submit" name="enviar" value="enviar"></input>
     </form>
 </body>
 </html>
+
