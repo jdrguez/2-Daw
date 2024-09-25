@@ -1,0 +1,24 @@
+
+.flex{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.item{
+    margin-top: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.cover {
+    height: 200px;
+    width: 200px;
+    background-color: grey;
+}
+
+
+
+/*# sourceMappingURL=/css.dfba648a.css.map */
