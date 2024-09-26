@@ -14,3 +14,8 @@ function funcion1(){
 }
 
 
+//Ejercicio2
+
+function funcion2(){
+    
+}
