@@ -1,4 +1,8 @@
 
+body{
+    background-image: linear-gradient(85deg, rgb(226, 223, 5), rgb(186, 240, 161));
+}
+
 .flex{
     display: flex;
     flex-direction: column;
@@ -6,19 +10,39 @@
     margin-right: auto;
 }
 
-
 .item{
-    margin-top: 15px;
-    align-items: center;
-    justify-content: center;
-}
-
-.cover {
     height: 200px;
     width: 200px;
+    margin-top: 25px;
+    align-items: center;
+    justify-content: center;
     background-color: grey;
+    border: 1px solid black;
+    border-radius: 3px ;
 }
 
+.cover{
+    cursor: pointer;
+    height: 200px;
+    width: 200px;
+}
 
+.item:hover{
+    transform: scale(1.1);
+}
+
+.cover1{
+    background-image: url(/epm.e718c8cb.jpg);
+    background-size: cover;
+}
+
+.cover2{
+    background-image: url(/universitaria.64954aab.jpg);
+    background-size: 200px 200px;
+}
+.cover3{
+    background-image: url(/tnt.a381aeba.jpeg);
+    background-size: cover;
+}
 
 /*# sourceMappingURL=/css.dfba648a.css.map */
