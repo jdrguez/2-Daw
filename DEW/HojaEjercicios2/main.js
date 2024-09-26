@@ -64,6 +64,10 @@ function funcion5(){
 }
 
 
+//Ejercicio 6
+//Ejercicio 7
+//Ejercicio 8
+
 
 
 // Ejercicio 9
@@ -82,3 +86,5 @@ function funcion9(){
     console.log(result)
 
 }
+
+//Ejercicio 10
