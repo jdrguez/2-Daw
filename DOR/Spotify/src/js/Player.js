@@ -10,6 +10,7 @@ export default class Player{
             var song = new Song(key,value)
             play_song(song)
             aux ++;
+
     }
 }
 
