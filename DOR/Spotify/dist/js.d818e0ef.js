@@ -150,11 +150,14 @@ var Song = exports.default = /*#__PURE__*/_createClass(function Song(k_song, v_s
   this.album = document.querySelector(c_song);
 });
 function play_song(song) {
+  var vinyl = document.querySelector(".vinyl");
   song.element.onclick = function () {
     if (song.audio.paused) {
       song.audio.play();
+      vinyl.style = "\n                translate:150px;\n                animation = rotate_v 1s;\n            ";
     } else {
       song.audio.pause();
+      vinyl.style.translate = "0px";
     }
   };
 }
@@ -188,10 +191,13 @@ var Player = exports.default = /*#__PURE__*/_createClass(function Player(map) {
     var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
       key = _Object$entries$_i[0],
       value = _Object$entries$_i[1];
-    var song = new _Song.default(key, value);
+    var s_key = key;
+    var s_value = value;
+    var s_cover = ".cover".concat(aux);
+    var song = new _Song.default(s_key, s_value, s_cover);
+    (0, _Song.play_song)(song);
+    aux++;
   }
-  (0, _Song.play_song)(song);
-  aux++;
 });
 },{"./Song.js":"src/js/Song.js"}],"src/js/index.js":[function(require,module,exports) {
 "use strict";
@@ -234,7 +240,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42019" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43627" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

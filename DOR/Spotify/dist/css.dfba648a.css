@@ -8,6 +8,8 @@ body{
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
+    align-items: center;
+    justify-content: center;
 }
 
 .item{
@@ -25,11 +27,48 @@ body{
     cursor: pointer;
     height: 200px;
     width: 200px;
+    position: relative;
 }
 
 .item:hover{
     transform: scale(1.1);
 }
+
+
+
+.vinyl{
+    width: 200px;
+    height: 200px;
+    background-color: black;
+    border-radius: 50%;
+    z-index: -1;
+    position: relative;
+    left: 0;
+}
+
+
+
+.detail{
+    width: 100px;
+    height: 100px;
+    background-color:yellow;
+    border-radius: 50%;
+}
+
+.label{
+    width: 50px;
+    height: 50px;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+.hole{
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border-radius: 50%;
+}
+
 
 .cover1{
     background-image: url(/epm.e718c8cb.jpg);
@@ -43,6 +82,21 @@ body{
 .cover3{
     background-image: url(/tnt.a381aeba.jpeg);
     background-size: cover;
+}
+
+@keyframes rotate_v {
+    0%{
+        transform: rotate3d(0);
+    }
+    25%{
+        transform: rotate3d(1, 1, 1, 45deg);
+    }
+    50%{
+        transform: rotate3d(2, -1, -1, -0.2turn);
+    }
+    100%{
+        transform: rotate3d(0, 1, 0.5, 3.142rad);
+    }
 }
 
 /*# sourceMappingURL=/css.dfba648a.css.map */

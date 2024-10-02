@@ -8,12 +8,18 @@ export default class Song{
 
 
 export function play_song(song){
+    var vinyl = document.querySelector(".vinyl");
     song.element.onclick = () => {
         if (song.audio.paused){
             song.audio.play();
+            vinyl.style=`
+                translate:150px;
+                animation = rotate_v 1s;
+            `
         }
         else{
             song.audio.pause();
+            vinyl.style.translate= "0px"
         }
     }
 }
