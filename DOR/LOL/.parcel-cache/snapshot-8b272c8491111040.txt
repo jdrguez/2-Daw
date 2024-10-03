@@ -1,0 +1,13 @@
+12
+65/home/jdrguez/Repositorios/2-Daw/DOR/LOL/dist/LOL.3464ddca.js.map1727963424473271222 0
+56/home/jdrguez/Repositorios/2-Daw/DOR/LOL/dist/index.html1727963424369278612 0
+61/home/jdrguez/Repositorios/2-Daw/DOR/LOL/dist/LOL.3464ddca.js1727963424471271365 0
+45/home/jdrguez/Repositorios/2-Daw/DOR/LOL/dist1727963424355279607 1
+48/home/jdrguez/Repositorios/2-Daw/DOR/LOL/src/css1727963369348823077 1
+51/home/jdrguez/Repositorios/2-Daw/DOR/LOL/src/assets1727963300021833225 1
+55/home/jdrguez/Repositorios/2-Daw/DOR/LOL/src/js/main.js1727963364838075941 0
+47/home/jdrguez/Repositorios/2-Daw/DOR/LOL/src/js1727963364838075941 1
+44/home/jdrguez/Repositorios/2-Daw/DOR/LOL/src1727963325238978395 1
+51/home/jdrguez/Repositorios/2-Daw/DOR/LOL/index.html1727963384460929942 0
+57/home/jdrguez/Repositorios/2-Daw/DOR/LOL/src/css/main.css1727963369348823077 0
+40/home/jdrguez/Repositorios/2-Daw/DOR/LOL1727963423279355914 1
