@@ -9,23 +9,19 @@ button.addEventListener("click", () => {
 });
 
 const startLoad = async () => {
-    document.querySelector(".cargandoDatos").style.visibility= "visible";
-    
-    for(var i = 1; i <= 151; i++) {
-        await fetch("src/champions.json")
-            .then(function(result) {
-                return result.json();
-            }).then(function(result) {
-                console.log(result)
-                const data = result.data;
-                const champion = new Champion (data);
-                pushChampion(champion);
-            });
-    }
-    await showLoad();
+    await fetch("https://ddragon.leagueoflegends.com/cdn/13.18.1/data/es_ES/champion.json")
+    .then(function(result) {
+        return result.json();
+    }).then (function(result){
+        const data = result
+        for(elements in data.data){
+            const champion = new Champion(elements);
+            pushChampion(champion)
+            console.log(champion)
+        }
+    });
+}
 
-
-};
 
 function pushChampion(champion) {
     champions.push(champion);
