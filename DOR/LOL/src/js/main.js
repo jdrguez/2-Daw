@@ -1,7 +1,4 @@
 import Champion from './Champion.js';
-
-const champios_json = JSON(champions.JSON)
-
 var champions = [];
 
 const button = document.querySelector("button");
@@ -12,20 +9,21 @@ button.addEventListener("click", () => {
 });
 
 const startLoad = async () => {
-    /*document.querySelector(".cargandoDatos").style.visibility= "visible";
+    document.querySelector(".cargandoDatos").style.visibility= "visible";
+    
     for(var i = 1; i <= 151; i++) {
         await fetch("src/champions.json")
             .then(function(result) {
-                console.log(result.data)
                 return result.json();
             }).then(function(result) {
+                console.log(result)
                 const data = result.data;
                 const champion = new Champion (data);
                 pushChampion(champion);
             });
     }
     await showLoad();
-    */
+
 
 };
 
