@@ -14,12 +14,17 @@ const startLoad = async () => {
         return result.json();
     }).then (function(result){
         const data = result
-        for(elements in data.data){
-            const champion = new Champion(elements);
-            pushChampion(champion)
-            console.log(champion)
+        for(element in data){
+            if (data.hasOwnProperty(element)){
+                const cham_data = data[element]
+                const champion = new Champion(cham_data)
+                pushChampion(champion)
+            }
+            
         }
     });
+
+    showLoad()
 }
 
 
@@ -30,20 +35,10 @@ function pushChampion(champion) {
 const showLoad = async () => {
     const pokedex = document.getElementById("pokedex");
     for(var i = 0; i < champions.length; i++) {
-        var aux =  0;
-        while (aux != champions[i].tags.length) {
-            if (aux == 0)
-                var tipo1 = champions[i].tags[aux].type.name;                       
-            if (aux == 1)   
-                var tipo2 = champions[i].tags[aux].type.name;
-            else 
-                tipo2 = "";          
-            aux++; 
-        }
     
         pokedex.innerHTML +=    `<div class="card">
                                     <img src="${champions[i].img}">
-                                    <img class="front" src="${champions[i].img_sprite}"><br>
+                                    <img class="front" src="${champions[i].image.full}"><br>
                                     ${champions[i].id}. ${champions[i].name}<br>
                                     <div class="container-hei-wei">
                                         <div class="height_weight">
@@ -51,7 +46,6 @@ const showLoad = async () => {
                                             <img class="weight" src="assets/img/defense.png">${champions[i].defense} kg
                                         </div>
                                     <div class="types">
-                                        ${tipo1} ${tipo2}
                                     </div>
                                 </div>`
     }
