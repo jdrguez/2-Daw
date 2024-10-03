@@ -14,7 +14,7 @@ export function play_song(song){
             song.audio.play();
             vinyl.style=`
                 translate:150px;
-                animation = rotate_v 1s;
+                animation : rotate_v 1s;
             `
         }
         else{
