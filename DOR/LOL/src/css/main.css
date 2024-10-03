@@ -1,0 +1,54 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    margin-top: 25px;
+    background-color: rgb(14, 13, 13);
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    color: gold;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: Beaufort, monospace;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+button:hover{
+    transform: scale(1.1);
+}
+
+
+/* Pokedex */
+
+#pokedex {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 10px 10px;
+    width: 100%;
+}
+
+.card {
+    font-family: DejaVu Sans Mono, monospace;
+    cursor: pointer;
+    border: 2px solid rgb(78, 78, 78);
+    border-radius: 5px;
+    background-image: linear-gradient(rgb(88, 88, 88), rgb(255, 255, 255));
+    text-align: center;
+    transition: border-color 0.3s ease;
+}
+.logo{
+    width: 450px;
+}
