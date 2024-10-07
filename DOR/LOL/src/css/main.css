@@ -1,3 +1,7 @@
+html{
+    background-color: rgb(48, 48, 48);
+}
+
 .header{
     display: flex;
     align-items: center;
@@ -30,26 +34,44 @@ button:hover{
     transform: scale(1.1);
 }
 
+#msg_load{
+    text-align: center;
+    justify-content: center;
+    color: gold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+    visibility: hidden;
+}
+
+
 
 /* Pokedex */
 
 #pokedex {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-gap: 10px 10px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px 15px;
     width: 100%;
 }
 
 .card {
-    font-family: DejaVu Sans Mono, monospace;
+    font-family: Verdana, Geneva, Tahoma, sans-serif, monospace;
     cursor: pointer;
     border: 2px solid rgb(78, 78, 78);
     border-radius: 5px;
-    background-image: linear-gradient(rgb(88, 88, 88), rgb(255, 255, 255));
+    background-image: linear-gradient(rgb(250, 128, 128), rgb(245, 223, 223));
     text-align: center;
     transition: border-color 0.3s ease;
 }
 
+.img_class{
+    padding: 15px;
+}
+
+.icon{
+    vertical-align: middle;
+    padding: 5px;
+}
 .types{
     background-color: yellow;
 }
