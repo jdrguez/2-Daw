@@ -50,6 +50,17 @@ button:hover{
     transition: border-color 0.3s ease;
 }
 
+.types{
+    background-color: yellow;
+}
+
+.container_icons{
+    vertical-align: middle;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
 .logo{
     width: 450px;
 }

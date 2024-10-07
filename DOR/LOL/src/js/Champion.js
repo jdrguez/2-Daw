@@ -6,7 +6,7 @@ export default class Champion {
         this.img = data.image.full;     
         this.tags = data.tags;
         this.difficult = data.info.difficulty;
-        this.attack = data.info.attack;   
+        this.attack = data.info.attack;
         this.defense = data.info.defense;        
     }
 }
