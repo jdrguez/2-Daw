@@ -73,7 +73,8 @@ button:hover{
     padding: 5px;
 }
 .types{
-    background-color: yellow;
+    font-size: medium;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .container_icons{
@@ -85,4 +86,9 @@ button:hover{
 
 .logo{
     width: 450px;
+}
+
+
+.card.Fighter:hover{
+    transform: scale(1);
 }

@@ -40,7 +40,7 @@ const showLoad = async () => {
     const pokedex = document.getElementById("pokedex");
     for(var i = 0; i < champions.length; i++) {
     
-        pokedex.innerHTML +=    `<div class="card">
+        pokedex.innerHTML +=    `<div class="card ${champions[i].tags[0]}">
                                     <img class= "img_class" src="${champions[i].img_sprite}">
                                         <div class= "name">
                                             <h3>${champions[i].name}</h3>
@@ -51,7 +51,7 @@ const showLoad = async () => {
                                         <img class="icon diff" src="https://img.icons8.com/?size=35&id=owYqN8ZvQFtU&format=png&color=000000">${champions[i].difficult}
                                     </div>
                                     <div class="types">
-                                        <p>${champions[i].tags}</p
+                                        <p>${champions[i].tags[0]}</p
                                     </div>
                                 </div>`
     }
