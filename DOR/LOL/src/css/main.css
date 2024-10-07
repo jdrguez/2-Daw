@@ -49,6 +49,7 @@ button:hover{
     text-align: center;
     transition: border-color 0.3s ease;
 }
+
 .logo{
     width: 450px;
 }

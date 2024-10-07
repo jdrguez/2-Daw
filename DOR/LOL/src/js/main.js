@@ -9,22 +9,26 @@ button.addEventListener("click", () => {
 });
 
 const startLoad = async () => {
-    await fetch("https://ddragon.leagueoflegends.com/cdn/13.18.1/data/es_ES/champion.json")
-    .then(function(result) {
-        return result.json();
-    }).then (function(result){
-        const data = result
-        for(element in data){
-            if (data.hasOwnProperty(element)){
-                const cham_data = data[element]
-                const champion = new Champion(cham_data)
-                pushChampion(champion)
-            }
-            
+    const api = "https://ddragon.leagueoflegends.com/cdn/13.18.1/data/es_ES/champion.json"
+    try{
+        const response = await fetch(api);
+        if (!response.ok){
+            throw new Error('Fallo en la lectura de la api')
         }
-    });
 
-    showLoad()
+        const data = await response.json()
+        const all_warriors = data.data
+
+        Object.keys(all_warriors).forEach(character => {
+            champions.push(new Champion(all_warriors[character]));
+        });
+
+        console.log(champions)
+    } catch (error){
+        console.error('Error', error);
+    }
+
+    showLoad();
 }
 
 
@@ -37,15 +41,12 @@ const showLoad = async () => {
     for(var i = 0; i < champions.length; i++) {
     
         pokedex.innerHTML +=    `<div class="card">
-                                    <img src="${champions[i].img}">
-                                    <img class="front" src="${champions[i].image.full}"><br>
-                                    ${champions[i].id}. ${champions[i].name}<br>
-                                    <div class="container-hei-wei">
-                                        <div class="height_weight">
-                                            <img class="height" src="assets/img/attack.png">${champions[i].attack } m 
-                                            <img class="weight" src="assets/img/defense.png">${champions[i].defense} kg
-                                        </div>
+                                    <img class= "img_class" src="${champions[i].img_sprite}"><br>
+                                    ${champions[i].id}. ${champions[i].name}<br> 
+                                    <img class="height" src="../assets/img/attack.png">${champions[i].attack}                                      
+                                    <img class="weight" src="../assets/img/defense.png">${champions[i].defense}
                                     <div class="types">
+                                        <p>${champions[i].tags}</p
                                     </div>
                                 </div>`
     }
