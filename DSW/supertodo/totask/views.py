@@ -11,7 +11,7 @@ def home(request):
     return render(
         request,
         'totask/home.html',
-        {'num_task': num_task, 'tasks': tasks},
+        {'num_tasks': num_task, 'tasks': tasks},
     )
 
 

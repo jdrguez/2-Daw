@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>Hello</h1>
-</body>
-</html>
+
+{% extends "totask/base.html" %}
+{% block title %}Totask | Home{% endblock title %}
+{% block body %}
+  <h1>Totaks: Go for that tasks!!</h1>
+  <p>Total tasks: <strong>{{ num_tasks }} task{{num_tasks|pluralize}}</strong></p>
+
+  {% for task in tasks %}  
+    <h2>{{ task.title }}</h2>
+    <div class="task-date">{{ task.created_at }}</div>
+    <p>{{ task.content|truncatewords:20 }} <a href="{% url "totask:task_detail" task.slug %}"> Read more </a></p>
+  {% endfor %}
+{% endblock body %}
+
