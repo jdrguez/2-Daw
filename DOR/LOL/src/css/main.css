@@ -1,5 +1,5 @@
 html{
-    background-color: rgb(48, 48, 48);
+    background-color: rgb(82, 82, 82);
 }
 
 .header{
@@ -23,7 +23,7 @@ a{
 
 .button {
     font-family: 'Marcellus SC', serif;
-    font-size: 15px;
+    font-size: 25px;
     font-weight: bold;
     letter-spacing: 1px;
     padding: 5px 15px; 
@@ -70,9 +70,17 @@ button:hover{
     cursor: pointer;
     border: 2px solid rgb(78, 78, 78);
     border-radius: 5px;
-    background-image: linear-gradient(rgb(250, 128, 128), rgb(245, 223, 223));
+    background: #1e2328;
     text-align: center;
+    color: #cdbe91;
     transition: border-color 0.3s ease;
+    border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+    border-image-slice: 1;
+    border-width: 2px;
+}
+
+.card:hover{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 
@@ -91,12 +99,10 @@ a.category{
 
 }
 
-
-
-
 .img_class{
     padding: 15px;
 }
+
 
 .icon{
     vertical-align: middle;
@@ -122,7 +128,7 @@ a.category{
 }
 
 
-.card.Fighter, .card.Mage, .card.Tank, .card{
+.card{
     transform: scale(1);
 }
 
