@@ -10,11 +10,11 @@ def home(request):
     tasks = Task.objects.all()
     return render(
         request,
-        'tasks/home.html',
+        'totask/home.html',
         {'num_task': num_task, 'tasks': tasks},
     )
 
 
 def task_detail(request, task_slug: str):
     task = Task.objects.get(slug=task_slug)
-    return render(request, 'blog/posts/detail.html', dict(task=task))
+    return render(request, 'totask/tasks/detail.html', dict(task=task))
