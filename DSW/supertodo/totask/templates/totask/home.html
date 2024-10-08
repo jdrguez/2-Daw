@@ -6,12 +6,15 @@
   <p>Total tasks: <strong>{{ num_tasks }} task{{num_tasks|pluralize}}</strong></p>
 
   {% for task in tasks %}
-    <div class="main_container">  
-      <h2>{{ task.title }}</h2>
-      <div class="task-date">{{ task.created_at }}</div>
-      <div class="taks-done">{%if task.done%} ✅ {% else %} ❌ {% endif %}</div>
-      <p>{{ task.content|truncatewords:20 }} <a href="{% url "totask:task_detail" task.slug %}"> Read more </a></p>
-    </div>
+    <div class="main_container">
+      <div class="task-container">
+        <h2>{{ task.title }}</h2>
+          <div class="content">
+            <div class="task date">{{ task.created_at }}</div>
+            <div class="task done">{%if task.done%} ✅ {% else %} ❌ {% endif %}</div>
+            <p>{{ task.content|truncatewords:20 }} <a href="{% url "totask:task_detail" task.slug %}"> Read more </a></p>
+          </div>
+      </div>  
     </div>
   {% endfor %}
 {% endblock body %}

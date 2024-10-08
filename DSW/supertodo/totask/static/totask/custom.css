@@ -1,3 +1,29 @@
 body {
   background-color: lightcyan;
 }
+
+.main_container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 15px 15px;
+  width: 100%;
+}
+
+.task-container {
+  font-family: "Marcellus SC", serif;
+  cursor: pointer;
+  border: 2px solid rgb(78, 78, 78);
+  border-radius: 5px;
+  background: white;
+  text-align: center;
+  color: black;
+  transition: border-color 0.3s ease;
+}
+
+/** Para details **/
+
+.details_container {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
