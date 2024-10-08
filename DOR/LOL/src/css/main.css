@@ -8,37 +8,48 @@ html{
     justify-content: center;
 }
 
-.body {
+a{
+    text-decoration:none;
+}
+
+
+
+.container_button {
+    padding-top: 45px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 .button {
-    margin-top: 25px;
-    background-color: rgb(14, 13, 13);
-    cursor: pointer;
-    border-radius: 8px;
-    border: none;
-    color: gold;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    font-family: Beaufort, monospace;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    font-family: 'Marcellus SC', serif;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 5px 15px; 
+    background: #1e2328;
+    color: #cdbe91;
+    box-shadow: inset 0 0 2px #000000;
+    border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+    border-image-slice: 1;
+    border-width: 2px;
 }
 
 button:hover{
-    transform: scale(1.1);
+    text-shadow: 0 0 5px #ffffff80;
+    box-shadow: 0 0 8px 0 #ffffff50;
+    background: linear-gradient(to bottom, #1e2328, #433d2b);
+    cursor: pointer;
+    transition: 0.1s;
 }
+
+
 
 #msg_load{
     text-align: center;
     justify-content: center;
     color: gold;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Marcellus SC', serif;
     font-size: large;
     visibility: hidden;
 }
@@ -55,7 +66,7 @@ button:hover{
 }
 
 .card {
-    font-family: Verdana, Geneva, Tahoma, sans-serif, monospace;
+    font-family: 'Marcellus SC', serif;
     cursor: pointer;
     border: 2px solid rgb(78, 78, 78);
     border-radius: 5px;
@@ -63,6 +74,25 @@ button:hover{
     text-align: center;
     transition: border-color 0.3s ease;
 }
+
+
+a.category{
+    position:absolute;
+    width:auto;
+    padding:7px 14px;
+    background:pink;
+    color:#000;
+    left:20px; top:15px; border-radius:20px;
+    font-size:10px;
+    z-index:6;
+    transition:0.6s;
+    text-transform:uppercase;
+    top:15px;
+
+}
+
+
+
 
 .img_class{
     padding: 15px;
@@ -74,7 +104,7 @@ button:hover{
 }
 .types{
     font-size: medium;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Marcellus SC', serif;
 }
 
 .container_icons{
@@ -84,11 +114,15 @@ button:hover{
     align-items: center;
 }
 
+
+
+
 .logo{
     width: 450px;
 }
 
 
-.card.Fighter:hover{
+.card.Fighter, .card.Mage, .card.Tank, .card{
     transform: scale(1);
 }
+
