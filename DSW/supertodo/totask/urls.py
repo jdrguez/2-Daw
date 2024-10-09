@@ -7,6 +7,6 @@ app_name = 'totask'
 urlpatterns = [
     path('', views.home, name='home'),
     path('tasks/<task_slug>/', views.task_detail, name='task_detail'),
-    path('done-tasks', views.taskdone, name='taskdone'),
-    path('pending-tasks', views.pendingtasks, name='pendingtasks'),
+    path('done', views.taskdone, name='taskdone'),
+    path('pending', views.pendingtasks, name='pendingtasks'),
 ]
