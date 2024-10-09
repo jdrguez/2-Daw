@@ -1,0 +1,20 @@
+{% extends "totask/base.html" %}
+{% block title %}Totask | Home{% endblock title %}
+{% block body %}
+  <header>
+    <h1>Done Tasks</h1>
+  </header>
+
+
+  {% for task in tasks_done %}
+  <div class="todo-container">
+    <h1>{{task.title}}</h1>
+    <ul class="todo-list">
+        <li class="todo-item">
+            <p>{{ task.content|truncatewords:20 }} <a href="{% url "totask:task_detail" task.slug %}">Read more </a></p>
+            <div class="task-checkbox">❌</div>
+        </li>
+    </ul>
+  </div>
+  {% endfor %}
+{% endblock body %}

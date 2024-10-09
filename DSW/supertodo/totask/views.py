@@ -18,3 +18,13 @@ def home(request):
 def task_detail(request, task_slug: str):
     task = Task.objects.get(slug=task_slug)
     return render(request, 'totask/tasks/detail.html', dict(task=task))
+
+
+def taskdone(request):
+    tasks_done = Task.objects.filter(done=True)
+    return render(request, 'totask/tasks/done.html', dict(tasks_done=tasks_done))
+
+
+def pendingtasks(request):
+    pending_tasks = Task.objects.filter(done=False)
+    return render(request, 'totask/tasks/pending.html', dict(pending_tasks=pending_tasks))

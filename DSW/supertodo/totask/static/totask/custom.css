@@ -17,6 +17,7 @@ header {
   align-items: center;
   justify-content: center;
   text-align: center;
+  padding-bottom: 20px;
 }
 
 header h1,
@@ -28,11 +29,66 @@ header p {
   width: 100%;
 }
 
+.container-bottom {
+  position: relative;
+  display: flex;
+}
+
+.task-done .task-pending {
+  border-radius: 1px 1px 1px grey;
+  color: white;
+}
+
+.task-done {
+  display: inline;
+  position: relative;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgreen;
+  width: 150px;
+  padding: 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: white;
+}
+
+.task-done a {
+  text-decoration: none;
+  color: black;
+}
+
+.task-done:hover {
+  box-shadow: 1px 1px 1px 1px grey;
+  cursor: pointer;
+}
+
+.task-pending {
+  display: inline;
+  position: relative;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightcoral;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.task-pending a {
+  text-decoration: none;
+  color: black;
+}
+
+.task-pending:hover {
+  box-shadow: 1px 1px 1px 1px grey;
+  cursor: pointer;
+}
+
 .todo-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   margin-top: 20px;
   background-color: #fff;
   padding: 20px;
@@ -41,6 +97,8 @@ header p {
   height: auto;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .todo-container h1 {
@@ -74,20 +132,21 @@ header p {
 }
 
 .task-card {
+  position: relative;
   background-color: #ffffff;
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   width: 800px;
   height: 400px;
-  text-align: center;
 }
 
 .task-title {
   background-color: white;
   width: 100%;
   color: black;
-  font-size: 24px;
+  border-bottom: 1px solid black;
+  font-size: 44px;
   font-weight: bold;
   margin-bottom: 20px;
 }
@@ -111,9 +170,21 @@ header p {
 }
 
 .home-button {
-  margin-top: 70px;
+  position: absolute;
+  bottom: 10px;
+  margin-left: 0;
+  margin-right: 0;
+  background-color: lightcoral;
+  padding: 10px;
+  border-radius: 6px;
 }
 
 .home-button a {
   text-decoration: none;
+  color: white;
+}
+
+.home-button:hover {
+  box-shadow: 1px 1px 1px 1px grey;
+  cursor: pointer;
 }

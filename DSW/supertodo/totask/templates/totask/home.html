@@ -6,6 +6,11 @@
     <h1>Totaks: Go for that tasks!!</h1>
     <p>Total tasks: <strong>{{ num_tasks }} task{{num_tasks|pluralize}}</strong></p>
   </header>
+  <div class="container-bottom">
+    <div class="task-done"><a href="{% url "totask:taskdone" %}">Tareas hechas</a></div>
+    <div class="task-pending"><a href="{% url "totask:pendingtasks" %}">Tareas pendientes</a></div>
+  </div>
+
   {% for task in tasks %}
   <div class="todo-container">
     <h1>{{task.title}}</h1>
