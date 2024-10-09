@@ -5,7 +5,7 @@ const button = document.querySelector("button");
 button.addEventListener("click", () => {
     document.querySelector('#button').style.display = 'none';
     document.querySelector('#msg_load').style.visibility = 'visible';
-    document.querySelector('#pokedex').style.visibility = 'visible';
+    document.querySelector('#champions').style.visibility = 'visible';
     startLoad();
 });
 
@@ -37,10 +37,10 @@ const startLoad = async () => {
 const showLoad = async () => {
     document.querySelector("#msg_load").style.visibility='hidden'
     document.querySelector('#msg_load').style.display = 'none'
-    const pokedex = document.getElementById("pokedex");
+    const all_champs = document.getElementById("champions");
     for(var i = 0; i < champions.length; i++) {
     
-        pokedex.innerHTML +=    `<div class="card ${champions[i].tags[0]}">
+        all_champs.innerHTML +=    `<div class="card ${champions[i].tags[0]}">
                                     <a href="#" class= "category">${champions[i].tags[0]}</a>
                                     <img class= "img_class" src="${champions[i].img}">
                                         <div class= "name">
