@@ -12,6 +12,7 @@
     <ul class="todo-list">
         <li class="todo-item">
             <p>{{ task.content|truncatewords:20 }} <a href="{% url "totask:task_detail" task.slug %}">Read more </a></p>
+            <div class="task-checkbox">❌</div>
         </li>
     </ul>
   </div>

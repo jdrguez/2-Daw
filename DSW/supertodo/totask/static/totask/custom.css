@@ -30,16 +30,16 @@ header p {
 }
 
 .container-bottom {
+  margin-top: 15px;
+  align-items: center;
+  justify-content: center;
   position: relative;
   display: flex;
-}
-
-.task-done .task-pending {
-  border-radius: 1px 1px 1px grey;
-  color: white;
+  gap: 100px;
 }
 
 .task-done {
+  text-align: center;
   display: inline;
   position: relative;
   margin: 0;
@@ -50,8 +50,7 @@ header p {
   width: 150px;
   padding: 15px;
   border-radius: 6px;
-  text-decoration: none;
-  color: white;
+  font-size: 18px;
 }
 
 .task-done a {
@@ -71,9 +70,13 @@ header p {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   background-color: lightcoral;
   padding: 10px;
+  font-size: 18px;
+  width: 150px;
   border-radius: 6px;
+  height: 51px;
 }
 
 .task-pending a {
