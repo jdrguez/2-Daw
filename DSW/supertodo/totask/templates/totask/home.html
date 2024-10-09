@@ -2,20 +2,20 @@
 {% extends "totask/base.html" %}
 {% block title %}Totask | Home{% endblock title %}
 {% block body %}
-  <h1>Totaks: Go for that tasks!!</h1>
-  <p>Total tasks: <strong>{{ num_tasks }} task{{num_tasks|pluralize}}</strong></p>
-
+  <header>
+    <h1>Totaks: Go for that tasks!!</h1>
+    <p>Total tasks: <strong>{{ num_tasks }} task{{num_tasks|pluralize}}</strong></p>
+  </header>
   {% for task in tasks %}
-    <div class="main_container">
-      <div class="task-container">
-        <h2>{{ task.title }}</h2>
-          <div class="content">
-            <div class="task date">{{ task.created_at }}</div>
-            <div class="task done">{%if task.done%} ✅ {% else %} ❌ {% endif %}</div>
-            <p>{{ task.content|truncatewords:20 }} <a href="{% url "totask:task_detail" task.slug %}"> Read more </a></p>
-          </div>
-      </div>  
-    </div>
+  <div class="todo-container">
+    <h1>{{task.title}}</h1>
+    <ul class="todo-list">
+        <li class="todo-item">
+            <p>{{ task.content|truncatewords:20 }} <a href="{% url "totask:task_detail" task.slug %}">Read more </a></p>
+            <div class="task-checkbox">{%if task.done%} ✅ {% else %} ❌ {% endif %}</div>
+        </li>
+    </ul>
+  </div>
   {% endfor %}
 {% endblock body %}
 

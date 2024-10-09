@@ -1,29 +1,127 @@
-body {
-  background-color: lightcyan;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.main_container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 15px 15px;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 50px;
+}
+
+header {
+  position: absolute;
+  top: 20px;
+  text-align: center;
+}
+
+header h1,
+header p {
+  text-align: center;
+}
+
+.todo-list {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las tareas se organicen si hay espacio */
+  justify-content: center; /* Centra los contenedores */
+  gap: 20px; /* Espacio entre los contenedores de tareas */
   width: 100%;
 }
 
-.task-container {
-  font-family: "Marcellus SC", serif;
-  cursor: pointer;
-  border: 2px solid rgb(78, 78, 78);
-  border-radius: 5px;
-  background: white;
-  text-align: center;
-  color: black;
-  transition: border-color 0.3s ease;
+.todo-container {
+  background-color: #fff;
+  padding: 20px;
+  width: 300px; /* Ancho fijo de los contenedores */
+  height: auto; /* Permite que el contenido determine la altura */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/** Para details **/
+.todo-container h1 {
+  margin-bottom: 20px;
+}
 
-.details_container {
-  text-align: center;
+.todo-item {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-content {
+  font-size: 16px;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.task-checkbox {
+  margin-left: 15px;
+  width: 20px;
+  height: 20px;
+}
+
+/** For details.html**/
+
+.task-details-container {
+  display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.task-card {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  width: 800px;
+  height: 400px;
+  text-align: center;
+}
+
+.task-title {
+  background-color: #333;
+  width: 100%;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.task-description,
+.task-date,
+.task-category,
+.task-extra {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.task-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: #333;
+  margin-top: 20px;
+}
+
+.home-button {
+  margin-top: 70px;
+}
+
+.home-button a {
+  text-decoration: none;
 }

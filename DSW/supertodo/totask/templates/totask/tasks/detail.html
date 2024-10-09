@@ -1,33 +1,24 @@
 {% extends "totask/base.html" %}
 
 {% block body %}
-
-  <div class="details_container">
-    <div class="text_container">
-      <h1>{{task.title}}</h1>
-      <p>Categoria: {{task.category}}</p>
-      <div class="date-contaier">
-        <p>Fecha de creación: {{task.created_at}}</p>
-      </div>
-      <div class="text-container">
-        <p>{{task.content}}</p>
-
-        <p>{%if task.done%} ✅ {% else %} ❌ {% endif %}</p>
-
-      </div>
-
-      <div class="home-button">
-        <a href="{% url "totask:home" %}">Vuelta al home</a>
-
+  <div class="task-details-container">
+    <div class="task-card">
+        <h1 class="task-title">{{task.title}}</h1>
+        <p class="task-description">{{task.content}}</p>
+        <p class="task-date">Fecha de creación: {{task.created_at}}</p>
+        <p class="task-category">Categoría: {{task.category}}</p>
+        <p class="task-extra">Información extra: </p>
+        <div class="task-status">
+            <span class="status-label">Estado:</span>
+            <div id="task-done">
+              <p>{%if task.done%} ✅ Realizada {% else %} ❌ No realizada {% endif %}</p>
+            </div>
+        </div>
+        <div class="home-button">
+          <a href="{% url "totask:home" %}">Vuelta al home</a>
+        </div>
     </div>
-
-  </div>
-
-
-
-
-
-
+</div>
 
 {% endblock body %}
 
