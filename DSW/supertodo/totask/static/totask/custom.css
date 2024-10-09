@@ -7,16 +7,15 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
   padding-top: 50px;
 }
 
 header {
-  position: absolute;
+  position: relative;
   top: 20px;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
@@ -26,23 +25,22 @@ header p {
 }
 
 .todo-list {
-  display: flex;
-  flex-wrap: wrap; /* Permite que las tareas se organicen si hay espacio */
-  justify-content: center; /* Centra los contenedores */
-  gap: 20px; /* Espacio entre los contenedores de tareas */
   width: 100%;
 }
 
 .todo-container {
-  background-color: #fff;
-  padding: 20px;
-  width: 300px; /* Ancho fijo de los contenedores */
-  height: auto; /* Permite que el contenido determine la altura */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .todo-container h1 {
@@ -57,12 +55,6 @@ header p {
   background-color: #f9f9f9;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.task-content {
-  font-size: 16px;
-  flex-grow: 1;
-  text-align: left;
 }
 
 .task-checkbox {
@@ -92,9 +84,9 @@ header p {
 }
 
 .task-title {
-  background-color: #333;
+  background-color: white;
   width: 100%;
-  color: white;
+  color: black;
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
