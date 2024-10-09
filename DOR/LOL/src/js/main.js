@@ -42,7 +42,7 @@ const showLoad = async () => {
     
         pokedex.innerHTML +=    `<div class="card ${champions[i].tags[0]}">
                                     <a href="#" class= "category">${champions[i].tags[0]}</a>
-                                    <img class= "img_class" src="${champions[i].img_sprite}">
+                                    <img class= "img_class" src="${champions[i].img}">
                                         <div class= "name">
                                             <h3>${champions[i].name}</h3>
                                             <p>${champions[i].title}</p
