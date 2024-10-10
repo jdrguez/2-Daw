@@ -8,6 +8,7 @@ export default class Champion {
         this.tags = data.tags;
         this.difficult = data.info.difficulty;
         this.attack = data.info.attack;
-        this.defense = data.info.defense;        
+        this.defense = data.info.defense;
+        this.blurb = data.blurb;        
     }
 }

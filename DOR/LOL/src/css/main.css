@@ -87,6 +87,19 @@ button:hover{
     width: 100%;
 }
 
+@keyframes cardLoad {
+    0%{
+        opacity: 0;
+        transform:scale(0.5) ;
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+
 .card {
     font-family: 'Marcellus SC', serif;
     border: 2px solid rgb(78, 78, 78);
@@ -94,10 +107,14 @@ button:hover{
     background: #1e2328;
     text-align: center;
     color: #cdbe91;
-    transition: border-color 0.3s ease;
+    transition: transform 0.2s ease-out;
     border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
     border-image-slice: 1;
     border-width: 2px;
+    animation: cardLoad 0.5s ease forwards;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    position: relative;
 }
 
 .card:hover{
@@ -144,16 +161,31 @@ a.category{
 }
 
 
-
-
 .logo{
     width: 450px;
 }
 
 
-.card{
-    transform: scale(1);
+.card_back{
+    position: relative;
+    font-family: 'Marcellus SC', serif;
+    border: 2px solid rgb(78, 78, 78);
+    border-radius: 5px;
+    background: #1e2328;
+    text-align: center;
+    color: #cdbe91;
+    transition: border-color 0.3s ease;
+    border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+    border-image-slice: 1;
+    border-width: 2px;
+    animation: cardLoad 0.5s ease forwards;
 }
+
+.card_front_{
+    backface-visibility: hidden;
+}
+
+
 
 .card.Mage:hover{
     border-image: linear-gradient(to bottom, #005A82, #0AC8B9);
