@@ -24,6 +24,10 @@ header h1,
 header p {
   text-align: center;
 }
+header p {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
 
 .todo-list {
   width: 100%;
