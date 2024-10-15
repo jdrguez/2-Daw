@@ -34,10 +34,11 @@ def pendingtasks(request):
 
 def add_task(request):
     if request.method == 'POST':
-        if (form := AddTaskForm(request.POST)).isvalid():
-            form_task = form.save(commit=False)
-            form_task.slug = slugify(form_task.title)
-            form_task.save()
+        if (form := AddTaskForm(request.POST)).is_valid():
+            task = form.save(commit=False)
+            task.slug = slugify(task.title)
+            print('funciona')
+            task.save()
             return redirect('totask:home')
     else:
         form = AddTaskForm()

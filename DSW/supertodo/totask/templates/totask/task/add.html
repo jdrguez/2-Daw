@@ -4,11 +4,11 @@
 
 {% block body %}
 
-<form action="." method="post" novalidate class="form-content">
-
+<form method="post" novalidate class="form-content">
+  {% csrf_token %}
   {{form}}
 
-  <input type="submit" value="Add" class="form-button">
+  <input type="submit" value="Add" class="form-button"/>
 </form>
 
 
