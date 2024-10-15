@@ -28,3 +28,7 @@ def taskdone(request):
 def pendingtasks(request):
     pending_tasks = Task.objects.filter(done=False)
     return render(request, 'totask/tasks/pending.html', dict(pending_tasks=pending_tasks))
+
+
+def add_task(request):
+    return render(request, 'totask/task/add.html')
