@@ -14,7 +14,7 @@
     <h1>{{task.title}}</h1>
     <ul class="todo-list">
         <li class="todo-item">
-            <p>{{ task.content|truncatewords:20 }} <a href="{% url "totask:task_detail" task.slug %}">Read more </a></p>
+            <p>{{ task.content|truncatewords:20 }} <a href="{% url "totask:task-detail" task.slug %}">Read more </a></p>
             <div class="task-checkbox">❌</div>
         </li>
     </ul>

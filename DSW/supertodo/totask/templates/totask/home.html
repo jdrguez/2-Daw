@@ -8,8 +8,8 @@
     <p>Total tasks: <strong>{{ num_tasks }} task{{num_tasks|pluralize}}</strong></p>
   </header>
   <div class="container-bottom">
-    <div class="task-done"><a href="{% url "totask:taskdone" %}">Tareas hechas</a></div>
-    <div class="task-pending"><a href="{% url "totask:pendingtasks" %}">Tareas pendientes</a></div>
+    <div class="task-done"><a href="{% url "totask:task-done" %}">Tareas hechas</a></div>
+    <div class="task-pending"><a href="{% url "totask:pending-tasks" %}">Tareas pendientes</a></div>
   </div>
 
   {% for task in tasks %}
@@ -17,7 +17,7 @@
     <h1>{{task.title}}</h1>
     <ul class="todo-list">
         <li class="todo-item">
-            <p>{{ task.content|truncatewords:20 }} <a href="{% url "totask:task_detail" task.slug %}">Read more </a></p>
+            <p>{{ task.content|truncatewords:20 }} <a href="{% url "totask:task-detail" task.slug %}">Read more </a></p>
             <div class="task-checkbox">{%if task.done%} ✅ {% else %} ❌ {% endif %}</div>
         </li>
     </ul>
