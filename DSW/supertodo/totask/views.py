@@ -38,7 +38,7 @@ def add_task(request):
             form_task = form.save(commit=False)
             form_task.slug = slugify(form_task.title)
             form_task.save()
-            redirect('totask:home')
+            return redirect('totask:home')
     else:
         form = AddTaskForm()
     return render(request, 'totask/task/add.html', dict(form=form))

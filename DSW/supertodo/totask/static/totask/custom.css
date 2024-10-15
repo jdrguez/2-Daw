@@ -128,6 +128,31 @@ header p {
   height: 20px;
 }
 
+.add_botton {
+  background-color: lightgreen;
+  border-radius: 50%;
+  position: sticky;
+  bottom: 0px;
+  width: 60px;
+  height: 60px;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  font-size: 55px;
+  left: 95%;
+  margin: 100px;
+}
+
+.add_botton a {
+  text-decoration: none;
+  color: white;
+}
+
+.add_botton:hover {
+  box-shadow: 1px 1px 1px 1px grey;
+  cursor: pointer;
+}
+
 /** For details.html**/
 
 .task-details-container {
@@ -199,8 +224,11 @@ header p {
 /** Formulario de Task **/
 
 .form-content {
-  background-color: #666;
-  font-style: oblique;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
 }
 
 .form-button {
