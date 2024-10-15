@@ -195,3 +195,14 @@ header p {
   box-shadow: 1px 1px 1px 1px grey;
   cursor: pointer;
 }
+
+/** Formulario de Task **/
+
+.form-content {
+  background-color: #666;
+  font-style: oblique;
+}
+
+.form-button {
+  background-color: #333;
+}

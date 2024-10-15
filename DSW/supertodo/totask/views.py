@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.utils.text import slugify
 
-from totask.models import Task
+from .forms import AddTaskForm
+from .models import Task
 
 # Create your views here.
 
@@ -31,4 +33,12 @@ def pendingtasks(request):
 
 
 def add_task(request):
-    return render(request, 'totask/task/add.html')
+    if request.method == 'POST':
+        if (form := AddTaskForm(request.POST)).isvalid():
+            form_task = form.save(commit=False)
+            form_task.slug = slugify(form_task.title)
+            form_task.save()
+            redirect('totask:home')
+    else:
+        form = AddTaskForm()
+    return render(request, 'totask/task/add.html', dict(form=form))
