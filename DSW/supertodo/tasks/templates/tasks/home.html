@@ -1,1 +1,30 @@
-pagina principal
+{% extends "tasks/base.html" %}
+
+{% block title %}Tasks | Home{% endblock title %}
+
+{% block body %}
+  
+{% for task in tasks %}
+<div class="container text-center">
+  <div class="row">
+    <div class="col">
+      <div class="card text-center">
+        <div class="card-header">
+          {{task.title}}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{task.title}}</h5>
+          <p class="card-text">{{task.content}}</p>
+          <p class="status">{% if task.done %} ✅ {% else %} ❌  {% endif %} </p>
+          <a href="{% url "tasks:task-detail" task.slug %}" class="btn btn-primary">Leer más</a>
+        </div>
+        <div class="card-footer text-body-secondary">
+          {{task.created_at}}
+        </div>
+      </div>
+      </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock body %}

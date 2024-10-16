@@ -1,0 +1,14 @@
+{% extends "tasks/base.html" %}
+
+{% block title %}Task | Add Task{% endblock title %}
+
+{% block body %}
+
+<form method="post" novalidate class="form-content">
+  {% csrf_token %}
+  {{form}}
+
+  <input type="submit" value="Add" class="form-button"/>
+</form>
+
+{% endblock body %}
