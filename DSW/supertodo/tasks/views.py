@@ -37,6 +37,24 @@ def add_task(request):
     return render(request, 'tasks/add.html', dict(form=form))
 
 
+def delete_task(request):
+    pass
+
+
+def edit_task(request, task_slug: str):
+    task = Task.objects.get('task_slug')
+    if request.method == 'POST':
+        if (form := AddTaskForm(request.POST)).is_valid():
+            task = form.save(commit=False)
+            task.slug = slugify(task.title)
+            print('funciona')
+            task.save()
+            return redirect('tasks:task-list')
+    else:
+        form = AddTaskForm(initial=task)
+    return render(request, 'tasks/add.html')
+
+
 def task_detail(request, task_slug: str):
     task = Task.objects.get(slug=task_slug)
     return render(request, 'tasks/task/detail.html', dict(task=task))
