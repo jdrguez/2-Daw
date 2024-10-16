@@ -8,19 +8,20 @@ from .models import Task
 
 
 def task_list(request):
-    num_task = Task.objects.count()
-    tasks = Task.objects.all()
-    return render(request, 'tasks/home.html', dict(num_task=num_task, tasks=tasks))
+    tasks = Task.objects.order_by('done')
+    return render(request, 'tasks/home.html', dict(tasks=tasks))
 
 
 def complete_tasks(request):
-    complete_tasks = Task.objects.filter(done=True)
-    return render(request, 'tasks/list_task.html', dict(complete_tasks=complete_tasks))
+    tasks = Task.objects.filter(done=True)
+    title = 'Complete'
+    return render(request, 'tasks/list_task.html', dict(tasks=tasks, title=title))
 
 
 def pending_tasks(request):
-    pending_tasks = Task.objects.filter(done=False)
-    return render(request, 'tasks/list_task.html', dict(pending_tasks=pending_tasks))
+    tasks = Task.objects.filter(done=False)
+    title = 'Pending'
+    return render(request, 'tasks/list_task.html', dict(tasks=tasks, title=title))
 
 
 def add_task(request):
