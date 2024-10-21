@@ -37,8 +37,10 @@ def add_task(request):
     return render(request, 'tasks/modifiers/add.html', dict(form=form))
 
 
-def delete_task(request):
-    pass
+def delete_task(request, task_slug: str):
+    task = Task.objects.get(slug=task_slug)
+    task.delete()
+    return render(request, 'tasks/modifiers/delete.html')
 
 
 def edit_task(request, task_slug: str):
@@ -58,6 +60,13 @@ def edit_task(request, task_slug: str):
         form = EditPostForm(instance=task)
 
     return render(request, 'tasks/modifiers/edit.html', dict(task=task, form=form))
+
+
+def toggle_status(request, task_slug: str):
+    task = Task.objects.get(slug=task_slug)
+    task.done = not task.done
+    task.save()
+    return redirect('tasks:task-list')
 
 
 def task_detail(request, task_slug: str):

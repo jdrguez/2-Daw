@@ -1,1 +1,18 @@
-detalles de la tarea
+{% extends "tasks/base.html" %}
+
+{% block title %}Tasks | {{task.title}}{% endblock title %}
+
+{% block body %}
+
+<div class="card mt-4">
+  <h5 class="card-header">{{task.title}}</h5>
+  <div class="card-body">
+    <p class="card-text">{{task.content}}</p>
+    <p class="card-text">Tu tarea fue creada en: {{task.created_at}}</p>
+    <p class="card-text"> Tiene un límite de : {{task.complete_before}}</p>
+    <a href="{% url "tasks:task-list" %}" class="btn btn-primary">Vuelve a tu home</a>
+  </div>
+</div>
+
+
+{% endblock body %}

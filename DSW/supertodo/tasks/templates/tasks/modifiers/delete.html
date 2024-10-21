@@ -1,0 +1,11 @@
+{% extends "tasks/base.html" %}
+
+{% block title %}Tasks | Delete Task{% endblock title %}
+
+{% block body %}
+
+<h1>Se ha borrado con exito tu tarea</h1>
+
+<a href="{% url "tasks:task-list" %}" class="btn btn-primary">Vuelve a la pagina principal</a>
+
+{% endblock body %}

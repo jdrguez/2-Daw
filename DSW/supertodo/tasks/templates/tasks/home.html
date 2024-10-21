@@ -5,7 +5,7 @@
 {% block body %}
   
 {% for task in tasks %}
-<div class="container text-center">
+<div class="container text-center mt-4">
   <div class="row">
     <div class="col">
       <div class="card text-center">
@@ -13,11 +13,18 @@
           {{task.title}}
         </div>
         <div class="card-body">
-          <h5 class="card-title">{{task.title}}</h5>
           <p class="card-text">{{task.content}}</p>
-          <p class="status">{% if task.done %} ✅ {% else %} ❌  {% endif %} </p>
-          <a href="{% url "tasks:task-detail" task.slug %}" class="btn btn-primary">Leer más</a>
-          <a href="{% url "tasks:edit-task" task.slug %}" class="btn btn-primary"> Editar tarea</a>
+          <p class="status">
+              {% if task.done %} 
+              <a href="{% url "tasks:toggle-status" task.slug %}" class="btn btn-success">Completada ✅ </a>
+              {% else %} 
+              <a href="{% url "tasks:toggle-status" task.slug %}" class="btn btn-danger">Pendiente ❌  </a>
+              {% endif %}
+          </a>
+          </p>
+          <a href="{% url "tasks:task-detail" task.slug %}" class="btn btn-outline-primary ">Leer más</a>
+          <a href="{% url "tasks:edit-task" task.slug %}" class="btn btn-outline-secondary"> Editar tarea</a>
+          <a href="{% url "tasks:delete-task" task.slug %}" class="btn btn-outline-danger"> Eliminar tarea</a>
         </div>
         <div class="card-footer text-body-secondary">
           {{task.created_at}}
