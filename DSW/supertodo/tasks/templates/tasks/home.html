@@ -10,7 +10,11 @@
     <div class="col">
       <div class="card text-center">
         <div class="card-header">
-          {{task.title}}
+          {% if task.done %}
+          <div class="text-decoration-line-through">{{task.title}}</div>
+          {% else %}
+          <div>{{task.title}}</div>
+          {% endif %}
         </div>
         <div class="card-body">
           <p class="card-text">{{task.content}}</p>
@@ -33,6 +37,9 @@
       </div>
     </div>
 </div>
+{% empty %}
+  <h1 class="mt-4">No tienes tareas activas 👨‍🏭</h1>
+  <a href="{% url "tasks:add-task" %}" class="btn btn-success">Crea tu primera tarea</a>
 {% endfor %}
 
 {% endblock body %}

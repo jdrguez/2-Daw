@@ -10,13 +10,24 @@
     <div class="col">
       <div class="card text-center">
         <div class="card-header">
-          {{task.title}}
+          {% if task.done %}
+          <div class="text-decoration-line-through">{{task.title}}</div>
+          {% else %}
+          <div>{{task.title}}</div>
+          {% endif %}
         </div>
         <div class="card-body">
-          <h5 class="card-title">{{task.title}}</h5>
           <p class="card-text">{{task.content}}</p>
-          <p class="status">{% if task.done %} ✅ {% else %} ❌  {% endif %} </p>
-          <a href="{% url "tasks:task-detail" task.slug %}" class="btn btn-primary">Leer más</a>
+          <p class="status">
+            {% if task.done %} 
+              <a href="{% url "tasks:toggle-status" task.slug %}" class="btn btn-success">Completada ✅ </a>
+              {% else %} 
+              <a href="{% url "tasks:toggle-status" task.slug %}" class="btn btn-danger">Pendiente ❌  </a>
+              {% endif %}
+          </p>  
+          <a href="{% url "tasks:task-detail" task.slug %}" class="btn btn-outline-primary ">Leer más</a>
+          <a href="{% url "tasks:edit-task" task.slug %}" class="btn btn-outline-secondary"> Editar tarea</a>
+          <a href="{% url "tasks:delete-task" task.slug %}" class="btn btn-outline-danger"> Eliminar tarea</a>
         </div>
         <div class="card-footer text-body-secondary">
           {{task.created_at}}
@@ -25,6 +36,11 @@
       </div>
     </div>
 </div>
+
+{% empty %}
+  <h1 class="mt-4">No tienes tareas activas 👨‍🏭</h1>
+  <a href="{% url "tasks:add-task" %}" class="btn btn-success">Crea tu primera tarea</a>
+
 {% endfor %}
 
 {% endblock body %}
