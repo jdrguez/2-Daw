@@ -9,19 +9,19 @@ from .models import Task
 
 def task_list(request):
     tasks = Task.objects.order_by('done')
-    return render(request, 'tasks/home.html', dict(tasks=tasks, num_task=tasks.count()))
+    return render(request, 'tasks/task_list.html', dict(tasks=tasks, num_task=tasks.count()))
 
 
 def complete_tasks(request):
     tasks = Task.objects.filter(done=True)
     title = 'Complete'
-    return render(request, 'tasks/list_task.html', dict(tasks=tasks, title=title, complete=True))
+    return render(request, 'tasks/task_list.html', dict(tasks=tasks, title=title, complete=True))
 
 
 def pending_tasks(request):
     tasks = Task.objects.filter(done=False)
     title = 'Pending'
-    return render(request, 'tasks/list_task.html', dict(tasks=tasks, title=title, complete=False))
+    return render(request, 'tasks/task_list.html', dict(tasks=tasks, title=title, complete=False))
 
 
 def add_task(request):
