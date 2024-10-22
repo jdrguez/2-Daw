@@ -8,5 +8,5 @@ from .models import Task
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ['title', 'slug', 'content', 'created_at', 'done']
-    prepopulated_fields = {'slug': ['title']}
+    list_display = ['name', 'slug', 'description', 'created_at', 'done']
+    prepopulated_fields = {'slug': ['name']}

@@ -6,7 +6,7 @@ from .models import Task
 class AddTaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ('title', 'content', 'complete_before')
+        fields = ('name', 'description', 'complete_before')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -18,7 +18,7 @@ class AddTaskForm(forms.ModelForm):
 class EditPostForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ('title', 'content', 'done', 'complete_before')
+        fields = ('name', 'description', 'done', 'complete_before')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

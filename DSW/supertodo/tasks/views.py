@@ -28,7 +28,7 @@ def add_task(request):
     if request.method == 'POST':
         if (form := AddTaskForm(request.POST)).is_valid():
             task = form.save(commit=False)
-            task.slug = slugify(task.title)
+            task.slug = slugify(task.name)
             print('funciona')
             task.save()
             return redirect('tasks:task-list')
@@ -50,7 +50,7 @@ def edit_task(request, task_slug: str):
         if (form := EditPostForm(request.POST, instance=task)).is_valid():
             task = form.save(commit=False)
 
-            task.slug = slugify(task.title)
+            task.slug = slugify(task.name)
 
             task.save()
 
