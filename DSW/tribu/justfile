@@ -1,0 +1,17 @@
+runserver:
+    ./manage.py runserver
+
+mm:
+    ./manage.py makemigrations
+
+m:
+    ./manage.py migrate
+
+c:
+    ./manage.py check
+
+sh:
+    ./manage.py shell
+
+apps app="":
+    ./manage.py startapp {{app}} 
