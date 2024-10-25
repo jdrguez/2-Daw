@@ -12,7 +12,7 @@ def user_login(request):
             password = form.cleaned_data['password']
             if user := authenticate(request, username=username, password=password):
                 login(request, user)
-                return redirect('home')
+                return redirect('echos:echo-list')
     else:
         form = LoginForm()
     return render(request, 'login.html', dict(form=form))
@@ -20,7 +20,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('home')
+    return redirect('login')
 
 
 def show_profile(request, username: str):
@@ -32,7 +32,7 @@ def user_signup(request):
         if (form := SignupForm(request.POST)).is_valid():
             user = form.save()
             login(request, user)
-            return redirect('echos/timeline.html')
+            return redirect('echos:echo-list')
     else:
         form = SignupForm()
     return render(request, 'signup.html', dict(form=form))
