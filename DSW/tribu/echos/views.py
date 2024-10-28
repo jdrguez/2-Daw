@@ -11,7 +11,8 @@ def echo_list(request):
 
 
 def echo_detail(request, echo_pk: int):
-    pass
+    echo = Echo.objects.get(echo_pk=echo_pk)
+    return render(request, 'echos/detail.html', dict(echo=echo))
 
 
 def add_echo(request):
