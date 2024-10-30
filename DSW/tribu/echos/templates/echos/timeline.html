@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+
 {% block content %}
 
 
@@ -8,7 +9,8 @@
 <p>{{echo.content}}</p>
 <p>{{echo.user}}</p>
 
-
+<a href="{% url "echos:echo-detail" echo.id %}">Ir al detalle</a>
+<a href="{% url "echos:edit-echo" echo.id %}">Editar este post</a>
 
 {% endfor %}
 
