@@ -11,6 +11,13 @@
 
 <a href="{% url "echos:echo-detail" echo.id %}">Ir al detalle</a>
 <a href="{% url "echos:edit-echo" echo.id %}">Editar este post</a>
+<button onclick=window.modal.showModal()>Eliminar este post</button>
+
+<dialog id="modal">
+  <strong>Estas seguro de eliminar esta tarea</strong>
+  <a href="{% url "echos:delete-echo" echo.id %}">Aceptar</a>
+  <button id="close" onclick=window.modal.close();>Cancelar</button>
+</dialog>
 
 {% endfor %}
 

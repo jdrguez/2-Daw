@@ -6,9 +6,7 @@ from .models import Echo
 class AddEchoForm(forms.ModelForm):
     class Meta:
         model = Echo
-        fields = [
-            'content',
-        ]
+        fields = ['content', 'user']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

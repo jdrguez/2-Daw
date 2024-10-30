@@ -35,7 +35,7 @@ def edit_echo(request, echo_id: int):
             echo = form.save(commit=False)
             echo.save()
 
-            return redirect('tasks:echo-list')
+            return redirect('echos:echo-list')
 
     else:
         form = EditEchoForm(instance=echo)
@@ -43,8 +43,10 @@ def edit_echo(request, echo_id: int):
     return render(request, 'echos/modifiers/edit.html', dict(echo=echo, form=form))
 
 
-def delete_echo(request, echo_pk: int):
-    pass
+def delete_echo(request, echo_id: int):
+    echo = Echo.objects.get(id=echo_id)
+    echo.delete()
+    return render(request, 'echos/modifiers/delete.html')
 
 
 def add_wave(request, echo_pk: int):
