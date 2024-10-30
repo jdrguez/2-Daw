@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 
+
 {% block content %}
-
-
 <h1>Editando post "{{ echo.title }}"</h1>
 
 <form method="post">
@@ -12,7 +11,6 @@
 </form>
 
 <a href="{% url "echos:echo-list" %}" class="btn btn-primary mt-4 ">Cancelar la operación </a>
-
 
 {% endblock content %}
 

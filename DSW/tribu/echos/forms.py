@@ -7,6 +7,9 @@ class AddEchoForm(forms.ModelForm):
     class Meta:
         model = Echo
         fields = ['content', 'user']
+        widgets = {
+            'content': forms.TextInput(attrs={'id': 'post-title'}),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
