@@ -907,3 +907,416 @@ function funcion8() {
 
 ```
 
+# Ejercicios 4
+
+```JAVASCRIPT
+
+
+// Ejercicio 1
+
+const ring = document.querySelector('#ring')
+ring.addEventListener('click', () =>{
+    document.querySelector('.chosen').style.backgroundColor='yellow'
+})
+
+// Ejercicio 2
+
+
+const elements = document.querySelectorAll('#ejer_list li')
+
+elements.forEach(element => {
+    element.addEventListener('mouseover', () => {
+        element.textContent = 'Nazgûl';
+        element.style.backgroundColor = 'black';
+        element.style.color = 'white';
+    })
+
+});
+
+
+// Ejercicio 3
+
+
+class Ejercito{
+    constructor(nombre, numeroSoldados,fuerza){
+        this.nombre = nombre
+        this.numeroSoldados = numeroSoldados
+        this.fuerza = fuerza
+    }
+
+    compararFuerza(other){
+        if (this.fuerza > other.fuerza){
+            return `${this.nombre} gana contra ${other.nombre} `
+        } else if (this.fuerza < other.fuerza){
+            return `${this.nombre} pierde contra ${other.nombre} `
+        } else{
+            return `${this.nombre} empata contra ${other.nombre} `
+        }
+    }
+}
+
+const ejercito1 = new Ejercito('Elfos', 1000, 80);
+const ejercito2 = new Ejercito('Enanos', 800, 85);
+const ejercito3 = new Ejercito('Humanos', 1200, 75);
+const ejercito4 = new Ejercito('Orcos', 1500, 70);
+const ejercito5 = new Ejercito('Trolls', 500, 90);
+
+console.log(ejercito1.compararFuerza(ejercito2));
+console.log(ejercito3.compararFuerza(ejercito4));
+console.log(ejercito5.compararFuerza(ejercito1));
+
+
+// Ejercicio 4
+
+
+document.querySelector('#mordor').addEventListener('click', () => {
+    alert('Has llegado a Mordor, Felicidades!!');
+});
+
+document.querySelector('#rohan').addEventListener('click', () => {
+    alert('Has llegado a Rohan, Felicidades');
+});
+
+document.querySelector('#gondor').addEventListener('click', () => {
+    alert('Has llegado a Gondor, Felicidades');
+});
+
+
+
+// Ejercicio 5
+
+
+const oscuridad = document.querySelector('#ladoOscuro')
+const fuerza = document.querySelector('#ladoFuerza')
+const body = document.querySelector('body')
+oscuridad.addEventListener('click', () =>{
+    body.style.backgroundColor='black'
+})
+fuerza.addEventListener('click', () =>{
+    body.style.backgroundColor='yellow'
+})
+
+
+
+// Ejercicio 6
+
+
+const sable = document.querySelector('#sableLaser');
+        sable.addEventListener('click', () => {
+            sable.src = 'https://www.aceroymagia.com/Images/articulo/sable-de-luz-obi-wan-hoja-extraible/01-sable-de-luz-obi-wan-hoja-extraible.jpg'; 
+});
+
+
+
+// Ejercicio 7
+
+
+class Jedi {
+    constructor(nombre, nivelFuerza, arma) {
+        this.nombre = nombre;
+        this.nivelFuerza = nivelFuerza;
+        this.arma = arma;
+    }
+}
+
+class Sith {
+    constructor(nombre, nivelFuerza, arma) {
+        this.nombre = nombre;
+        this.nivelFuerza = nivelFuerza;
+        this.arma = arma;
+    }
+}
+
+function combate(jedi, sith) {
+    if (jedi.nivelFuerza > sith.nivelFuerza) {
+        return `${jedi.nombre} gana el combate con su ${jedi.arma}`;
+    } else if (jedi.nivelFuerza < sith.nivelFuerza) {
+        return `${sith.nombre} gana el combate con su ${sith.arma}`;
+    } else {
+        return `Es un empate entre ${jedi.nombre} y ${sith.nombre}`;
+    }
+}
+
+const jedi = new Jedi('Luke Skywalker', 95, 'sable láser verde');
+const sith = new Sith('Darth Vader', 90, 'sable láser rojo');
+
+console.log(combate(jedi, sith));
+
+
+
+
+// Ejercicio 8
+
+
+class Superheroe {
+    constructor(nombre, poder, nivel) {
+        this.nombre = nombre;
+        this.poder = poder;
+        this.nivel = nivel;
+    }
+}
+
+function encontrarMasPoderoso(superheroes) {
+    let masPoderoso = superheroes[0];
+    superheroes.forEach(hero => {
+        if (hero.nivel > masPoderoso.nivel) {
+            masPoderoso = hero;
+        }
+    });
+    return masPoderoso.nombre;
+}
+
+const heroes = [
+    new Superheroe('Spiderman', 'Telarañan', 80),
+    new Superheroe('Superman', 'HiperFuerza', 95),
+    new Superheroe('Batman', 'Tecnología', 90)
+];
+
+console.log(`El superhéroe más poderoso es ${encontrarMasPoderoso(heroes)}`);
+
+
+
+
+// Ejercicio 9
+
+
+const escudo = document.querySelector('#escudo');
+        escudo.addEventListener('click', () => {
+            escudo.style.left = '100px'
+        });
+
+
+
+// Ejercicio 10
+
+
+const bats = document.querySelector('#batS');
+        bats.addEventListener('click', () => {
+            document.body.style.backgroundImage = 'url("https://www.shutterstock.com/image-vector/chattogram-bangladesh-june-17-2023-600nw-2318874201.jpg")';
+        });
+
+
+
+// Ejercicio 11
+
+
+class Superman{
+    constructor(element){
+        this.element = element
+    }
+
+    volar(){
+        this.element.style.bottom = '500px'
+    }
+}
+
+const superman = new Superman(document.getElementById('superman'))
+
+document.querySelector('#volar').addEventListener('click', () => {
+    superman.volar()
+})
+
+
+
+// Ejercicio 12
+
+const poder = {
+    'Spiderman': 'Telaraña',
+    'Superman': 'Volar',
+    'Batman': 'Tecnología'
+};
+
+const seleccion = document.querySelector('#superheroes')
+
+const poderParrafo = document.querySelector('#poder')
+
+seleccion.addEventListener('change', () =>{
+    const heroe = seleccion.value;
+    poderParrafo.textContent = `Poder de ${heroe}:${poder[heroe]}`
+})
+
+
+// Ejercicio 13
+
+
+const button = document.querySelector('#cambiar')
+const image = document.querySelector('#img_batman')
+
+button.addEventListener('click', () =>{
+    if (image.style.display == 'none'){
+        image.style.display = 'block';
+    } else{
+        image.style.display = 'none';
+    }
+})
+
+
+
+// Ejercicio 14
+
+
+
+class Gema{
+    constructor(nombre, poder){
+        this.nombre = nombre
+        this.poder = poder
+    }
+}
+
+class Thanos{
+    constructor(){
+        this.gemas = []
+    }
+
+    recogerGema(gema){
+        this.gemas.push(gema);
+        console.log(`Thanos recoge la gema de ${gema.nombre}`)
+    }
+
+    poderTotal(){
+        return this.gemas.reduce((total, gema) => total + gema.poder, 0)
+    }
+}
+
+const gema1 = new Gema('Gema del Poder', 50);
+const gema2 = new Gema('Gema del Espacio', 60);
+const gema3 = new Gema('Gema del Tiempo', 70);
+
+const thanos = new Thanos();
+thanos.recogerGema(gema1);
+thanos.recogerGema(gema2);
+thanos.recogerGema(gema3);
+
+console.log(`Poder total de Thanos: ${thanos.poderTotal()}`);
+
+
+
+
+// Ejercicio 15
+
+
+
+document.querySelector('#groot').addEventListener('click', () => {
+    alert('¡Yo soy Groot!');
+});
+
+
+
+
+// Ejercicio 16
+
+
+const input = document.querySelector('#password');
+        const mensaje = document.querySelector('#mensaje');
+
+        input.addEventListener('input', () => {
+            if (input.value === 'Vengadores') {
+                mensaje.textContent = 'Assemble!';
+            } else {
+                mensaje.textContent = '';
+            }
+});
+
+
+
+
+// Ejercicio 17
+
+
+const misiones = document.querySelectorAll('#misiones li');
+        misiones.forEach(mision => {
+            mision.addEventListener('click', () => {
+                mision.style.textDecoration = 'line-through';
+                mision.style.backgroundColor = 'green';
+                mision.style.color='white';
+            });
+        });
+
+
+
+// Ejercicio 18
+
+
+class Villano{
+    constructor(nombre, plan){
+        this.nombre = nombre;
+        this.plan = plan;
+    }
+
+    cambiarPlan(nuevoplan){
+        this.plan = nuevoplan
+    }
+}
+
+const thanos = new Villano('thanos', 'Matar a la mitad de la población universal')
+
+console.log(thanos.plan)
+thanos.cambiarPlan('Volver a casa')
+console.log(thanos.plan)
+
+
+// Ejercicio 19
+
+
+const frodo = document.querySelector('#anilloFrodo')
+const mensaje = document.querySelector('#mensaje')
+
+frodo.addEventListener('click', () =>{
+    mensaje.textContent = 'Has elegido correctamente'
+})
+
+
+
+
+// Ejercicio 20
+
+
+class Hechizo {
+    constructor(nombre, poder) {
+        this.nombre = nombre;
+        this.poder = poder;
+    }
+}
+
+class Mago {
+    constructor(nombre, hechizo) {
+        this.nombre = nombre;
+        this.hechizo = hechizo;
+    }
+
+    invocarHechizo() {
+        return this.hechizo.poder;
+    }
+}
+
+function duelo(mago1, mago2) {
+    const poderMago1 = mago1.invocarHechizo();
+    const poderMago2 = mago2.invocarHechizo();
+
+    if (poderMago1 > poderMago2) {
+        return `${mago1.nombre} gana el duelo con el hechizo ${mago1.hechizo.nombre}`;
+    } else if (poderMago2 > poderMago1) {
+        return `${mago2.nombre} gana el duelo con el hechizo ${mago2.hechizo.nombre}`;
+    } else {
+        return 'El duelo termina en empate';
+    }
+}
+
+const hechizo1 = new Hechizo('Rayo', 80);
+const hechizo2 = new Hechizo('Bola de fuego', 90);
+
+const mago1 = new Mago('Merlin', hechizo1);
+const mago2 = new Mago('Agni', hechizo2);
+
+const mensaje = document.querySelector('#mensaje')
+const ganador = document.querySelector('#ganador')
+
+ganador.addEventListener('click', () =>  {
+    mensaje.textContent=`${duelo(mago1, mago2)}`
+
+})
+
+
+
+console.log(duelo(mago1, mago2));
+```
