@@ -23,12 +23,13 @@ from django.urls import include, path
 from shared import views
 
 urlpatterns = [
-    path('', lambda _: redirect('login')),
     path('admin/', admin.site.urls),
+    path('', lambda _: redirect('echos:echo-list')),
     path('echos/', include('echos.urls')),
     path('waves/', include('waves.urls')),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
     path('signup/', views.user_signup, name='signup'),
     path('@<username>/', views.show_profile, name='show-profile'),
+    path('@<username>/echos/', views.show_user_echos, name='show-user-echos'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

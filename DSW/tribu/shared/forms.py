@@ -11,3 +11,4 @@ class SignupForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ['first_name', 'username', 'password']
+        widgets = dict(password=forms.PasswordInput)
