@@ -6,7 +6,7 @@
 
 {% for echo in echos %}
 
-<p>{{echo.content}}</p>
+<p>{{echo.content|truncatewords:20}}</p>
 <p>{{echo.user}}</p>
 
 <a href="{% url "echos:echo-detail" echo.id %}">Ir al detalle</a>

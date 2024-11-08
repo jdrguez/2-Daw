@@ -6,7 +6,7 @@ from .models import Echo
 class AddEchoForm(forms.ModelForm):
     class Meta:
         model = Echo
-        fields = ['content', 'user']
+        fields = ['content']
         widgets = {
             'content': forms.TextInput(attrs={'id': 'post-title'}),
         }

@@ -10,6 +10,5 @@ urlpatterns = [
     path('<int:echo_pk>/', views.echo_detail, name='echo-detail'),
     path('<int:echo_pk>/edit/', views.edit_echo, name='edit-echo'),
     path('<int:echo_pk>/delete/', views.delete_echo, name='delete-echo'),
-    path('<int:echo_pk>/waves/add/', views.add_wave, name='add-wave'),
     path('<int:echo_pk>/waves/', views.all_waves, name='all-waves'),
 ]
