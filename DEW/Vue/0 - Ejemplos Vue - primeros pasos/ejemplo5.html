@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cabia color</title>
+        <style>
+    #app {
+      border: dashed black 1px;
+      width: 350px;
+      padding: 0 20px;
+    }
+    #app > div {
+      width: 200px;
+      height: 80px;
+    }
+    #app span {
+      font-weight: bold;
+      font-family: 'Courier New', Courier, monospace;
+    }
+  </style>
+    </head>
+    <body>
+
+        <h1>Example: Cambia colorr</h1>
+
+        <div id="app">
+            <p>Mueva el puntero del mouse sobre el cuadro a continuación para
+                cambiar el color de fondo aleatoriamente con código de color
+                hsl.</p>
+
+            <div v-on:mousemove=" colorVal = Math.floor(Math.random()*360) "
+                v-bind:style=" {backgroundColor: 'hsl('+colorVal+',60%,60%)'} "></div>
+
+            <p><span>backgroundColor: hsl(<strong>{{ colorVal }}</strong>, 80%,
+                    80%)</span></p>
+
+            <p>Para comprender cómo establecer un color en CSS con 'hsl()',
+                consulte <a
+                    href="/css/css_colors_hsl.asp" target="_blank">nuestra
+                    pagina sobre esto</a>.</p>
+        </div>
+
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script>
+            const app = Vue.createApp({
+                data() {
+                return {
+                    colorVal: 50
+                }
+                }
+            })
+            app.mount('#app')
+        </script>
+
+    </body>
+</html>

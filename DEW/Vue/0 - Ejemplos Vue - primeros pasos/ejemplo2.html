@@ -1,0 +1,63 @@
+<!-- Ejemplo 2 -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi primera página Vue</title>
+    <style>
+      #app {
+        border: dashed black 1px;
+        width: 130px;
+        padding: 0 20px 20px 20px;
+        font-weight: bold;
+        background-color: lightgreen;
+      }
+      img {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ejemplo con 'v-if', 'v-else-if' y 'v-else'</h1>
+
+    <p>
+      En este ejemplo todas las directivas 'v-if', 'v-else-if' and 'v-else' son
+      usadas juntas.
+    </p>
+
+    <p>
+      Elimine 'pizza' de la propiedad 'texto' dentro de la instancia de Vue,
+      haga clic en 'Ejecutar' y vea qué sucede. Luego elimina 'burrito' y haz
+      clic 'Run' una vez más.
+    </p>
+
+    <div id="app">
+      <div v-if="text.includes('pizza')">
+        <p>El texto incluye la palabra 'pizza'.</p>
+        <img src="./img/pizza.png" />
+      </div>
+
+      <div v-else-if="text.includes('burrito')">
+        <p>El texto in cluye la pala burrito 'burrito', pero no 'pizza'.</p>
+        <img src="./img/pizza.png" />
+      </div>
+
+      <p v-else>
+        Las palanras 'pizza' o 'burrito' no se encuentran en el texto.
+      </p>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            text: 'Me gusta la pizza, el burrito, la ensalada de ternera Thai, la sopa Pou y el Tagin.'
+          }
+        }
+      })
+      app.mount('#app')
+    </script>
+  </body>
+</html>

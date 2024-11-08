@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cuena ratón</title>
+    <style>
+    #app {
+      border: dashed black 1px;
+      width: 250px;
+      padding: 10px;
+    }
+    img {
+      width: 100%;
+    }
+    button {
+      margin: 10px;
+      padding: 5px 10px;
+    }
+  </style>
+  </head>
+  <body>
+
+    <h1>Ejemplo: pasar argumentos con métodos</h1>
+
+    <div id="app">
+      <img src="./img/pizza.png" width="670" height="249">
+      <p>{{ "Moose count: " + count }}</p>
+      <button v-on:click="addMoose(1)">+1</button>
+      <button v-on:click="addMoose(5)">+5</button>
+      <button v-on:click="addMoose(-1)">-1</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+            const app = Vue.createApp({
+                data() {
+                return {
+                    count: 0
+                }
+                },
+                methods: {
+                addMoose(number) {
+                    this.count+=number
+                }
+                }
+            })
+            app.mount('#app')
+        </script>
+
+  </body>
+</html>

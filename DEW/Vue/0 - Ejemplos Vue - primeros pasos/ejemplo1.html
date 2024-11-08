@@ -1,0 +1,48 @@
+<!--  Ejemplo 1 -->
+
+<!--  1.- Creación del HTML -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi primera página Vue</title>
+    <style> 
+            #app {
+            display: inline-block;
+            padding: 10px;
+            font-size: x-large;
+            background-color: lightgreen;
+            }
+        </style>
+  </head>
+  <body>
+
+    <h1>Ejemplo de avascript dentro de {{ }}</h1>
+
+    <p>El texto del 'message' de la instancia de Vue se junta con otro
+      texto y una expresión JavaScript. La expresión JavaScript crea
+      un número entero aleatorio entre 1 y 6.</p>
+
+    <!--  2.- Creaciónn del div -->
+    <div id="app">
+
+      <!--  5.- Añado la interpolación de message -->
+      {{ message }} <br>
+      {{'Random number: ' + Math.ceil(Math.random()*6) }}
+    </div>
+
+    <!--  3.- Añado link a Vue -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!--  4.- Añado instancia a Vue -->
+    <script>
+            const appMsg = Vue.createApp({
+            data() {
+                return {
+                message: "Hello World!"
+                }
+            }
+            })
+                appMsg.mount('#app')
+        </script>
+  </body>
+</html>
