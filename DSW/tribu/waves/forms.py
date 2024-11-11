@@ -1,12 +1,15 @@
 from django import forms
 
-from .models import Echo
+from .models import Wave
 
 
-class AddEchoForm(forms.ModelForm):
+class AddWaveForm(forms.ModelForm):
     class Meta:
-        model = Echo
+        model = Wave
         fields = ['content']
+        widgets = {
+            'content': forms.TextInput(attrs={'id': 'post-title'}),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -15,9 +18,9 @@ class AddEchoForm(forms.ModelForm):
             visible.field.widget.attrs['class'] = 'form-control'
 
 
-class EditEchoForm(forms.ModelForm):
+class EditWaveForm(forms.ModelForm):
     class Meta:
-        model = Echo
+        model = Wave
         fields = [
             'content',
         ]

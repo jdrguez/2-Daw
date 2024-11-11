@@ -7,6 +7,23 @@
 
 
 
+{% for wave in waves%}
+
+<h2>{{wave.user}}</h2>
+
+<p>{{wave.content}}</p>
+
+{% endfor %}
+
+{% if num_waves >= 5 %}
+
+<a href="{% url "echos:all-waves" echo.pk %}">Todos los comentarios</a>
+
+{% endif %}
+
+<a href="{% url "echos:add-wave" echo.pk %}">Añade tu comentario</a>
+
+
 {% endblock content %}
 
 

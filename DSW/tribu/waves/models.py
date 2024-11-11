@@ -15,7 +15,7 @@ class Wave(models.Model):
     )
     echo = models.ForeignKey(
         'echos.Echo',
-        related_name='echo',
+        related_name='waves',
         on_delete=models.CASCADE,
     )
 
