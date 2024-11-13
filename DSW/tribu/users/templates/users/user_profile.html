@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<img src="{{user.profile.avatar}}" alt="">
+
+<h1>{{user.username}}</h1>
+<p>{{user.first_name}}</p>
+<p>{{user.last_name}}</p>
+<p>{{user.email}}</p>
+
+<p>{{user.profile.bio}}</p>
+
+
+
+
+{% for echo in echos  %}
+
+<p>{{echo.content}}</p>
+<p>{{echo.created_at}}</p>
+
+
+{% endfor %}
+
+<a href="{% url "users:user-echos" user.username %}"> Ver todos tus echos</a>
+
+
+
+{% endblock content %}
+
+
+
+
+
+

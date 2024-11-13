@@ -28,6 +28,7 @@ urlpatterns = [
     path('', lambda _: redirect('echos:echo-list')),
     path('echos/', include('echos.urls')),
     path('waves/', include('waves.urls')),
+    path('users/', include('users.urls')),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', accounts.views.user_logout, name='logout'),
     path('signup/', accounts.views.user_signup, name='signup'),

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for echo in echos  %}
+
+<p>{{echo.content}}</p>
+<p>{{echo.created_at}}</p>
+
+{% endfor %}
+
+
+
+{% endblock content %}

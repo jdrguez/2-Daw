@@ -9,14 +9,12 @@ class Profile(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile'
     )
     avatar = models.ImageField(
-        blank=True,
-        null=True,
-        upload_to='uploads',
+        blank=True, null=True, upload_to='uploads', default='media/noavatar.png'
     )
     bio = models.TextField(blank=True)
 
     def __str__(self):
-        return self.content
+        return self.bio
 
     def get_absolute_url(self):
-        return reverse('Profile_detail', kwargs={'pk': self.pk})
+        return reverse('users:user-detail', kwargs={'username': self.username})

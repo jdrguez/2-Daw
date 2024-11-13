@@ -11,6 +11,9 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url "echos:add-echo" %}">Añade un echo</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url "users:all-users" %}">Todos los usuarios</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {% if user.is_authenticated %}
@@ -22,6 +25,7 @@
           </a>
           <ul class="dropdown-menu">
             {% if user.is_authenticated %}
+            <li><a class="dropdown-item" href="{% url "users:logged-user"%}">Ir a tu perfil</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="{% url "logout" %}">Cerrar sesión</a></li>
             {% else %}
