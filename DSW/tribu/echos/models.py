@@ -14,7 +14,7 @@ class Echo(models.Model):
     )
 
     def get_absolute_url(self):
-        return reverse('echos:echos-details', kwargs={'echo_pk': self.pk})
+        return reverse('echos:echo-detail', kwargs={'echo_pk': self.pk})
 
     def __str__(self):
         return f'Contenido del post:{self.content}, creado en fecha {self.created_at}'

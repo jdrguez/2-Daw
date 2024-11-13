@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<h1>Añade un comentario</h1>
+<form method="post" novalidate class="form-content mt-4">
+  {% csrf_token %}
+  {{form}}
+
+  <input type="submit" value="Add" class="form-button"/>
+</form>
+<a href="{% url "echos:echo-list" %}" class="btn btn-primary mt-4 ">Cancelar la operación </a>
+
+{% endblock content %}

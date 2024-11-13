@@ -7,9 +7,6 @@ class AddWaveForm(forms.ModelForm):
     class Meta:
         model = Wave
         fields = ['content']
-        widgets = {
-            'content': forms.TextInput(attrs={'id': 'post-title'}),
-        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

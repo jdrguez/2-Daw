@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render
-from waves.forms import AddWaveForm
 
 from .forms import AddEchoForm, EditEchoForm
 from .models import Echo
@@ -59,7 +58,7 @@ def edit_echo(request, echo_pk: int):
             echo.user = request.user
             echo.save()
 
-            return redirect('echos:echo-list')
+            return redirect(echo)
     else:
         form = EditEchoForm(instance=echo)
 
@@ -79,19 +78,4 @@ def all_waves(request, echo_pk: int):
     echo = Echo.objects.get(pk=echo_pk)
     waves = echo.waves.all()
 
-    return render(request, 'echos/all_waves.html', dict(waves=waves))
-
-
-@login_required
-def add_wave(request, echo_pk: int):
-    if request.method == 'POST':
-        if (form := AddWaveForm(request.POST)).is_valid():
-            wave = form.save(commit=False)
-            wave.user = request.user
-            echo = Echo.objects.get(pk=echo_pk)
-            wave.echo = echo
-            wave.save()
-            return redirect('echos:echo-detail', echo_pk)
-    else:
-        form = AddWaveForm()
-    return render(request, 'echos/modifiers/add.html', dict(form=form))
+    return render(request, 'echos/all_waves.html', dict(waves=waves, echo=echo))

@@ -2,8 +2,9 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render
+from echos.models import Echo
 
-from .forms import EditWaveForm
+from .forms import AddWaveForm, EditWaveForm
 from .models import Wave
 
 
@@ -19,6 +20,22 @@ def validated_user(func):
 
 
 @login_required
+def add_wave(request, echo_pk: int):
+    if request.method == 'POST':
+        if (form := AddWaveForm(request.POST)).is_valid():
+            wave = form.save(commit=False)
+            wave.user = request.user
+            echo = Echo.objects.get(pk=echo_pk)
+            wave.echo = echo
+            wave.save()
+            return redirect(wave.echo)
+    else:
+        form = AddWaveForm()
+    return render(request, 'waves/modifiers/add.html', dict(form=form))
+
+
+@login_required
+@validated_user
 def edit_wave(request, wave_pk: int):
     wave = Wave.objects.get(pk=wave_pk)
 
@@ -32,8 +49,15 @@ def edit_wave(request, wave_pk: int):
     else:
         form = EditWaveForm(instance=wave)
 
-    return render(request, 'echos/modifiers/add.html', dict(wave=wave, form=form))
+    return render(request, 'waves/modifiers/add.html', dict(wave=wave, form=form))
 
 
+@login_required
+@validated_user
 def delete_wave(request, wave_pk: int):
-    pass
+    wave = Wave.objects.get(pk=wave_pk)
+    wave.delete()
+    return render(
+        request,
+        'waves/modifiers/delete.html',
+    )
