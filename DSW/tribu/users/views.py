@@ -2,7 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render
+
 from echos.models import Echo
+from waves.models import Wave
 
 from .forms import EditProfileForm
 from .models import Profile
@@ -12,6 +14,10 @@ from .models import Profile
 
 def get_user(username: str):
     return User.objects.get(username=username)
+
+
+def get_echos(user: object):
+    return Echo.objects.filter(user=user)
 
 
 @login_required
@@ -28,15 +34,19 @@ def logged_user(request):
 @login_required
 def user_detail(request, username: str):
     user = get_user(username)
-    echos = Echo.objects.filter(user=user)[:5]
-
-    return render(request, 'users/user_profile.html', dict(user=user, echos=echos))
+    echos = get_echos(user)[:5]
+    total_waves = Wave.objects.filter(user=user).count()
+    return render(
+        request,
+        'users/user_profile.html',
+        dict(user=user, echos=echos, total_echos=echos.count(), total_waves=total_waves),
+    )
 
 
 @login_required
 def user_echos(request, username: str):
     user = get_user(username)
-    echos = Echo.objects.filter(user=user)
+    echos = get_echos(user)
 
     return render(request, 'users/user_echos.html', dict(user=user, echos=echos))
 

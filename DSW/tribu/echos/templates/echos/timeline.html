@@ -6,26 +6,12 @@
 
 {% for echo in echos %}
 
-{% comment %} <p>{{echo.content|truncatewords:20}}</p>
-<p>{{echo.user}}</p>
 
 
-<a href="{% url "echos:echo-detail" echo.pk %}">Ir al detalle</a>
-<a href="{% url "echos:edit-echo" echo.pk %}">Editar este post</a>
-<button onclick=window.modal.showModal()>Eliminar este post</button>
-
-<dialog id="modal">
-  <strong>Estas seguro de eliminar esta tarea</strong>
-  <a href="{% url "echos:delete-echo" echo.pk %}">Aceptar</a>
-  <button id="close" onclick=window.modal.close();>Cancelar</button>
-</dialog> {% endcomment %}
+<section class="mx-auto my-5" style="max-width: 23rem;" height="250px">
 
 
-
-<section class="mx-auto my-5" style="max-width: 23rem;">
-
-
-        <div class="card">
+        <div class="card h-100" >
           <div class="card-body d-flex flex-row">
             <img src="{{echo.user.profile.avatar.url}}" class="rounded-circle me-3" height="50px"
               width="50px" alt="avatar" />
@@ -42,11 +28,12 @@
               <a class="btn btn-link link-danger p-md-1 my-1" data-mdb-toggle="collapse" href="{% url "echos:echo-detail" echo.pk %}"
                 role="button" aria-expanded="false" aria-controls="collapseContent">Lee más</a>
               <div>
+              {% if request.user == echo.user %}
                 <a href="{% url "echos:edit-echo" echo.pk %}"><i class="bi bi-pencil-square text-muted p-md-1 my-1 me-2" data-mdb-toggle="tooltip"
                   data-mdb-placement="top" title="Edit this echo"></i></a>
                 <a href="{% url "echos:delete-echo" echo.pk %}"> <i class="bi bi-trash-fill text-muted p-md-1 my-1 me-0" data-mdb-toggle="tooltip" data-mdb-placement="top"
                   title="Delete this echo"></i></a>
-               
+               {% endif %}
               </div>
             </div>
           </div>
