@@ -18,7 +18,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {% if user.is_authenticated %}
-              {{ user.username|capfirst }}
+              {{ request.user|capfirst }}
             {% else %}
               Sin usuario
             {% endif %}

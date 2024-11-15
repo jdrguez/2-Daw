@@ -7,8 +7,8 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = [
-            'bio',
             'avatar',
+            'bio',
         ]
 
     def __init__(self, *args, **kwargs):
