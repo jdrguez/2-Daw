@@ -2,34 +2,19 @@
 
 
 {% block content %}
-
-
-<h1>{{echo.user}}</h1>
-<p>{{echo.content}}</p>
-
-
-
-{% for wave in waves%}
-
-
-<h2>{{wave.user}}</h2>
-
-<p>{{wave.content}}</p>
-
-{% endfor %}
-
-{% if num_waves >= 5 %}
-
-<a href="{% url "echos:all-waves" echo.pk %}">Todos los comentarios</a>
-
-{% endif %}
-
-<a href="{% url "echos:add-wave" echo.pk %}">Añade tu comentario</a>
-
-
-{% endblock content %}
-
-
-
-
-
+  <h1>{{echo.user}}</h1>
+  <p>{{echo.content}}</p>
+  {% if waves_count >= 5 %}
+    <a href="{% url "echos:all-waves" echo.pk %}">Todos los waves</a>
+  {% endif %}
+  <a href="{% url "echos:edit-echo" echo.pk%}">Editar el echo</a>
+  <a href="{% url "echos:delete-echo" echo.pk%}">Borrar el echo</a>
+  <a href="{% url "echos:add-wave" echo.pk%}">Añadir wave</a>
+  ---
+  {% for wave in waves %}
+      <h3>{{ wave.user }}</h3>
+      <p>{{ wave.content }}</p>
+      <a href="{% url "waves:edit-wave" wave.pk%}">Editar el Wave</a>
+      <a href="{% url "waves:delete-wave" wave.pk%}">Borrar el Wave</a>
+  {% endfor %}
+{% endblock %}

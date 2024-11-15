@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render
 from echos.models import Echo
 
@@ -7,17 +8,6 @@ from .forms import EditProfileForm
 from .models import Profile
 
 # Create your views here.
-
-
-def validated_user(func):
-    def wrapper(*args, **kwargs):
-        user = args[0].user
-        profile = Profile.objects.get(user=user)
-        if user != profile.user:
-            return HttpResponseForbidden('No puedes editar esto')
-        return func(*args, **kwargs)
-
-    return wrapper
 
 
 def get_user(username: str):
@@ -48,22 +38,21 @@ def user_echos(request, username: str):
     user = get_user(username)
     echos = Echo.objects.filter(user=user)
 
-    return render(request, 'users/all_echos.html', dict(user=user, echos=echos))
+    return render(request, 'users/user_echos.html', dict(user=user, echos=echos))
 
 
 @login_required
-@validated_user
 def edit_profile(request, username: str):
-    target_user = get_user(username)
+    user = User.objects.get(username=username)
+    if user == request.user:
+        profile = Profile.objects.filter(user=request.user).first()
+        if request.method == 'POST':
+            if (form := EditProfileForm(request.POST, request.FILES, instance=profile)).is_valid():
+                form.save()
+                return redirect('users:logged-user')
+        else:
+            form = EditProfileForm(instance=profile)
 
-    if request.method == 'POST':
-        if (form := EditProfileForm(request.POST, instance=target_user)).is_valid():
-            target_user = form.save(commit=False)
-            target_user.user = request.user
-            target_user.save()
-
-            return redirect(target_user)
+        return render(request, 'users/modifiers/edit.html', {'form': form})
     else:
-        form = EditProfileForm(instance=target_user)
-
-    return render(request, 'echos/modifiers/edit.html', dict(target_user=target_user, form=form))
+        return HttpResponseForbidden('No puedes editar este perfil')
