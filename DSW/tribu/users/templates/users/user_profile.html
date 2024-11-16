@@ -9,7 +9,7 @@
       <div class="row d-flex justify-content-center">
         <div class="col col-lg-9 col-xl-8">
           <div class="card">
-            <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+            <div class="rounded-top text-white d-flex flex-row" style="background: linear-gradient(135deg, #6a11cb 0%, #89f7fe 100%); height:200px;">
               <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
                 <img src="{{user.profile.avatar.url}}"
                   alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
@@ -41,7 +41,7 @@
             </div>
             <div class="card-body p-4 text-black">
               <div class="mb-5  text-body">
-                <p class="lead fw-normal mb-1">About</p>
+                <p class="lead fw-normal mb-1 btn-secondary">About</p>
                 <div class="p-4 bg-body-tertiary">
                   <p class="font-italic mb-1">{{user.last_name}}</p>
                   <p class="font-italic mb-1">{{user.email}}</p>
@@ -49,7 +49,7 @@
                 </div>
               </div>
               <div class="mb-5  text-body">
-                <p class="lead fw-normal mb-1">Bio</p>
+                <p class="lead fw-normal mb-1 btn-secondary">Bio</p>
                 <div class="p-4 bg-body-tertiary">
                   <p class="font-italic mb-1">{{user.profile.bio}}</p>
                 </div>
@@ -60,14 +60,16 @@
               </div>
               <div class="row g-2">
                       {% for echo in echos %} 
-                      <div class="col-md-4 col-sm-6 content-card">
+                      <div class="col-md-4 col-sm-6 content-card d-flex">
                           <div class="card-big-shadow">
-                              <div class="card card-just-text" data-background="color" data-color="green" data-radius="none">
+                              <div class="card card-just-text h-100" data-background="color" data-color="green" data-radius="none">
                                   <div class="content">
                                       <h4 class="category">Echo</h4>
                                       <h6 class="title">{{echo.created_at}}</h6>
                                       <p class="description">{{echo.content|truncatewords:20}}</p>
-                                      <button><a href="{% url "echos:echo-detail" echo.pk %}">Ver más</a></button>
+                                      <div class="card-footer text-center mt-auto d-flex justify-content-center align-center">
+                                        <a class="btn btn-primary text-decoration-none text-light" href="{% url 'echos:echo-detail' echo.pk %}">Ver más</a>
+                                    </div>
                                   </div>
                               </div> 
                           </div>

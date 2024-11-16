@@ -2,19 +2,53 @@
 
 {% block content %}
 
-  <h1>{{user.username}}</h1>
-  <h2>{{user.first_name}}</h2>
-  <h2>{{user.last_name}}</h2>
-  <h3>{{user.email}}</h3>
-  {% if user == request.user%}
-    <a href="{% url "users:edit-profile" user.username%}">Edita el perfil</a>
-  {% endif %}
-  <p>{{user.profile.bio}}</p>
-  <p><img src="{{user.profile.avatar.url}}" heigth="100" width="100"></p>
+<section id="content" class="container">
+  <!-- Begin .page-heading -->
+  <div class="page-heading">
+      <div class="media clearfix">
+        <div class="media-left pr30">
+          <a href="#">
+            <img class="media-object mw150" src="{{user.profile.avatar.url}}" alt="...">
+          </a>
+        </div>                      
+        <div class="media-body va-m">
+          <h2 class="media-heading">{{user.first_name}} {{user.last_name}}
+            <small> - {{user.username}}</small>
+          </h2>
+          {% if user == request.user%}
+            <a href="{% url "users:edit-profile" user.username%}">Edita el perfil</a>
+          {% endif %}
+          <p class="lead">{{user.profile.bio}}</p>
+          <h3>{{user.email}}</h3>
+        </div>
+      </div>
+  </div>
+  
   ---
   {% for echo in echos %}
-    <p>{{echo.content}}</p>
+  <div class="container py-4">
+    <!-- Post Container -->
+    <div class="card mb-3 shadow-sm" style="max-width: 600px; margin: auto;">
+      <div class="card-body">
+        <div class="d-flex">
+          <!-- User Avatar -->
+          <img src="{{user.profile.avatar.url}}" alt="Avatar" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
+          <!-- Post Content -->
+          <div class="w-100">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <strong class="text-dark">{{user.last_name}}</strong> 
+                <span class="text-muted">@{{user.username}} • {{echo.created_at}}</span>
+              </div>
+            </div>
+            <p class="mt-2 mb-3 text-dark">
+              {{echo.content}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   {% endfor %}
-
 
 {% endblock content %}

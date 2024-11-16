@@ -5,44 +5,38 @@
 
 
 {% for echo in echos %}
-
-
-
-<section class="mx-auto my-5" style="max-width: 23rem;" height="250px">
-
-
-        <div class="card h-100" >
-          <div class="card-body d-flex flex-row">
-            <img src="{{echo.user.profile.avatar.url}}" class="rounded-circle me-3" height="50px"
-              width="50px" alt="avatar" />
-            <div>
-              <h5 class="card-title font-weight-bold mb-2">{{echo.user}}</h5>
-              <p class="card-text"><i class="far fa-clock pe-2"></i>{{echo.created_at}}</p>
-            </div>
-          </div>
-          <div class="card-body">
-            <p class="card-text" id="collapseContent">
-              {{echo.content|truncatewords:20}}
-            </p>
-            <div class="d-flex justify-content-between">
-              <a class="btn btn-link link-danger p-md-1 my-1" data-mdb-toggle="collapse" href="{% url "echos:echo-detail" echo.pk %}"
-                role="button" aria-expanded="false" aria-controls="collapseContent">Lee más</a>
-              <div>
-              {% if request.user == echo.user %}
-                <a href="{% url "echos:edit-echo" echo.pk %}"><i class="bi bi-pencil-square text-muted p-md-1 my-1 me-2" data-mdb-toggle="tooltip"
-                  data-mdb-placement="top" title="Edit this echo"></i></a>
-                <a href="{% url "echos:delete-echo" echo.pk %}"> <i class="bi bi-trash-fill text-muted p-md-1 my-1 me-0" data-mdb-toggle="tooltip" data-mdb-placement="top"
-                  title="Delete this echo"></i></a>
-               {% endif %}
+    <div class="container py-4">
+      <!-- Post Container -->
+      <div class="card mb-3 shadow-sm" style="max-width: 600px; margin: auto;">
+        <div class="card-body">
+          <div class="d-flex">
+            <!-- User Avatar -->
+           <a href="{% url "users:user-detail" echo.user %}"> <img src="{{echo.user.profile.avatar.url}}" alt="Avatar" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;"></a>
+            <!-- Post Content -->
+            <div class="w-100">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <strong class="text-dark">{{echo.user.last_name}}</strong> 
+                  <span class="text-muted">@{{echo.user}} • {{echo.created_at}}</span>
+                </div>
               </div>
+              <p class="mt-2 mb-3 text-dark">
+                {{echo.content| truncatewords:20}}
+              </p>
+              {% if request.user == echo.user %}
+              <div class="d-flex justify-content-between text-muted">
+                <a  href="{% url "echos:edit-echo" echo.pk %}"><button class="btn btn-sm btn-light"><i class="bi bi-pencil-square"></i>Editar</button></a>  
+                <a  href="{% url "echos:delete-echo" echo.pk %}"><button class="btn btn-sm btn-light"><i class="bi bi-trash-fill me-1"></i>Eliminar</button></a>
+                {% endif %}
+                <a href="{% url "echos:echo-detail" echo.pk %}"><button class="btn btn-sm btn-light" ><i class="bi bi-binoculars-fill me-1"></i>Ver más</button></a>
+              </div>
+              
             </div>
           </div>
+        </div>
+      </div>
+    </div>
 
-
-  
-  </div>
-  
-</section>
 
 
 

@@ -1,0 +1,21 @@
+.gradient-custom {
+    background: linear-gradient(135deg, #6a11cb 0%, #89f7fe 100%);
+  }
+  .btn-primary {
+    background-color: #ff758c;
+    border-color: #ff758c;
+  }
+  .btn-primary:hover {
+    background-color: #ff577e;
+    border-color: #ff577e;
+  }
+  .btn-secondary {
+    background-color: #f1f3f5;
+    color: #6c757d;
+    border-color: #f1f3f5;
+  }
+  .btn-secondary:hover {
+    background-color: #e9ecef;
+    color: #495057;
+  }
+  

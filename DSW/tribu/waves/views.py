@@ -49,7 +49,7 @@ def edit_wave(request, wave_pk: int):
     else:
         form = EditWaveForm(instance=wave)
 
-    return render(request, 'waves/modifiers/add.html', dict(wave=wave, form=form))
+    return render(request, 'waves/modifiers/edit.html', dict(wave=wave, form=form))
 
 
 @login_required
