@@ -1,47 +1,25 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+  import Ejercicio1 from './components/Ejercicio1.vue';
+  import Ejercicio2 from './components/Ejercicio2.vue';
+  import Ejercicio3 from './components/Ejercicio3.vue';
+  import Ejercicio4 from './components/Ejercicio4.vue';
+  import Ejercicio5 from './components/Ejercicio5.vue';
+  import Ejercicio6 from './components/Ejercicio6.vue';
+  import Ejercicio7 from './components/Ejercicio7.vue';
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <Ejercicio1/>
+  <hr>
+  <Ejercicio2/>
+  <hr>
+  <Ejercicio3/>
+  <hr>
+  <Ejercicio4/>
+  <hr>
+  <Ejercicio5/>
+  <hr>
+  <Ejercicio6/>
+  <hr>
+  <Ejercicio7/>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
