@@ -13,7 +13,7 @@ const routes = [
     {path: "/about", component:About},
     {path: "/projects", component:Projects},
     {path: "/contact", component:Contact},
-    {path: "/skilss", component:Skills},
+    {path: "/skills", component:Skills},
     {path: "/experiences", component:Experience},
 ]
 

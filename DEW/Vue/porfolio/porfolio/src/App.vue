@@ -1,13 +1,15 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import Navbar from './components/Navbar.vue'
+import About from './components/About.vue';
+import { RouterView } from 'vue-router';
 </script>
 
 <template>
-  <nav>
-    <Navbar></Navbar>
-  </nav>
-  <HelloWorld msg="Vite + Vue" />
+    <nav>
+      <Navbar></Navbar>
+    </nav>
+    <RouterView></RouterView>
 </template>
 
 <style scoped>
