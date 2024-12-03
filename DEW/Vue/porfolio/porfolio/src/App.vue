@@ -1,7 +1,5 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
 import Navbar from './components/Navbar.vue'
-import About from './components/About.vue';
 import { RouterView } from 'vue-router';
 </script>
 

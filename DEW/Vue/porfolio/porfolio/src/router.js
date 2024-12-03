@@ -10,11 +10,12 @@ import Projects from "./components/Projects.vue"
 
 const routes = [
     {path: "/", redirect:'/about'},
-    {path: "/about", component:About},
-    {path: "/projects", component:Projects},
-    {path: "/contact", component:Contact},
-    {path: "/skills", component:Skills},
-    {path: "/experiences", component:Experience},
+    {path: "/about", component: About},
+    {path: "/projects", component: Projects},
+    {path: "/contact", component: Contact},
+    {path: "/skills", component: Skills},
+    {path: "/experiences", component: Experience},
+    {path: "/:catchAll(.*)", component: Error404},
 ]
 
 const router = createRouter({
