@@ -45,28 +45,28 @@ export default defineComponent({
     },
   },
   mounted() {
-    nextTick(() => {
+   
       this.projects = [
         {
-          title: this.$t("projects[0].title") as string,
-          description: this.$t("projects[0].description") as string,
+          title: this.$t("projects.0.title") as string,
+          description: this.$t("projects.0.description") as string,
           link: "https://github.com/jdrguez/2-Daw/tree/main/DSW/tribu",
           image: "tribu.webp",
         },
         {
-          title: this.$t("projects[1].title") as string,
-          description: this.$t("projects[1].description") as string,
+          title: this.$t("projects.1.title") as string,
+          description: this.$t("projects.1.description") as string,
           link: "https://github.com/jdrguez/Poker-Pro",
           image: "poker.webp",
         },
         {
-          title: this.$t("projects[2].title") as string,
-          description: this.$t("projects[2].description") as string,
+          title: this.$t("projects.2.title") as string,
+          description: this.$t("projects.2.description") as string,
           link: "https://github.com/jdrguez/2-Daw/tree/main/DSW/supertodo",
           image: "todo.webp",
         },
       ];
-    });
+    
   },
 });
   </script>

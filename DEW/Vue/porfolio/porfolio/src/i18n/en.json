@@ -53,5 +53,35 @@
       "title": "TypeScript",
       "description": "A superset of JavaScript that adds static typing, improving code maintainability and scalability."
     }
-  ]
+  ],
+   "experienceTitle": "Work Experience",
+  "downloadCV": "Download CV",
+  "experience": [
+    {
+      "title": "Frontend Developer",
+      "company": "Tech Solutions",
+      "description": "Development and maintenance of web applications using Vue.js, JavaScript, and CSS.",
+      "date": "January 2022 - Present"
+    },
+    {
+      "title": "Backend Developer",
+      "company": "Code Lab",
+      "description": "Development of RESTful APIs using Node.js and Express, integration with SQL databases.",
+      "date": "February 2021 - December 2021"
+    },
+    {
+      "title": "Backend Developer",
+      "company": "Code Lab",
+      "description": "Development of RESTful APIs using Node.js and Express, integration with SQL databases.",
+      "date": "February 2021 - December 2021"
+    }
+  ],
+  "contactTitle": "Contact",
+  "nameLabel": "Name",
+  "emailLabel": "Email",
+  "messageLabel": "Message",
+  "submitButton": "Send",
+  "successMessage": "Your message has been sent successfully!",
+  "errorMessage": "There was an error sending the message. Please try again later."
+
 }

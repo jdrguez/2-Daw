@@ -16,6 +16,11 @@ export interface I18nMessages {
     description: string;
     link: string;
   }>;
+  skillsTitle: string;
+  habilidades: Array<{
+    title: string;
+    description: string;
+  }>;
   // Agregar más categorías de traducción si es necesario
 }
 
@@ -23,10 +28,9 @@ const messages: Record<string, LocaleMessageObject> = {
   en: en, // Importa los datos del archivo en.json
   es: es, // Importa los datos del archivo es.json
 };
-
-const i18n = createI18n({
-  locale: 'en', // idioma por defecto
-  fallbackLocale: 'en', // en caso de que no se encuentre una traducción
+const i18n = createI18n<I18nMessages>({
+  locale: 'es', // idioma por defecto
+  fallbackLocale: 'es', // en caso de que no se encuentre una traducción
   messages, // Mensajes traducidos de los archivos JSON
 });
 
