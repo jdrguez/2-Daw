@@ -2,7 +2,7 @@
     <section class="experience-section container">
       <h1 class="text-center">{{ $t('experienceTitle') }}</h1>
       <div class="row g-4 mt-5">
-        <!-- Iterar sobre la experiencia laboral -->
+        
         <div v-for="(job, index) in experience" :key="index" class="col-md-4">
           <div class="card h-100">
             <div class="card-body">
@@ -14,7 +14,7 @@
           </div>
         </div>
       </div>
-      <!-- Botón para descargar CV en PDF -->
+      
       <div class="text-center mt-4">
         <button @click="downloadCV" class="btn btn-primary">
           <i class="bi bi-download"></i> {{ $t('downloadCV') }}
@@ -25,7 +25,7 @@
   
   <script lang="ts">
   import { defineComponent } from "vue";
-  import jsPDF from "jspdf"; // Importamos jsPDF para la generación del PDF
+  import jsPDF from "jspdf"; 
   
   interface Job {
     title: string;
@@ -38,11 +38,11 @@
     name: "Experience",
     data() {
       return {
-        experience: [] as Job[], // Inicializamos como un array vacío
+        experience: [] as Job[], 
       };
     },
     created() {
-      // Cargar la experiencia laboral en el hook created
+      
       this.experience = [
         {
           title: this.$t("experience.0.title") as string,
@@ -68,27 +68,27 @@
       downloadCV() {
         const doc = new jsPDF();
   
-        // Título del CV
+        
         doc.setFontSize(20);
         doc.text("Curriculum Vitae", 20, 20);
   
-        // Correo electrónico
+       
         doc.setFontSize(12);
         doc.text("Email: josedomingo.rguez.rguez@gmail.com", 20, 30);
   
-        // Agregar la experiencia laboral al PDF
+        
         doc.setFontSize(14);
-        let yPosition = 50; // Control de la posición vertical en el PDF
+        let yPosition = 50; 
         this.experience.forEach((job) => {
           doc.text(job.title, 20, yPosition);
           doc.setFontSize(12);
           doc.text(`${job.company} - ${job.date}`, 20, yPosition + 10);
           doc.setFontSize(10);
           doc.text(job.description, 20, yPosition + 20);
-          yPosition += 40; // Espaciado entre trabajos
+          yPosition += 40; 
         });
   
-        // Guardar el PDF
+        
         doc.save("curriculum_vitae.pdf");
       },
     },

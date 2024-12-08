@@ -32,7 +32,7 @@
   
   <script lang="ts">
   import { defineComponent, ref } from "vue";
-  import { messagesCollection, addDoc } from "@/firebase"; // Importar la configuración de Firebase
+  import { messagesCollection, addDoc } from "@/firebase"; 
   
   export default defineComponent({
     name: "Contact",
@@ -48,7 +48,7 @@
     methods: {
       async sendMessage() {
         try {
-          // Crear un nuevo mensaje en Firebase Firestore
+         
           await addDoc(messagesCollection, {
             name: this.name,
             email: this.email,
@@ -56,16 +56,16 @@
             timestamp: new Date(),
           });
           
-          // Mostrar mensaje de éxito
+          
           this.successMessage = this.$t("successMessage");
           this.errorMessage = "";
           
-          // Limpiar el formulario
+         
           this.name = "";
           this.email = "";
           this.message = "";
         } catch (error) {
-          // Mostrar mensaje de error
+          
           this.errorMessage = this.$t("errorMessage");
           this.successMessage = "";
           console.error("Error al enviar el mensaje: ", error);
