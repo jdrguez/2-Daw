@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2020", // Define la versión de ECMAScript que deseas usar
+    "useDefineForClassFields": true, // Usar la nueva definición de campos de clase
+    "module": "ESNext", // Usar el módulo ESNext
+    "lib": ["ES2020", "DOM", "DOM.Iterable"], // Bibliotecas que se incluirán
+    "skipLibCheck": true, // Omite la verificación de tipos en archivos de declaración
+
+    /* Bundler mode */
+    "moduleResolution": "bundler", // Resolución de módulos para bundlers
+    "allowImportingTsExtensions": true, // Permitir importar archivos .ts
+    "isolatedModules": true, // Asegura que cada archivo se puede compilar de forma independiente
+    "moduleDetection": "force", // Forzar la detección de módulos
+    "noEmit": true, // No emitir archivos de salida
+    "jsx": "preserve", // Preservar JSX para su procesamiento posterior
+
+    /* Linting */
+    "strict": true, // Habilitar todas las comprobaciones estrictas
+    "noUnusedLocals": true, // Prohibir variables locales no utilizadas
+    "noUnusedParameters": true, // Prohibir parámetros no utilizados
+    "noFallthroughCasesInSwitch": true, // Prohibir caídas en switch
+  },
+  "include": [
+    "src/**/*.ts", 
+    "src/**/*.tsx", 
+    "src/**/*.vue" // Incluir archivos TypeScript y Vue
+  ],
+  "exclude": [
+    "node_modules", // Excluir la carpeta node_modules
+    "**/*.spec.ts", // Excluir archivos de prueba
+    "**/*.test.ts" // Excluir archivos de prueba
+  ]
+}
