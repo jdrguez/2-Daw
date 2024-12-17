@@ -3,20 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pruebas</title>
+    <title>Document</title>
+    <style>
+        body {
+            display: grid;
+            grid-template-areas:
+                "header header header"
+                "sidebar main main"
+                "footer footer footer";
+        }
+        header {
+                grid-area: header;
+                background-color: red;
+                }
+
+        sidebar {
+                grid-area: sidebar;
+                background-color: blue;
+                height: 500px;
+                }
+
+        main {
+                grid-area: main;
+                background-color: purple;
+                }
+
+        footer {
+                grid-area: footer;
+                background-color: beige;
+                height: 500px;
+                }
+
+
+
+    </style>
 </head>
 <body>
-
-    <header id="main-header">
-        <h1>pokemon</h1>
-    </header>
-
-    <div id="Cesar">
-
-    </div>
-    <form>
-
-    </form>
-    <script src="main.js"></script>
+    <header>Header</header>
+    <sidebar>sidebar</sidebar>
+    <main>main content</main>
+    <footer>footer</footer>
 </body>
 </html>
