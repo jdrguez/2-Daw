@@ -916,22 +916,24 @@ https://mkdocs.aprendepython.es/third-party/webdev/django/forms/#widgets
 # Maneras de acceder a datos con ek __
 
 
-Expresión,Descripción
-field__exact,Igual a un valor específico (por defecto en filter).
-field__iexact,Igual a un valor específico (sin distinguir mayúsculas/minúsculas).
-field__contains,Contiene un valor (distingue mayúsculas/minúsculas).
-field__icontains,Contiene un valor (no distingue mayúsculas/minúsculas).
-field__startswith,Comienza con un valor.
-field__istartswith,Comienza con un valor (sin distinguir mayúsculas/minúsculas).
-field__endswith,Termina con un valor.
-field__iendswith,Termina con un valor (sin distinguir mayúsculas/minúsculas).
-field__in,Está en una lista de valores.
-field__gt,Mayor que un valor.
-field__gte,Mayor o igual que un valor.
-field__lt,Menor que un valor.
-field__lte,Menor o igual que un valor.
-field__year,Año de un campo de fecha.
-field__isnull,Es nulo (True o False).
+| Expresión          | Descripción                                                  |
+|--------------------|--------------------------------------------------------------|
+| `field__exact`     | Igual a un valor específico (por defecto en `filter`).       |
+| `field__iexact`    | Igual a un valor específico (sin distinguir mayúsculas/minúsculas). |
+| `field__contains`  | Contiene un valor (distingue mayúsculas/minúsculas).         |
+| `field__icontains` | Contiene un valor (no distingue mayúsculas/minúsculas).      |
+| `field__startswith`| Comienza con un valor.                                       |
+| `field__istartswith`| Comienza con un valor (sin distinguir mayúsculas/minúsculas). |
+| `field__endswith`  | Termina con un valor.                                        |
+| `field__iendswith` | Termina con un valor (sin distinguir mayúsculas/minúsculas). |
+| `field__in`        | Está en una lista de valores.                                |
+| `field__gt`        | Mayor que un valor.                                          |
+| `field__gte`       | Mayor o igual que un valor.                                  |
+| `field__lt`        | Menor que un valor.                                          |
+| `field__lte`       | Menor o igual que un valor.                                  |
+| `field__year`      | Año de un campo de fecha.                                    |
+| `field__isnull`    | Es nulo (`True` o `False`).                                  |
+
 ---
 
 # Relacion ManyToMany con role
