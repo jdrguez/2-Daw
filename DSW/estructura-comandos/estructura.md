@@ -935,8 +935,40 @@ field__isnull,Es nulo (True o False).
 
 # Relacion ManyToMany con role:
 
+'''python
+
+class Enrollment(models.Model):
+    student = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='enrollments',
+        on_delete=models.CASCADE,
+    )
+    subject = models.ForeignKey(
+        'subjects.Subject',
+        related_name='enrollments',
+        on_delete=models.CASCADE,
+    )
+    enrolled_at = models.DateField(auto_now_add=True)
+    mark = models.PositiveSmallIntegerField(
+        blank=True, null=True, validators=[MinValueValidator(1), MaxValueValidator(10)]
+    )
+
+    def __str__(self):
+        return f'{self.student} {self.subject} enrolled at {self.enrolled_at} {self.mark}'
 
 
+
+'''
+Y para ponerle un choice es usar un class dentro llamado como se pida y sus opciones:
+
+'''python
+
+
+
+
+
+
+'''
 
 
 
