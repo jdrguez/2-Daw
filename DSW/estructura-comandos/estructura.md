@@ -963,7 +963,15 @@ Y para ponerle un choice es usar un class dentro llamado como se pida y sus opci
 
 '''python
 
+class Role(models.TextChoices):
+        STUDENT = 'S', 'student'
+        TEACHER = 'T', 'teacher'
 
+    role = models.CharField(
+        max_length=1,
+        choices=Role,
+        default=Role.STUDENT,
+    )
 
 
 
