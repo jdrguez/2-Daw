@@ -939,6 +939,43 @@ https://mkdocs.aprendepython.es/third-party/webdev/django/forms/#widgets
 # Relacion ManyToMany con role
 
 ```python
+class Subject(models.Model):
+    code = models.CharField(max_length=3, unique=True)
+    name = models.CharField(max_length=100)
+    teacher = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='subjects',
+        on_delete=models.CASCADE,
+    )
+    students = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        through='subjects.Enrollment',
+        related_name='enrolled_subjects',
+    )
+
+    class Meta:
+        ordering = ['code']
+
+    def __str__(self):
+        return f'{self.code}: {self.name}'
+
+    def get_absolute_url(self):
+        return reverse('subjects:subject-detail', kwargs={'subject_code': self.code})
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
+```python
 
 class Enrollment(models.Model):
     student = models.ForeignKey(
