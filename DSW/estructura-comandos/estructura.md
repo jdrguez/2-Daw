@@ -31,7 +31,8 @@
   - [Formulario de clase](#formulario-de-clase)
   - [Formulario de modelo](#formulario-de-modelo)
   - [Formulario de edición](#formularios-de-edición)
-
+- [__ Para acceder a elementos](#maneras-de-acceder-a-datos-con-ek-__)
+- [ManyToMany](#relacion-manytomany-con-role)
 
 
 
@@ -933,9 +934,9 @@ field__year,Año de un campo de fecha.
 field__isnull,Es nulo (True o False).
 ---
 
-# Relacion ManyToMany con role:
+# Relacion ManyToMany con role
 
-'''python
+```python
 
 class Enrollment(models.Model):
     student = models.ForeignKey(
@@ -958,10 +959,10 @@ class Enrollment(models.Model):
 
 
 
-'''
+```
 Y para ponerle un choice es usar un class dentro llamado como se pida y sus opciones:
 
-'''python
+```python
 
 class Role(models.TextChoices):
         STUDENT = 'S', 'student'
@@ -976,7 +977,7 @@ class Role(models.TextChoices):
 
 
 
-'''
+```
 
 
 
