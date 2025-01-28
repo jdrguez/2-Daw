@@ -1,0 +1,38 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`HelloWorld.vue > applies correct styles 1`] = `
+<div
+  class="greetings"
+  data-v-e17ea971=""
+>
+  <h1
+    class="green"
+    data-v-e17ea971=""
+  >
+    Hello, World!
+  </h1>
+  <h3
+    data-v-e17ea971=""
+  >
+     You’ve successfully created a project with 
+    <a
+      data-v-e17ea971=""
+      href="https://vite.dev/"
+      rel="noopener"
+      target="_blank"
+    >
+      Vite
+    </a>
+     + 
+    <a
+      data-v-e17ea971=""
+      href="https://vuejs.org/"
+      rel="noopener"
+      target="_blank"
+    >
+      Vue 3
+    </a>
+    . 
+  </h3>
+</div>
+`;
