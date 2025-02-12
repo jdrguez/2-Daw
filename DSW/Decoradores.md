@@ -209,8 +209,8 @@ def game_exist(func):
             return JsonResponse({'error': 'Game not found'}, status=404)
 
     return wrapper
-
-
+```
+```python
 def game_exist_post(func):
     def wrapper(request, *args, **kwargs):
         game_slug = request.json_body['game-slug']
@@ -223,8 +223,8 @@ def game_exist_post(func):
             return JsonResponse({'error': 'Game not found'}, status=404)
 
     return wrapper
-
-
+```
+```python
 def review_exist(func):
     def wrapper(*args, **kwargs):
         try:
