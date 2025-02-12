@@ -234,7 +234,47 @@ def review_exist(func):
         except Review.DoesNotExist:
             return JsonResponse({'error': 'Review not found'}, status=404)
 
+
     return wrapper
 
 
 ```
+
+# Vistas para la creación de algo mediante post
+
+```python
+
+
+@method_required('post')
+@check_json_body
+@valid_token
+@token_exists
+@csrf_exempt
+def add_order(request):
+    user = request.user
+    order = Order.objects.create(user=user)
+    order_json = OrderSerializer(order, request=request)
+    return order_json.json_response()
+
+```
+# Añadir algo a un modelo mediante post
+
+```python
+
+
+@csrf_exempt
+@method_required('post')
+@check_json_body
+@required_fields('game-slug')
+@valid_token
+@token_exists
+@order_exist
+@game_exist_post
+@user_owner
+def add_game_to_order(request, order_pk):
+    order = request.order
+    order.add_game(request.game)
+    return JsonResponse({'num-games-in-order': order.num_games_in_order()})
+
+```
+
