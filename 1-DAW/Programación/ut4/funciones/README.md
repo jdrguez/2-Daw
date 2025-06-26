@@ -1,0 +1,32 @@
+# Ejercicios
+
+-    pycheck: num_in_interval 
+        - [X] Hecho [X] No enviado
+-    pycheck: extract_evens Hecho No envidado 
+        - [X] Hecho [X] No enviado
+-    pycheck: split_case
+        - [X] Hecho [X] No enviado
+-    pycheck: perfect
+        - [X] Hecho [X] No enviado
+-    pycheck: palindrome
+        - [X] Hecho [X] No enviado
+-    pycheck: count_vowels_rec
+        - [X] Hecho [X] No enviado
+-    pycheck: pangram
+        - [X] Hecho []No enviado
+-    pycheck: cycle_alphabet
+        - [X] Hecho [] No enviado
+-    pycheck: bubble_sort
+        - [x] Hecho [] No enviado
+-    pycheck: consecutive_seq
+        - [] Hecho []No enviado
+-    pycheck: magic_square
+        - [] Hecho []No enviado
+-   pycheck: sum_nested
+        - [X] Hecho [X]No enviado
+-   pycheck: power_recursive
+        - [X] Hecho []No enviado
+-   pycheck: hyperfactorial
+        - [X] Hecho []No enviado
+-   pycheck: fibonacci_generator
+        - [X] Hecho []No enviado
